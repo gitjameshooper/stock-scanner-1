@@ -4,8 +4,15 @@ var gulp = require('gulp'),
     watchify = require('watchify'),
     browserify = require('browserify'),
    runSequence = require('run-sequence'),
+    rename = require('gulp-rename'),
+    bundle = require('gulp-bundle-assets'),
+    del = require('del'),
      browserSync = require('browser-sync').create();
 
+// Delete Build folder
+gulp.task('clean', function() {
+  return del(['app']);
+});
 //////////////////////////////////////////////////////////////////
 // Concatenate & Minify JS
 
@@ -20,33 +27,39 @@ var gulp = require('gulp'),
 //         .pipe(browserSync.stream({match: '**/**/*.js'}));
 // });
 
-// // Uses bundle.config.js to find npm js files and bundles/uglifys them
-// gulp.task('bundleScripts', function() {
-//   return gulp.src('src/assets/js/global-admin/bundle.config.js')
-//     .pipe(bundle())
-//     .pipe(rename('global.js'))
-//     .pipe(gulp.dest('app/js'));
-// });
+// Uses bundle.config.js to find npm js files and bundles/uglifys them
+gulp.task('bundleScripts', function() {
+  return gulp.src('src/bundle.config.js')
+    .pipe(bundle())
+    .pipe(rename('global.js'))
+    .pipe(gulp.dest('app/js'))
+    .pipe(browserSync.stream({match: '**/**/*.js'}));
+});
+gulp.task('copy',  function () {
+        return gulp.src(['src/**/*', '!src/**/*.js'], {
+            base: 'src'
+        }).pipe(gulp.dest('app'));
+    });
 
 // gulp.task('scripts', ['globalScripts', 'bundleScripts']);
 
 gulp.task('browser-sync', function() {
     browserSync.init({
         reloadDebounce: 5000,
-        server: "./build",
+        server: "./app",
         port: 8000,
         tunnel: false // only need to enable this if with a device not on the same wifi - crashes often so off by default
     });
 });
 gulp.task('watch', function() {
-    gulp.watch('app/*.js');
-    gulp.watch('app/*.css');
-    gulp.watch('app/*.html');
+    gulp.watch('src/*.js', ['bundleScripts', 'copy']);
+    gulp.watch('src/*.css', ['bundleScripts', 'copy']);
+    gulp.watch('src/*.html', ['bundleScripts', 'copy']);
   
 });
 
 gulp.task('serve', function(callback) {
-  runSequence(['watch'],
+  runSequence('clean', ['copy','bundleScripts','watch'],
               'browser-sync',
               callback);
 });

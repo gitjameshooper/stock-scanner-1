@@ -1,6 +1,6 @@
 {
   "name": "stocks",
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/gitjimhooper/stock-scanner.git"
   },
@@ -11,9 +11,15 @@
   "dependencies": {
     "gulp": "3.9.1",
     "gulp-webserver": "0.9.1",
+    "jquery": "^2.2.3",
     "oauth-1.0a": "1.0.1",
     "watchify": "^3.7.0",
     "browser-sync": "^2.12.7",
-    "run-sequence": "1.1.3"
+    "run-sequence": "1.1.3",
+    "gulp-bundle-assets": "^2.23.0",
+    "gulp-rename": "1.2.2",
+    "del": "^2.2.0",
+    "request": "^2.72.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

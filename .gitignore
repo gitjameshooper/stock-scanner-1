@@ -1,2 +1,3 @@
-tk-creds.json
+/src/tk-creds.json
 node_modules
+.DS_Store
