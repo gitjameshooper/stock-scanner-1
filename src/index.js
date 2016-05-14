@@ -1,4 +1,9 @@
-$.getJSON("/tk-creds.json", function(data) {
+(function(){
+
+   
+
+window.tkData = {};
+$.getJSON("/json/tk-creds.json", function(data) {
 
     var creds = data;
 
@@ -21,12 +26,20 @@ $.getJSON("/tk-creds.json", function(data) {
         url: request_data.url,
         type: request_data.method,
         data: oauth.authorize(request_data, token)
+    }).error(function(err) {
+      
+       window.console.log(err);
     }).done(function(data) {
       
-        window.console.log(data);
+   
+        window.tkData = data;
     });
     
 });
+
+window.console.log(window.tkData);
+
+})();
 
 // make transferrable to other trading sites
 // draw out flow chart and timing
