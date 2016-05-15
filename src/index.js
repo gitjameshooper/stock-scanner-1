@@ -4,9 +4,11 @@
          tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
          symbolsJSON: "/json/symbols.json",
          symbolStr: "",
+         symbolsPerCall: 250,
          testQuotes: "/json/quotes.json",
          stockDiffPct: 5,
          stockAwayPct: 3
+
      }
 
      var quotesData = {};
@@ -20,7 +22,7 @@
                      config.symbolStr += v + ',';
                  });
                  config.symbolStr = config.symbolStr.slice(0, -1);
-                 // callApi();  
+                 callApi();  
              });
          }
          // Call tradeking api
@@ -96,31 +98,24 @@
 
              $.each(quotesData, function(key, stock) {
                  window.console.log(stock);
+                 if(stock.)
                  if (hodTest(stock) && lodTest(stock) && vwapTest(stock)) {
                      stocksTrade.push(stock);
                  }
              });
              window.console.log(stocksTrade);
          }
-         // for testing
-     var quotetestSymbols = function() {
-         $.getJSON(config.testQuotes, function(data) {
 
-             quotesData = data.response.quotes.quote;
-             quoteScan();
-         });
-
-     }
 
      return {
          init: function() {
-             // formatSymbols();
-             quotetestSymbols();
+             formatSymbols();
+             
 
 
          }
      };
 
  })();
-
+// var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
  stockScanner.init();
