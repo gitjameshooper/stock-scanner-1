@@ -1,24 +1,29 @@
  var stockScanner = (function() {
      var config = {
          tkCredsJSON: "/json/tk-creds.json",
-         tkApiUrl :  "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=aapl,fb,acc",
-         symbolsJSON : "/json/symbols.json",
+         tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
+         symbolsJSON: "/json/symbols.json",
+         symbolStr: "",
+         testQuotes: "/json/quotes.json",
+         stockDiffPct: 5,
+         stockAwayPct: 3
      }
 
      var quotesData = {};
+     var stocksTrade = [];
 
-     var formatSymbols = function(){
-        $.getJSON(config.symbolsJSON, function(data) {
-            
-            $.each(data.symbols, function(k, v){
+     // format symbols into string
+     var formatSymbols = function() {
+             $.getJSON(config.symbolsJSON, function(data) {
 
-                    window.console.log(v.symbol);
-            });
-            
-
-        });
-     }
-     // Call tradeking api
+                 $.each(data.symbols, function(k, v) {
+                     config.symbolStr += v + ',';
+                 });
+                 config.symbolStr = config.symbolStr.slice(0, -1);
+                 // callApi();  
+             });
+         }
+         // Call tradeking api
      var callApi = function() {
          $.getJSON(config.tkCredsJSON, function(data) {
 
@@ -36,7 +41,7 @@
                  secret: creds.access_secret
              };
              var request_data = {
-                 url: config.tkApiUrl,
+                 url: config.tkApiUrl + config.symbolStr,
                  method: 'GET'
              };
              $.ajax({
@@ -49,19 +54,73 @@
              }).done(function(data) {
 
                  quotesData = data;
+                 quoteScan();
              });
 
          });
      }
+     //  test stock for first move up
+     var lodTest = function(stock) {
+         var stockLo = Number(stock.lo),
+             stockHi = Number(stock.hi),
+             stockDiff = (stockHi - stockLo).toFixed(2),
+             stockDiffPct = (stockDiff / stockLo).toFixed(3)*100;
+    
+         if (stockDiffPct >= config.stockDiffPct) {        
+             return true;
+         }
+
+     }
+       //  test stock if it is above vwap
+     var vwapTest = function(stock) {
+         var stockVwap = Number(stock.vwap),
+             stockPrice = Number(stock.last);
+    
+         if (stockPrice >= stockVwap) {        
+             return true;
+         }
+
+     }
+     //  test stock for first move up
+     var hodTest = function(stock) {
+         var stockHi = Number(stock.hi),
+             stockPrice = Number(stock.last),
+             stockDiff = (stockHi - stockPrice).toFixed(2),
+             stockDiffPct = (stockDiff / stockHi).toFixed(3)*100;
+         if (stockDiffPct >= config.stockDiffPct) {        
+             return true;
+         }
+
+     }
+     var quoteScan = function() {
+
+             $.each(quotesData, function(key, stock) {
+                 window.console.log(stock);
+                 if (hodTest(stock) && lodTest(stock) && vwapTest(stock)) {
+                     stocksTrade.push(stock);
+                 }
+             });
+             window.console.log(stocksTrade);
+         }
+         // for testing
+     var quotetestSymbols = function() {
+         $.getJSON(config.testQuotes, function(data) {
+
+             quotesData = data.response.quotes.quote;
+             quoteScan();
+         });
+
+     }
 
      return {
          init: function() {
-                formatSymbols();
-             // callApi();
+             // formatSymbols();
+             quotetestSymbols();
+
 
          }
      };
 
  })();
 
- stockScanner.init(); 
+ stockScanner.init();
