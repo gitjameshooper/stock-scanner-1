@@ -19,8 +19,8 @@ var stockScanner = (function() {
             [751, 900]
         ],
         symbolsCurTier: 0,
-        stockDiffPct: 5,
-        stockAwayPct: 3,
+        stockDiffPct: 4,
+        stockAwayPct: 2,
         run: true
 
     }
