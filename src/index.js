@@ -127,37 +127,54 @@ var stockScanner = (function() {
 
         $.each(quotesData, function(key, stock) {
 
-
+              // check if the stock passes the tests
             if (lodTest(stock) && hodTest(stock) && vwapTest(stock)) {
-                stocksTrade.push(stock);
+
+                
+                    stocksTrade.push(stock);
+                
             }
         });
-        
+          // empty array after going thru all tiers
+        if (config.symbolsCurTier === 0) {
+           stocksTrade = [];
+        }
 
+        
         formatSymbols();
 
     }
 
 
     return {
-        init: function() {
-
+        startScan: function() {
+            config.run = true;
             formatSymbols();
-            
 
         },
         stopScan: function() {
             config.run = false;
         },
-        stocksScanned:function(){
+        stocksScanned: function() {
             return stocksTrade;
         }
     };
 
 })();
 // var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
-stockScanner.init();
-setTimeout(function() {
-    stockScanner.stopScan();
-    window.console.log(stockScanner.stocksScanned());
-}, 6000);
+
+
+
+
+var myApp = angular.module('stockScannerApp', []);
+
+myApp.controller('stockController', ['$scope', function($scope) {
+    
+    $scope.$watch('stocks', function(){
+            alert('hey, myVar has changed!');
+    });
+    
+    
+    $scope.startScan = function() { stockScanner.startScan(); $scope.class = "green"; $scope.stocks = stockScanner.stocksScanned(); }
+    $scope.stopScan = function() { stockScanner.stopScan(); $scope.class = "red"; }
+}]);

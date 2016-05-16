@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="stockScannerApp">
 
 <head>
     <meta charset="utf-8" />
@@ -12,16 +12,21 @@
     <link rel="stylesheet" href="/css/global.css" />
 </head>
 
-<body>
+<body ng-controller="stockController">
     <header>
     </header>
     <section id="section-1">
-        <div class="container-fluid">
-          <h1>Stock Scanner</h1>
+        <div class="container-fluid" ng-class="class">
+            <h1>Stock Scanner</h1>
+            <a class="btn start" href="" ng-click="startScan()">Start Scan</a> <a class="btn stop" href="" ng-click="stopScan()">Stop Scan</a>
             <div class="row">
-                <div class="col-md-4 border">.col-md-4</div>
-                <div class="col-md-4 border">.col-md-4</div>
-                <div class="col-md-4 border">.col-md-4</div>
+                <div class="col-md-4 border">
+                    <ul class="list-unstyled">
+                        <li ng-repeat="stock in stocks">{{ stock.symbol }} <span>Price {{ stock.last }}</span></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 border"></div>
+                <div class="col-md-4 border"></div>
             </div>
         </div>
     </section>
