@@ -62,7 +62,7 @@ gulp.task('browser-sync', function() {
     browserSync.init({
         reloadDebounce: 5000,
         server: "./app",
-        port: 8000,
+        port: 2000,
         tunnel: false // only need to enable this if with a device not on the same wifi - crashes often so off by default
     });
 });

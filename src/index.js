@@ -1,9 +1,12 @@
 // api limits  250 stocks per call per second
 //  use this to pull stocks from finviz var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_price_o1,ta_volatility_mo2&ft=4&o=-price
+ 
+var myApp = angular.module('stockScannerApp', []);
 
-var stockScanner = (function() {
-    var config = {
+
+myApp.controller('stockController', ['$scope', function($scope) {
+     $scope.config = {
         tkCredsJSON: "/json/tk-creds.json",
         tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
         symbolsJSON: "/json/symbols.json",
@@ -25,40 +28,43 @@ var stockScanner = (function() {
 
     }
 
-    var quotesData = {};
-    var stocksTrade = [];
+    $scope.quotesData = {};
+    $scope.stockstoTrade = [];
 
     // format symbols into string
-    var formatSymbols = function() {
-            if (config.run) {
-                config.symbolStr = '';
-                config.symbolsBegCount = 0;
-                $.getJSON(config.symbolsJSON, function(data) {
+    $scope.formatSymbols = function() {
+            if ($scope.config.run) {
+                $scope.config.symbolStr = '';
+                $scope.config.symbolsBegCount = 0;
+                $.getJSON($scope.config.symbolsJSON, function(data) {
 
                     $.each(data.symbols, function(k, v) {
 
-                        if (config.symbolsBegCount >= config.symbolsTiers[config.symbolsCurTier][0] && config.symbolsTiers[config.symbolsCurTier][0] <= config.symbolsCurCount && config.symbolsCurCount <= config.symbolsTiers[config.symbolsCurTier][1]) {
-                            config.symbolStr += v + ',';
-                            config.symbolsCurCount++;
+                        if ($scope.config.symbolsBegCount >= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] && $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] <= $scope.config.symbolsCurCount && $scope.config.symbolsCurCount <= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][1]) {
+                            $scope.config.symbolStr += v + ',';
+                            $scope.config.symbolsCurCount++;
 
                         }
-                        config.symbolsBegCount++;
+                        $scope.config.symbolsBegCount++;
                     });
 
-                    config.symbolsCurTier++;
+                    $scope.config.symbolsCurTier++;
 
-                    if (config.symbolsCurTier >= config.symbolsTiers.length) {
-                        config.symbolsCurTier = 0;
-                        config.symbolsCurCount = 0;
+                    if ($scope.config.symbolsCurTier >= $scope.config.symbolsTiers.length) {
+                        $scope.config.symbolsCurTier = 0;
+                        $scope.config.symbolsCurCount = 0;
                     };
-                    config.symbolStr = config.symbolStr.slice(0, -1);
-                    callApi();
+                    $scope.config.symbolStr = $scope.config.symbolStr.slice(0, -1);
+                    setTimeout(function(){
+                            $scope.callApi();
+                    }, 500);
+                    
                 });
             }
         }
         // Call tradeking api
-    var callApi = function() {
-            $.getJSON(config.tkCredsJSON, function(data) {
+    $scope.callApi = function() {
+            $.getJSON($scope.config.tkCredsJSON, function(data) {
 
                 var creds = data;
 
@@ -74,7 +80,7 @@ var stockScanner = (function() {
                     secret: creds.access_secret
                 };
                 var request_data = {
-                    url: config.tkApiUrl + config.symbolStr,
+                    url: $scope.config.tkApiUrl + $scope.config.symbolStr,
                     method: 'GET'
                 };
                 $.ajax({
@@ -82,29 +88,29 @@ var stockScanner = (function() {
                     type: request_data.method,
                     data: oauth.authorize(request_data, token)
                 }).error(function(err) {
-
+                    $scope.class = "error";
                     window.console.log("Bad TK Request", err);
                 }).done(function(data) {
 
-                    quotesData = data.response.quotes.quote;
-                    quoteScan();
+                    $scope.quotesData = data.response.quotes.quote;
+                    $scope.quoteScan();
                 });
 
             });
         }
         //  test stock for first move up
-    var lodTest = function(stock) {
+    $scope.lodTest = function(stock) {
             var stockLo = Number(stock.lo),
                 stockHi = Number(stock.hi),
                 stockDiff = (stockHi - stockLo).toFixed(2),
                 stockDiffPct = (stockDiff / stockLo).toFixed(3) * 100;
 
-            if (stockDiffPct >= config.stockDiffPct) {
+            if (stockDiffPct >= $scope.config.stockDiffPct) {
                 return true;
             }
         }
         //  test stock if it is above vwap
-    var vwapTest = function(stock) {
+    $scope.vwapTest = function(stock) {
             var stockVwap = Number(stock.vwap),
                 stockPrice = Number(stock.last);
 
@@ -113,60 +119,40 @@ var stockScanner = (function() {
             }
         }
         //  test stock for first move up
-    var hodTest = function(stock) {
+    $scope.hodTest = function(stock) {
         var stockHi = Number(stock.hi),
             stockPrice = Number(stock.last),
             stockDiff = (stockHi - stockPrice).toFixed(2),
             stockDiffPct = (stockDiff / stockHi).toFixed(3) * 100;
-        if (stockDiffPct >= config.stockDiffPct) {
+        if (stockDiffPct >= $scope.config.stockDiffPct) {
             return true;
         }
     }
-    var quoteScan = function() {
+    $scope.quoteScan = function() {
 
-        $.each(quotesData, function(key, stock) {
+        $.each($scope.quotesData, function(key, stock) {
 
             // check if the stock passes the tests
-            if (lodTest(stock) && hodTest(stock) && vwapTest(stock)) {
-                stocksTrade.push(stock);
+            if ($scope.lodTest(stock) && $scope.hodTest(stock) && $scope.vwapTest(stock)) {
+                $scope.stockstoTrade.push(stock);
             }
         });
         // empty array after going thru all tiers
-        if (config.symbolsCurTier === 0) {
-            stocksTrade = [];
-            $(".btn.stop").trigger("click");
-            setTimeout(function() {
-                $(".btn.start").trigger("click");
-            }, 4000);
-
+        
+        if ($scope.config.symbolsCurTier === 0) {
+             $scope.$apply();
+             $scope.stockstoTrade = [];
+               
         }
-        formatSymbols();
+        $scope.formatSymbols();
     }
-    return {
-        startScan: function() {
-            config.run = true;
-            formatSymbols();
-
-        },
-        stopScan: function() {
-            config.run = false;
-        },
-        stocksTrade: stocksTrade
-    };
-
-})();
-
-var myApp = angular.module('stockScannerApp', []);
-
-
-myApp.controller('stockController', ['$scope', function($scope) {
-    $scope.stocks = stockScanner.stocksTrade;
     $scope.startScan = function() {
-        stockScanner.startScan();
+        $scope.config.run = true;
+        $scope.formatSymbols();
         $scope.class = "green";
     }
     $scope.stopScan = function() {
-        stockScanner.stopScan();
+        $scope.config.run = false;
         $scope.class = "red";
     }
 
