@@ -1,4 +1,7 @@
 // api limits  250 stocks per call per second
+//  use this to pull stocks from finviz var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
+// http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_price_o1,ta_volatility_mo2&ft=4&o=-price
+
 var stockScanner = (function() {
     var config = {
         tkCredsJSON: "/json/tk-creds.json",
@@ -31,7 +34,7 @@ var stockScanner = (function() {
                 config.symbolStr = '';
                 config.symbolsBegCount = 0;
                 $.getJSON(config.symbolsJSON, function(data) {
-                    window.console.log(config.symbolsCurCount);
+
                     $.each(data.symbols, function(k, v) {
 
                         if (config.symbolsBegCount >= config.symbolsTiers[config.symbolsCurTier][0] && config.symbolsTiers[config.symbolsCurTier][0] <= config.symbolsCurCount && config.symbolsCurCount <= config.symbolsTiers[config.symbolsCurTier][1]) {
@@ -97,10 +100,8 @@ var stockScanner = (function() {
                 stockDiffPct = (stockDiff / stockLo).toFixed(3) * 100;
 
             if (stockDiffPct >= config.stockDiffPct) {
-
                 return true;
             }
-
         }
         //  test stock if it is above vwap
     var vwapTest = function(stock) {
@@ -110,7 +111,6 @@ var stockScanner = (function() {
             if (stockPrice >= stockVwap) {
                 return true;
             }
-
         }
         //  test stock for first move up
     var hodTest = function(stock) {
@@ -121,31 +121,27 @@ var stockScanner = (function() {
         if (stockDiffPct >= config.stockDiffPct) {
             return true;
         }
-
     }
     var quoteScan = function() {
 
         $.each(quotesData, function(key, stock) {
 
-              // check if the stock passes the tests
+            // check if the stock passes the tests
             if (lodTest(stock) && hodTest(stock) && vwapTest(stock)) {
-
-                
-                    stocksTrade.push(stock);
-                
+                stocksTrade.push(stock);
             }
         });
-          // empty array after going thru all tiers
+        // empty array after going thru all tiers
         if (config.symbolsCurTier === 0) {
-           stocksTrade = [];
+            stocksTrade = [];
+            $(".btn.stop").trigger("click");
+            setTimeout(function() {
+                $(".btn.start").trigger("click");
+            }, 4000);
+
         }
-
-        
         formatSymbols();
-
     }
-
-
     return {
         startScan: function() {
             config.run = true;
@@ -155,26 +151,23 @@ var stockScanner = (function() {
         stopScan: function() {
             config.run = false;
         },
-        stocksScanned: function() {
-            return stocksTrade;
-        }
+        stocksTrade: stocksTrade
     };
 
 })();
-// var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
-
-
-
 
 var myApp = angular.module('stockScannerApp', []);
 
+
 myApp.controller('stockController', ['$scope', function($scope) {
-    
-    $scope.$watch('stocks', function(){
-            alert('hey, myVar has changed!');
-    });
-    
-    
-    $scope.startScan = function() { stockScanner.startScan(); $scope.class = "green"; $scope.stocks = stockScanner.stocksScanned(); }
-    $scope.stopScan = function() { stockScanner.stopScan(); $scope.class = "red"; }
+    $scope.stocks = stockScanner.stocksTrade;
+    $scope.startScan = function() {
+        stockScanner.startScan();
+        $scope.class = "green";
+    }
+    $scope.stopScan = function() {
+        stockScanner.stopScan();
+        $scope.class = "red";
+    }
+
 }]);

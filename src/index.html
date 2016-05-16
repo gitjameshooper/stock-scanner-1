@@ -17,16 +17,31 @@
     </header>
     <section id="section-1">
         <div class="container-fluid" ng-class="class">
-            <h1>Stock Scanner</h1>
-            <a class="btn start" href="" ng-click="startScan()">Start Scan</a> <a class="btn stop" href="" ng-click="stopScan()">Stop Scan</a>
-            <div class="row">
-                <div class="col-md-4 border">
-                    <ul class="list-unstyled">
-                        <li ng-repeat="stock in stocks">{{ stock.symbol }} <span>Price {{ stock.last }}</span></li>
-                    </ul>
+            <h1 class="page-header">Stock Scanner</h1>
+            <button class="btn start" ng-click="startScan()">Start Scan</button> <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
+            <div class="row margin-top-20 f-18">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>VWAP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in stocks">
+                                <th scope="row">{{ $index + 1 }}</th>
+                                <td>{{ stock.symbol }}</td>
+                                <td>{{ stock.last }}</td>
+                                <td>{{ stock.vwap }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                     
                 </div>
-                <div class="col-md-4 border"></div>
-                <div class="col-md-4 border"></div>
             </div>
         </div>
     </section>
