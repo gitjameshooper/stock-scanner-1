@@ -1,7 +1,7 @@
 // api limits  250 stocks per call per second
 //  use this to pull stocks from finviz var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_price_o1,ta_volatility_mo2&ft=4&o=-price
- 
+ // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_curvol_o750,sh_price_o1&ft=4&o=-price&r=121
 var myApp = angular.module('stockScannerApp', []);
 
 
@@ -19,17 +19,21 @@ myApp.controller('stockController', ['$scope', function($scope) {
             [301, 450],
             [451, 600],
             [601, 750],
-            [751, 900]
+            [751, 900],
+            [901, 1050]
         ],
         symbolsCurTier: 0,
-        stockDiffPct: 4,
-        stockAwayPct: 2,
+        stockDiffPctA: 5,
+        stockAwayPctA: 2,
+        stockDiffPctV: 8,
+        stockAwayPctV: 2,
         run: true
 
     }
 
     $scope.quotesData = {};
-    $scope.stockstoTrade = [];
+    $scope.stocksABCD = [];
+    $scope.stocksVWAP = [];
 
     // format symbols into string
     $scope.formatSymbols = function() {
@@ -37,7 +41,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 $scope.config.symbolStr = '';
                 $scope.config.symbolsBegCount = 0;
                 $.getJSON($scope.config.symbolsJSON, function(data) {
-
+                       window.console.log(data);
                     $.each(data.symbols, function(k, v) {
 
                         if ($scope.config.symbolsBegCount >= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] && $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] <= $scope.config.symbolsCurCount && $scope.config.symbolsCurCount <= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][1]) {
@@ -89,6 +93,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     data: oauth.authorize(request_data, token)
                 }).error(function(err) {
                     $scope.class = "error";
+                    $scope.config.run = false;
                     window.console.log("Bad TK Request", err);
                 }).done(function(data) {
 
@@ -99,18 +104,18 @@ myApp.controller('stockController', ['$scope', function($scope) {
             });
         }
         //  test stock for first move up
-    $scope.lodTest = function(stock) {
+    $scope.lodTestA = function(stock) {
             var stockLo = Number(stock.lo),
                 stockHi = Number(stock.hi),
                 stockDiff = (stockHi - stockLo).toFixed(2),
-                stockDiffPct = (stockDiff / stockLo).toFixed(3) * 100;
+                stockDiffPctA = (stockDiff / stockLo).toFixed(3) * 100;
 
-            if (stockDiffPct >= $scope.config.stockDiffPct) {
+            if (stockDiffPctA >= $scope.config.stockDiffPctA) {
                 return true;
             }
         }
         //  test stock if it is above vwap
-    $scope.vwapTest = function(stock) {
+    $scope.vwapTestA = function(stock) {
             var stockVwap = Number(stock.vwap),
                 stockPrice = Number(stock.last);
 
@@ -118,30 +123,55 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 return true;
             }
         }
-        //  test stock for first move up
-    $scope.hodTest = function(stock) {
+        //  test stock for pullback
+    $scope.hodTestA = function(stock) {
         var stockHi = Number(stock.hi),
             stockPrice = Number(stock.last),
             stockDiff = (stockHi - stockPrice).toFixed(2),
-            stockDiffPct = (stockDiff / stockHi).toFixed(3) * 100;
-        if (stockDiffPct >= $scope.config.stockDiffPct) {
+            stockDiffPctA = (stockDiff / stockHi).toFixed(3) * 100;
+        if (stockDiffPctA >= $scope.config.stockAwayPctA) {
             return true;
         }
     }
+    $scope.lodTestV = function(stock) {
+            var stockLo = Number(stock.lo),
+                stockHi = Number(stock.hi),
+                stockDiff = (stockHi - stockLo).toFixed(2),
+                stockDiffPctV = (stockDiff / stockLo).toFixed(3) * 100;
+
+            if (stockDiffPctV >= $scope.config.stockDiffPctV) {
+                return true;
+            }
+        }
+    $scope.vwapTestV = function(stock) {
+            var stockVwap = Number(stock.vwap),
+                stockPrice = Number(stock.last),
+                stockDiffVwap = (stockPrice - stockVwap).toFixed(2),
+                stockDiffPctVwapV = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+
+            if (Math.abs(stockDiffPctVwapV) <= $scope.config.stockAwayPctV) {
+                return true;
+            }
+        }
     $scope.quoteScan = function() {
 
         $.each($scope.quotesData, function(key, stock) {
 
-            // check if the stock passes the tests
-            if ($scope.lodTest(stock) && $scope.hodTest(stock) && $scope.vwapTest(stock)) {
-                $scope.stockstoTrade.push(stock);
+            // check if the stock passes the ABCD tests
+            if ($scope.lodTestA(stock) && $scope.hodTestA(stock) && $scope.vwapTestA(stock)) {
+                $scope.stocksABCD.push(stock);
+            }
+            // check if the stock passes the VWAP tests
+            if ($scope.lodTestV(stock) && $scope.vwapTestV(stock)) {
+                $scope.stocksVWAP.push(stock);
             }
         });
         // empty array after going thru all tiers
         
         if ($scope.config.symbolsCurTier === 0) {
              $scope.$apply();
-             $scope.stockstoTrade = [];
+             $scope.stocksABCD = [];
+             $scope.stocksVWAP = [];
                
         }
         $scope.formatSymbols();
