@@ -4,7 +4,6 @@
  // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_curvol_o750,sh_price_o1&ft=4&o=-price&r=121
 var myApp = angular.module('stockScannerApp', []);
 
-
 myApp.controller('stockController', ['$scope', function($scope) {
      $scope.config = {
         tkCredsJSON: "/json/tk-creds.json",
@@ -41,7 +40,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 $scope.config.symbolStr = '';
                 $scope.config.symbolsBegCount = 0;
                 $.getJSON($scope.config.symbolsJSON, function(data) {
-                       window.console.log(data);
+                     
                     $.each(data.symbols, function(k, v) {
 
                         if ($scope.config.symbolsBegCount >= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] && $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] <= $scope.config.symbolsCurCount && $scope.config.symbolsCurCount <= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][1]) {
