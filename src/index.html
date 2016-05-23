@@ -34,7 +34,7 @@
                         <tbody>
                             <tr ng-repeat="stockA in stocksABCD">
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ stockA.symbol }}</td>
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                                 <td>{{ stockA.last }}</td>
                                 <td>{{ stockA.vwap }}</td>
                             </tr>
@@ -43,7 +43,7 @@
                     </table>
                      
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>VWAP</h3>
@@ -60,6 +60,29 @@
                                 <td>{{ stockV.symbol }}</td>
                                 <td>{{ stockV.last }}</td>
                                 <td>{{ stockV.vwap }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                     
+                </div> -->
+                <div class="col-md-6">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>VWAP Diff</h3>
+                            <tr>
+                                <th>#</th>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>VWAP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockVD in stocksVWAPD">
+                                <th scope="row">{{ $index + 1 }}</th>
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockVD.symbol }}&src=ctag">{{ stockVD.symbol }}</a></td>
+                                <td>{{ stockVD.last }}</td>
+                                <td>{{ stockVD.vwap }}</td>
                             </tr>
                             
                         </tbody>
