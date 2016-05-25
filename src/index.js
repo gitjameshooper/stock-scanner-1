@@ -5,7 +5,9 @@
 var myApp = angular.module('stockScannerApp', []);
 
 myApp.controller('stockController', ['$scope', function($scope) {
-    $scope.config = {
+    var $s = $scope;
+    // config
+    $s.cfg = {
         tkCredsJSON: "/json/tk-creds.json",
         tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
         symbolsJSON: "/json/symbols.json",
@@ -26,52 +28,52 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockAwayPctA: 2,
         stockDiffPctV: 8,
         stockAwayPctV: 2,
-        stockAwayPctVD: 3,  // price away from vwap
+        stockAwayPctVD: 2,  // price away from vwap
         stockVolume: 100000,
         soundCount: 0,
         run: true
 
     }
 
-    $scope.quotesData = {};
-    $scope.stocksABCD = [];
-    $scope.stocksVWAP = [];
-    $scope.stocksVWAPD = [];
+    $s.quotesData = {};
+    $s.stocksABCD = [];
+    $s.stocksVWAP = [];
+    $s.stocksVWAPD = [];
 
-    // format symbols into string
-    $scope.formatSymbols = function() {
-            if ($scope.config.run) {
-                $scope.config.symbolStr = '';
-                $scope.config.symbolsBegCount = 0;
-                $.getJSON($scope.config.symbolsJSON, function(data) {
+    // format symbols form json into string
+    $s.formatSymbols = function() {
+            if ($s.cfg.run) {
+                $s.cfg.symbolStr = '';
+                $s.cfg.symbolsBegCount = 0;
+                $.getJSON($s.cfg.symbolsJSON, function(data) {
 
                     $.each(data.symbols, function(k, v) {
 
-                        if ($scope.config.symbolsBegCount >= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] && $scope.config.symbolsTiers[$scope.config.symbolsCurTier][0] <= $scope.config.symbolsCurCount && $scope.config.symbolsCurCount <= $scope.config.symbolsTiers[$scope.config.symbolsCurTier][1]) {
-                            $scope.config.symbolStr += v + ',';
-                            $scope.config.symbolsCurCount++;
+                        if ($s.cfg.symbolsBegCount >= $s.cfg.symbolsTiers[$s.cfg.symbolsCurTier][0] && $s.cfg.symbolsTiers[$s.cfg.symbolsCurTier][0] <= $s.cfg.symbolsCurCount && $s.cfg.symbolsCurCount <= $s.cfg.symbolsTiers[$s.cfg.symbolsCurTier][1]) {
+                            $s.cfg.symbolStr += v + ',';
+                            $s.cfg.symbolsCurCount++;
 
                         }
-                        $scope.config.symbolsBegCount++;
+                        $s.cfg.symbolsBegCount++;
                     });
 
-                    $scope.config.symbolsCurTier++;
+                    $s.cfg.symbolsCurTier++;
 
-                    if ($scope.config.symbolsCurTier >= $scope.config.symbolsTiers.length) {
-                        $scope.config.symbolsCurTier = 0;
-                        $scope.config.symbolsCurCount = 0;
+                    if ($s.cfg.symbolsCurTier >= $s.cfg.symbolsTiers.length) {
+                        $s.cfg.symbolsCurTier = 0;
+                        $s.cfg.symbolsCurCount = 0;
                     };
-                    $scope.config.symbolStr = $scope.config.symbolStr.slice(0, -1);
+                    $s.cfg.symbolStr = $s.cfg.symbolStr.slice(0, -1);
                     setTimeout(function() {
-                        $scope.callApi();
+                        $s.callApi();
                     }, 500);
 
                 });
             }
         }
         // Call tradeking api
-    $scope.callApi = function() {
-            $.getJSON($scope.config.tkCredsJSON, function(data) {
+    $s.callApi = function() {
+            $.getJSON($s.cfg.tkCredsJSON, function(data) {
 
                 var creds = data;
 
@@ -87,7 +89,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     secret: creds.access_secret
                 };
                 var request_data = {
-                    url: $scope.config.tkApiUrl + $scope.config.symbolStr,
+                    url: $s.cfg.tkApiUrl + $s.cfg.symbolStr,
                     method: 'GET'
                 };
                 $.ajax({
@@ -95,30 +97,30 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     type: request_data.method,
                     data: oauth.authorize(request_data, token)
                 }).error(function(err) {
-                    $scope.class = "error";
-                    $scope.config.run = false;
+                    $s.class = "error";
+                    $s.cfg.run = false;
                     window.console.log("Bad TK Request", err);
                 }).done(function(data) {
 
-                    $scope.quotesData = data.response.quotes.quote;
-                    $scope.quoteScan();
+                    $s.quotesData = data.response.quotes.quote;
+                    $s.quoteScan();
                 });
 
             });
         }
         //  test stock for first move up
-    $scope.lodTestA = function(stock) {
+    $s.lodTestA = function(stock) {
             var stockLo = Number(stock.lo),
                 stockHi = Number(stock.hi),
                 stockDiff = (stockHi - stockLo).toFixed(2),
                 stockDiffPctA = (stockDiff / stockLo).toFixed(3) * 100;
 
-            if (stockDiffPctA >= $scope.config.stockDiffPctA) {
+            if (stockDiffPctA >= $s.cfg.stockDiffPctA) {
                 return true;
             }
         }
         //  test stock if it is above vwap
-    $scope.vwapTestA = function(stock) {
+    $s.vwapTestA = function(stock) {
             var stockVwap = Number(stock.vwap),
                 stockPrice = Number(stock.last);
 
@@ -127,53 +129,53 @@ myApp.controller('stockController', ['$scope', function($scope) {
             }
         }
         //  test stock for pullback
-    $scope.hodTestA = function(stock) {
+    $s.hodTestA = function(stock) {
             var stockHi = Number(stock.hi),
                 stockPrice = Number(stock.last),
                 stockDiff = (stockHi - stockPrice).toFixed(2),
                 stockDiffPctA = (stockDiff / stockHi).toFixed(3) * 100;
-            if (stockDiffPctA >= $scope.config.stockAwayPctA) {
+            if (stockDiffPctA >= $s.cfg.stockAwayPctA) {
                 return true;
             }
         }
-        // $scope.lodTestV = function(stock) {
+        // $s.lodTestV = function(stock) {
         //         var stockLo = Number(stock.lo),
         //             stockHi = Number(stock.hi),
         //             stockDiff = (stockHi - stockLo).toFixed(2),
         //             stockDiffPctV = (stockDiff / stockLo).toFixed(3) * 100;
 
-    //         if (stockDiffPctV >= $scope.config.stockDiffPctV) {
+    //         if (stockDiffPctV >= $s.cfg.stockDiffPctV) {
     //             return true;
     //         }
     //     }
-    // $scope.vwapTestV = function(stock) {
+    // $s.vwapTestV = function(stock) {
     //         var stockVwap = Number(stock.vwap),
     //             stockPrice = Number(stock.last),
     //             stockDiffVwap = (stockPrice - stockVwap).toFixed(2),
     //             stockDiffPctVwapV = (stockDiffVwap / stockPrice).toFixed(3) * 100;
 
-    //         if (Math.abs(stockDiffPctVwapV) <= $scope.config.stockAwayPctV) {
+    //         if (Math.abs(stockDiffPctVwapV) <= $s.cfg.stockAwayPctV) {
     //             return true;
     //         }
     //     }
-    $scope.vwapTestVD = function(stock) {
+    $s.vwapTestVD = function(stock) {
         var stockVwap = Number(stock.vwap),
             stockPrice = Number(stock.last),
             stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
             stockDiffPctVwapVD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
 
-        if (stockDiffPctVwapVD >= $scope.config.stockAwayPctVD) {
+        if (stockDiffPctVwapVD >= $s.cfg.stockAwayPctVD) {
             return true;
         }
     }
-    $scope.volumeTest = function(stock) {
+    $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
 
-        if (stockVolume >= $scope.config.stockVolume) {
+        if (stockVolume >= $s.cfg.stockVolume) {
             return true;
         }
     }
-    $scope.initSound = function() {
+    $s.initSound = function() {
 
         $.extend({
             playSound: function() {
@@ -183,21 +185,21 @@ myApp.controller('stockController', ['$scope', function($scope) {
             }
         });
     }
-    $scope.quoteScan = function() {
+    $s.quoteScan = function() {
 
-        $.each($scope.quotesData, function(key, stock) {
+        $.each($s.quotesData, function(key, stock) {
 
             // check if the stock passes the ABCD tests
-            if ($scope.volumeTest(stock) && $scope.lodTestA(stock) && $scope.hodTestA(stock) && $scope.vwapTestA(stock)) {
-                $scope.stocksABCD.push(stock);
+            if ($s.volumeTest(stock) && $s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
+                $s.stocksABCD.push(stock);
             }
             // check if the stock passes the VWAP tests
-            // if ($scope.volumeTest(stock) && $scope.lodTestV(stock) && $scope.vwapTestV(stock)) {
-            //     $scope.stocksVWAP.push(stock);
+            // if ($s.volumeTest(stock) && $s.lodTestV(stock) && $s.vwapTestV(stock)) {
+            //     $s.stocksVWAP.push(stock);
             // }
             // check if the stock passes the VWAP tests
-            if ($scope.volumeTest(stock) && $scope.vwapTestVD(stock)) {
-                $scope.stocksVWAPD.push(stock);
+            if ($s.volumeTest(stock) && $s.vwapTestVD(stock)) {
+                $s.stocksVWAPD.push(stock);
 
 
             }
@@ -205,29 +207,29 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
         // empty array after going thru all tiers
 
-        if ($scope.config.symbolsCurTier === 0) {
+        if ($s.cfg.symbolsCurTier === 0) {
             // play sound if vwamp stock found
-             if ($scope.stocksVWAPD.length && ($scope.stocksVWAPD.length !== $scope.config.soundCount)) {
-                $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
-                $scope.config.soundCount = $scope.stocksVWAPD.length;
+             if ($s.stocksVWAPD.length && ($s.stocksVWAPD.length !== $s.cfg.soundCount)) {
+                // $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+                $s.cfg.soundCount = $s.stocksVWAPD.length;
             }
-            $scope.$apply();
-            $scope.stocksABCD = [];
-            $scope.stocksVWAP = [];
-            $scope.stocksVWAPD = [];
+            $s.$apply();
+            $s.stocksABCD = [];
+            $s.stocksVWAP = [];
+            $s.stocksVWAPD = [];
 
         }
-        $scope.formatSymbols();
+        $s.formatSymbols();
     }
-    $scope.startScan = function() {
-        $scope.config.run = true;
-        $scope.formatSymbols();
-        $scope.initSound();
-        $scope.class = "green";
+    $s.startScan = function() {
+        $s.cfg.run = true;
+        $s.formatSymbols();
+        $s.initSound();
+        $s.class = "green";
     }
-    $scope.stopScan = function() {
-        $scope.config.run = false;
-        $scope.class = "red";
+    $s.stopScan = function() {
+        $s.cfg.run = false;
+        $s.class = "red";
     }
 
 }]);
