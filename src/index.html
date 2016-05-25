@@ -20,30 +20,30 @@
             <h1 class="page-header">Stock Scanner</h1>
             <button class="btn start" ng-click="startScan()">Start Scan</button> <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
-                <div class="col-md-6">
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
-                            <h3>ABCD</h3>
+                            <h3>A-ABCD</h3>
                             <tr>
                                 <th>#</th>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                                <th>VWAP</th>
+                           
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksABCD">
+                            <tr ng-repeat="stockA in stocksA | orderBy:'-vl'">
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                                 <td>{{ stockA.last }}</td>
-                                <td>{{ stockA.vwap }}</td>
+                            
                             </tr>
                             
                         </tbody>
                     </table>
                      
                 </div>
-                <!-- <div class="col-md-6">
+                <!-- <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>VWAP</h3>
@@ -66,23 +66,44 @@
                     </table>
                      
                 </div> -->
-                <div class="col-md-6">
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
-                            <h3>VWAP Diff</h3>
+                            <h3>B-VWAP Diff</h3>
                             <tr>
                                 <th>#</th>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                                <th>VWAP</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockVD in stocksVWAPD">
+                            <tr ng-repeat="stockB in stocksB | orderBy:'-vl'">
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockVD.symbol }}&src=ctag">{{ stockVD.symbol }}</a></td>
-                                <td>{{ stockVD.last }}</td>
-                                <td>{{ stockVD.vwap }}</td>
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockB.symbol }}&src=ctag">{{ stockB.symbol }}</a></td>
+                                <td>{{ stockB.last }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                     
+                </div>
+                <div class="col-sm-4">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>C-Vwap-Close</h3>
+                            <tr>
+                                <th>#</th>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockC in stocksC | orderBy:'-vl'">
+                                <th scope="row">{{ $index + 1 }}</th>
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
+                                <td>{{ stockC.last }}</td>
                             </tr>
                             
                         </tbody>
