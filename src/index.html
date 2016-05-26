@@ -20,7 +20,7 @@
             <h1 class="page-header">Stock Scanner</h1>
             <button class="btn start" ng-click="startScan()">Start Scan</button> <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>A-ABCD</h3>
@@ -36,6 +36,7 @@
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                                 <td>{{ stockA.last }}</td>
+                                 
                             
                             </tr>
                             
@@ -66,7 +67,7 @@
                     </table>
                      
                 </div> -->
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>B-VWAP Diff</h3>
@@ -82,13 +83,15 @@
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockB.symbol }}&src=ctag">{{ stockB.symbol }}</a></td>
                                 <td>{{ stockB.last }}</td>
+
+                                
                             </tr>
                             
                         </tbody>
                     </table>
                      
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>C-Vwap-Close</h3>
@@ -104,6 +107,31 @@
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                                 <td>{{ stockC.last }}</td>
+                    
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                     
+                </div>
+                <div class="col-sm-3">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>D-Vwap-Beta</h3>
+                            <tr>
+                                <th>#</th>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>Beta</th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockD in stocksD | orderBy:'-vl'">
+                                <th scope="row">{{ $index + 1 }}</th>
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
+                                <td>{{ stockD.last }}</td>
+                                <td>{{ stockD.beta }}</td>
                             </tr>
                             
                         </tbody>
