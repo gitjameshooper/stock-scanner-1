@@ -11,7 +11,10 @@ myApp.controller('stockController', ['$scope', function($scope) {
     var $s = $scope;
     // config
     $s.cfg = {
-        tkCredsJSON: "/json/tk-creds.json",
+        tkCredsJSONUrl: "/json/tk-creds.json",
+        tkOauth: {},
+        tkToken: {},
+        tkRequestData: {},
         tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
         symbolsJSONUrl: "/json/symbols.json",
         symbolsJSON: {},
@@ -34,6 +37,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockBeta: 2,
         stockVolume: [50000, 500000],
         soundCount: 0,
+        apiMSecs: 1200,
         run: true
     }
 
@@ -43,17 +47,45 @@ myApp.controller('stockController', ['$scope', function($scope) {
     $s.stocksC = [];
     $s.stocksD = [];
 
-    // get all symbolStr
-    $s.jsonSymbols = function() {
+    // get both json data and tkcreds
+    $s.initData = function() {
 
-            $.getJSON($s.cfg.symbolsJSONUrl, function(data) {
+            var xhr1 = $.getJSON($s.cfg.symbolsJSONUrl, function(data) {
                 $s.cfg.symbolsJSON = data.symbols;
 
-            }).done(function() {
+            }).fail(function(err) {
+                window.console.log(err.responseText);
+                $s.class = "error";
+                $s.$apply();
+            });
+            var xhr2 = $.getJSON($s.cfg.tkCredsJSONUrl, function(data) {
 
+                var creds = data;
+
+                $s.cfg.tkOauth = OAuth({
+                    consumer: {
+                        public: creds.consumer_key,
+                        secret: creds.consumer_secret
+                    },
+                    signature_method: 'HMAC-SHA1'
+                });
+                $s.cfg.tkToken = {
+                    public: creds.access_token,
+                    secret: creds.access_secret
+                };
+                $s.cfg.tkRequestData = {
+                    url: $s.cfg.tkApiUrl,
+                    method: 'GET'
+                };
+            }).fail(function(err) {
+                window.console.log(err.responseText);
+                $s.class = "error";
+                $s.$apply();
+                  
+            });
+            $.when(xhr1, xhr2).done(function(xhr1, xhr2) {
                 $s.formatSymbols();
             });
-
         }
         // format symbols form json into string
     $s.formatSymbols = function() {
@@ -77,50 +109,34 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     $s.cfg.symbolsCurCount = 0;
                 };
                 $s.cfg.symbolStr = $s.cfg.symbolStr.slice(0, -1);
+                $s.cfg.tkRequestData.url = $s.cfg.tkApiUrl + $s.cfg.symbolStr;
                 setTimeout(function() {
                     $s.callApi();
-                }, 1500);
+                }, $s.cfg.apiMSecs);
             }
         }
         // Call tradeking api
     $s.callApi = function() {
-            $.getJSON($s.cfg.tkCredsJSON, function(data) {
+            
+            $.ajax({
+                url: $s.cfg.tkRequestData.url,
+                type: $s.cfg.tkRequestData.method,
+                data: $s.cfg.tkOauth.authorize($s.cfg.tkRequestData, $s.cfg.tkToken)
+            }).error(function(err) {
+                $s.class = "error";
+                $s.$apply();
+                window.console.log("Bad TK Request", err);
+                setTimeout(function() {
+                    if($s.cfg.run){
+                         $s.callApi();
+                    }
+                }, 3000);
+            }).done(function(data) {
 
-                var creds = data;
-
-                var oauth = OAuth({
-                    consumer: {
-                        public: creds.consumer_key,
-                        secret: creds.consumer_secret
-                    },
-                    signature_method: 'HMAC-SHA1'
-                });
-                var token = {
-                    public: creds.access_token,
-                    secret: creds.access_secret
-                };
-                var request_data = {
-                    url: $s.cfg.tkApiUrl + $s.cfg.symbolStr,
-                    method: 'GET'
-                };
-                $.ajax({
-                    url: request_data.url,
-                    type: request_data.method,
-                    data: oauth.authorize(request_data, token)
-                }).error(function(err) {
-                    $s.class = "error";
-                    $s.$apply();
-                    window.console.log("Bad TK Request", err);
-                    setTimeout(function() {
-                        $s.callApi();
-                    }, 3000);
-                }).done(function(data) {
-
-                    $s.quotesData = data.response.quotes.quote;
-                    $s.quoteScan();
-                });
-
+                $s.quotesData = data.response.quotes.quote;
+                $s.quoteScan();
             });
+
         }
         /*  ALL A TESTS */
         //  test stock for first move up
@@ -250,7 +266,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 $s.stocksC.push(stock);
             }
             // check if the stock passes all the D Tests
-            if ($s.volumeTest(stock) && $s.betaTestD(stock) && $s.vwapTestD(stock)) {
+            if ($s.volumeTest(stock) && $s.betaTestD(stock) ) {
                 stock.beta = Number(stock.beta);
                 stock.last = Number(stock.last);
                 $s.stocksD.push(stock);
@@ -279,7 +295,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
     $s.startScan = function() {
         $s.cfg.run = true;
         $s.helperFuncs();
-        $s.jsonSymbols();
+        $s.initData();
         $s.class = "green";
     }
     $s.stopScan = function() {

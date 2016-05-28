@@ -107,7 +107,7 @@
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                                 <td>{{ stockC.last }}</td>
-                    
+
                             </tr>
                             
                         </tbody>
@@ -127,7 +127,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockD in stocksD | orderBy:'-vl'">
+                            <tr ng-repeat="stockD in stocksD | orderBy:'-beta'">
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                                 <td>{{ stockD.last }}</td>
