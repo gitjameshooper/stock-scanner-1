@@ -1,18 +1,27 @@
 /*  Include Bootstrap css */
 @import "bootstrap/index";
 
+@purple : #462066;
+@orange : #FFB85F;
+@red : #FF7A5A;
+@green : #00AAA0;
+@teal : #8ED2C9;
+@beige : #FCF4D9;
+@black: #333;
+
 /* Custom Styles */
 html{
-	background: #333;
+	background: @black;
+	color: @black;
 }
 .container-fluid{
-	background: #8c92ac;
+	background: @beige;
 	border: 5px solid #8c92ac;
 	&.green{
-		border: 5px solid green;
+		border: 5px solid @green;
 	}
 	&.red{
-		border: 5px solid red;
+		border: 5px solid @red;
 	}
 	&.error{
 		border: 5px solid blue;
@@ -25,11 +34,11 @@ html{
 	}
 	.btn.start{
 		color: #fff;
-		background: green;
+		background: @green;
 	}
 		.btn.stop{
 		color: #fff;
-		background: red;
+		background: @red;
 	}
 	.border{
 		border: 1px solid #000;
