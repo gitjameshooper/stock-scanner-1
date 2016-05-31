@@ -30,14 +30,24 @@ myApp.controller('stockController', ['$scope', function($scope) {
             [751, 900],
             [901, 1050]
         ],
+        dateHours: null,
         symbolsCurTier: 0,
-        stockDiffPctA: 4,
+        stockDiffPctA: 5,
         stockAwayPctA: 2,
-        stockAwayPctB: 2, // price away from vwap
+        stockAwayPctB: 4, // price away from vwap
         stockBeta: 2,
-        stockVolume: [50000, 500000],
+        stockVolume: {
+            "hr9" :  50000,
+            "hr10" : 200000,
+            "hr11" : 500000,
+            "hr12" : 800000,
+            "hr13" : 1000000,
+            "hr14" : 1200000,
+            "hr15" : 1200000
+        },
+
         soundCount: 0,
-        apiMSecs: 1200,
+        apiMSecs: 1000,
         run: true
     }
 
@@ -132,7 +142,9 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     }
                 }, 3000);
             }).done(function(data) {
-
+                // set date var
+                $s.cfg.dateHours = new Date().getHours();
+                //run tk data thru tests
                 $s.quotesData = data.response.quotes.quote;
                 $s.quoteScan();
             });
@@ -225,9 +237,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
     /* Global Tests */
     $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
-        var num = new Date().getHours() >= 13 ? 1 : 0;
-
-        if (stockVolume >= $s.cfg.stockVolume[num]) {
+        if (stockVolume >= $s.cfg.stockVolume['hr'+$s.cfg.dateHours]) {
             return true;
         }
     }
@@ -248,6 +258,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
             // check if the stock passes all the A Tests
             if ($s.volumeTest(stock) && $s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
+           
                 stock.vl = Number(stock.vl);
                 stock.last = Number(stock.last);
                 $s.stocksA.push(stock);
