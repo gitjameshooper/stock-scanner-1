@@ -4,6 +4,7 @@
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_price_o1,ta_volatility_mo2&ft=4&o=-price
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_curvol_o750,sh_price_o1&ft=4&o=-price&r=121
 // for volume cacluation based off time
+// https://github.com/cdituri/node-tradeking  example for websocket
 
 var myApp = angular.module('stockScannerApp', []);
 
@@ -22,13 +23,9 @@ myApp.controller('stockController', ['$scope', function($scope) {
         symbolsCurCount: 0,
         symbolsBegCount: 0,
         symbolsTiers: [
-            [0, 150],
-            [151, 300],
-            [301, 450],
-            [451, 600],
-            [601, 750],
-            [751, 900],
-            [901, 1050]
+            [0, 350],
+            [351, 700],
+            [701, 1050]
         ],
         dateHours: null,
         symbolsCurTier: 0,
@@ -37,8 +34,9 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockAwayPctB: 4, // price away from vwap
         stockBeta: 2,
         stockVolume: {
-            "hr9" :  50000,
-            "hr10" : 200000,
+            "hr8" :  50000,
+            "hr9" :  100000,
+            "hr10" : 300000,
             "hr11" : 500000,
             "hr12" : 800000,
             "hr13" : 1000000,
@@ -47,11 +45,12 @@ myApp.controller('stockController', ['$scope', function($scope) {
         },
 
         soundCount: 0,
-        apiMSecs: 1000,
+        apiMSecs: 1100,
         run: true
     }
-
+    
     $s.quotesData = {};
+    // Test Stock Buckets
     $s.stocksA = [];
     $s.stocksB = [];
     $s.stocksC = [];
@@ -99,6 +98,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         }
         // format symbols form json into string
     $s.formatSymbols = function() {
+
             if ($s.cfg.run) {
                 $s.cfg.symbolStr = '';
                 $s.cfg.symbolsBegCount = 0;
@@ -119,6 +119,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     $s.cfg.symbolsCurCount = 0;
                 };
                 $s.cfg.symbolStr = $s.cfg.symbolStr.slice(0, -1);
+
                 $s.cfg.tkRequestData.url = $s.cfg.tkApiUrl + $s.cfg.symbolStr;
                 setTimeout(function() {
                     $s.callApi();
@@ -131,17 +132,28 @@ myApp.controller('stockController', ['$scope', function($scope) {
             $.ajax({
                 url: $s.cfg.tkRequestData.url,
                 type: $s.cfg.tkRequestData.method,
-                data: $s.cfg.tkOauth.authorize($s.cfg.tkRequestData, $s.cfg.tkToken)
+                data: $s.cfg.tkOauth.authorize($s.cfg.tkRequestData, $s.cfg.tkToken),
+                beforeSend: function(xhr, settings){
+                     // hijack request url and remove duplicate symbols from oAuth
+                     var symbolStr = settings.url.indexOf('&symbols=');
+                     var oauthStr = settings.url.indexOf('&oauth_signature=');
+                     var rmString = settings.url.substring(symbolStr, oauthStr);
+                     settings.url = settings.url.replace(rmString,'');
+                }
+
             }).error(function(err) {
                 $s.class = "error";
                 $s.$apply();
                 window.console.log("Bad TK Request", err);
+                // after failed request try api again
                 setTimeout(function() {
                     if($s.cfg.run){
                          $s.callApi();
                     }
                 }, 3000);
             }).done(function(data) {
+
+                $s.class = "green";
                 // set date var
                 $s.cfg.dateHours = new Date().getHours();
                 //run tk data thru tests
@@ -237,6 +249,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
     /* Global Tests */
     $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
+        // if outside trading time use after 3/EOD volume
+        if ($s.cfg.dateHours > 15 || $s.cfg.dateHours < 8){ $s.cfg.dateHours = 15;}
         if (stockVolume >= $s.cfg.stockVolume['hr'+$s.cfg.dateHours]) {
             return true;
         }
@@ -255,10 +269,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
     $s.quoteScan = function() {
 
         $.each($s.quotesData, function(key, stock) {
-
             // check if the stock passes all the A Tests
             if ($s.volumeTest(stock) && $s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
-           
                 stock.vl = Number(stock.vl);
                 stock.last = Number(stock.last);
                 $s.stocksA.push(stock);
@@ -287,6 +299,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         // empty array after going thru all tiers
 
         if ($s.cfg.symbolsCurTier === 0) {
+
             // play sound if vwamp stock found
             if ($s.stocksB.length && ($s.stocksB.length !== $s.cfg.soundCount)) {
                 // $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
