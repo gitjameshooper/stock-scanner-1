@@ -1,8 +1,9 @@
-// api limits  250 stocks per call per second
+// api limits 1 call per second
 // https://developers.tradeking.com/documentation/market-ext-quotes-get-post
 //  use this to pull stocks from finviz var arr = []; $('.screener-link-primary').each(function(){  var it = $(this).text(); arr.push(it); }); window.console.log(arr);
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_price_o1,ta_volatility_mo2&ft=4&o=-price
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o750,sh_curvol_o750,sh_price_o1&ft=4&o=-price&r=121
+// http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o200,sh_price_o1&ft=4&o=-price&r=181
 // for volume cacluation based off time
 // https://github.com/cdituri/node-tradeking  example for websocket
 
@@ -17,7 +18,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         tkToken: {},
         tkRequestData: {},
         tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
-        symbolsJSONUrl: "/json/symbols.json",
+        symbolsJSONUrl: "/json/symbols-more.json",
         symbolsJSON: {},
         symbolStr: "",
         symbolsCurCount: 0,
@@ -25,27 +26,32 @@ myApp.controller('stockController', ['$scope', function($scope) {
         symbolsTiers: [
             [0, 350],
             [351, 700],
-            [701, 1050]
+            [701, 1050],
+            [1051, 1400],
+            [1401, 1750],
+            [1751, 2100],
+            [2101, 2450],
+            [2451, 2800]
         ],
         dateHours: null,
         symbolsCurTier: 0,
-        stockDiffPctA: 5,
+        stockDiffPctA: 8,
         stockAwayPctA: 2,
         stockAwayPctB: 4, // price away from vwap
         stockBeta: 2,
         stockVolume: {
-            "hr8" :  50000,
-            "hr9" :  100000,
-            "hr10" : 300000,
-            "hr11" : 500000,
-            "hr12" : 800000,
-            "hr13" : 1000000,
-            "hr14" : 1200000,
-            "hr15" : 1200000
+            "hr8" :  100000,
+            "hr9" :  250000,
+            "hr10" : 600000,
+            "hr11" : 800000,
+            "hr12" : 1000000,
+            "hr13" : 1200000,
+            "hr14" : 1400000,
+            "hr15" : 1400000
         },
 
         soundCount: 0,
-        apiMSecs: 1100,
+        apiMSecs: 800,
         run: true
     }
     
@@ -164,32 +170,40 @@ myApp.controller('stockController', ['$scope', function($scope) {
         }
         /*  ALL A TESTS */
         //  test stock for first move up
-    $s.lodTestA = function(stock) {
-            var stockLo = Number(stock.lo),
-                stockHi = Number(stock.hi),
-                stockDiff = (stockHi - stockLo).toFixed(2),
-                stockDiffPctA = (stockDiff / stockLo).toFixed(3) * 100;
+    // $s.lodTestA = function(stock) {
+    //         var stockLo = Number(stock.lo),
+    //             stockHi = Number(stock.hi),
+    //             stockDiff = (stockHi - stockLo).toFixed(2),
+    //             stockDiffPctA = (stockDiff / stockLo).toFixed(3) * 100;
 
-            if (stockDiffPctA >= $s.cfg.stockDiffPctA) {
-                return true;
-            }
-        }
+    //         if (stockDiffPctA >= $s.cfg.stockDiffPctA) {
+    //             return true;
+    //         }
+    //     }
         //  test stock for pullback
-    $s.hodTestA = function(stock) {
-            var stockHi = Number(stock.hi),
-                stockPrice = Number(stock.last),
-                stockDiff = (stockHi - stockPrice).toFixed(2),
-                stockDiffPctA = (stockDiff / stockHi).toFixed(3) * 100;
-            if (stockDiffPctA >= $s.cfg.stockAwayPctA) {
-                return true;
-            }
-        }
+    // $s.hodTestA = function(stock) {
+    //         var stockHi = Number(stock.hi),
+    //             stockPrice = Number(stock.last),
+    //             stockDiff = (stockHi - stockPrice).toFixed(2),
+    //             stockDiffPctA = (stockDiff / stockHi).toFixed(3) * 100;
+    //         if (stockDiffPctA >= $s.cfg.stockAwayPctA) {
+    //             return true;
+    //         }
+    //     }
         //  test stock if it is above vwap
     $s.vwapTestA = function(stock) {
         var stockVwap = Number(stock.vwap),
             stockPrice = Number(stock.last);
 
         if (stockPrice >= stockVwap) {
+            return true;
+        }
+    }
+    $s.pCloseTestA = function(stock) {
+        var stockPcls = Number(stock.pcls),
+            stockPrice = Number(stock.last);
+
+        if (stockPrice  <= stockPcls) {
             return true;
         }
     }
@@ -247,6 +261,14 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
 
     /* Global Tests */
+    $s.evenTest = function(stock) {
+        var stockPrice = Number(stock.last),
+           stockPriceR = Math.round(stockPrice);
+                
+        if (stockPrice <= (stockPriceR +.10) && stockPrice >= (stockPriceR - .10)) {
+            return true;
+        }
+    }
     $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
         // if outside trading time use after 3/EOD volume
@@ -270,30 +292,33 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
         $.each($s.quotesData, function(key, stock) {
             // check if the stock passes all the A Tests
-            if ($s.volumeTest(stock) && $s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
+            if($s.volumeTest(stock)){
+            if ($s.evenTest(stock)) {
                 stock.vl = Number(stock.vl);
                 stock.last = Number(stock.last);
+                stock.beta = Number(stock.beta);
                 $s.stocksA.push(stock);
             }
 
             // check if the stock passes all the B Tests
-            if ($s.volumeTest(stock) && $s.vwapTestB(stock)) {
+            if ($s.vwapTestB(stock)) {
                 stock.vl = Number(stock.vl);
                 stock.last = Number(stock.last);
                 $s.stocksB.push(stock);
             }
             // check if the stock passes all the C Tests
-            if ($s.volumeTest(stock) && $s.vwapTestC(stock) && $s.closeTestC(stock)) {
+            if ($s.vwapTestC(stock) && $s.closeTestC(stock)) {
                 stock.vl = Number(stock.vl);
                 stock.last = Number(stock.last);
                 $s.stocksC.push(stock);
             }
             // check if the stock passes all the D Tests
-            if ($s.volumeTest(stock) && $s.betaTestD(stock) ) {
+            if ($s.betaTestD(stock) ) {
                 stock.beta = Number(stock.beta);
                 stock.last = Number(stock.last);
                 $s.stocksD.push(stock);
             }
+        }
         });
 
         // empty array after going thru all tiers

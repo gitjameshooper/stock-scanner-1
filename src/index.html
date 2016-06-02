@@ -32,11 +32,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksA | orderBy:'-vl'">
+                            <tr ng-repeat="stockA in stocksA | orderBy:'-pchg'">
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                                 <td>{{ stockA.last }}</td>
-                                 <td>{{ stockA.vl }}</td>
+                                 <td>{{ stockA.pchg }}</td>
                                  
                             
                             </tr>
@@ -76,6 +76,7 @@
                                 <th>#</th>
                                 <th>Symbol</th>
                                 <th>Price</th>
+                                <th>VWAP</th>
                                 
                             </tr>
                         </thead>
@@ -84,6 +85,7 @@
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockB.symbol }}&src=ctag">{{ stockB.symbol }}</a></td>
                                 <td>{{ stockB.last }}</td>
+                                <td>{{ stockB.vwap }}</td>
                                
 
                                 
