@@ -18,7 +18,8 @@
     <section id="section-1">
         <div class="container-fluid" ng-class="class">
             <h1 class="page-header">Stock Scanner</h1>
-            <button class="btn start" ng-click="startScan()">Start Scan</button> <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
+            <button class="btn start" ng-click="startScan()">Start Scan</button>
+            <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
                 <div class="col-sm-3">
                     <table class="table table-bordered table-responsive">
@@ -28,22 +29,16 @@
                                 <th>#</th>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                           
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksA | orderBy:'-pchg'">
+                            <tr ng-repeat="stockA in stocksA | orderBy:'-vl'">
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                                 <td>{{ stockA.last }}</td>
-                                 <td>{{ stockA.pchg }}</td>
-                                 
-                            
                             </tr>
-                            
                         </tbody>
                     </table>
-                     
                 </div>
                 <!-- <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
@@ -77,7 +72,6 @@
                                 <th>Symbol</th>
                                 <th>Price</th>
                                 <th>VWAP</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -86,16 +80,11 @@
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockB.symbol }}&src=ctag">{{ stockB.symbol }}</a></td>
                                 <td>{{ stockB.last }}</td>
                                 <td>{{ stockB.vwap }}</td>
-                               
-
-                                
                             </tr>
-                            
                         </tbody>
                     </table>
-                     
                 </div>
-                <div class="col-sm-3">
+                <!--                 <div class="col-sm-3">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>C-Vwap-Close</h3>
@@ -117,8 +106,8 @@
                         </tbody>
                     </table>
                      
-                </div>
-                <div class="col-sm-3">
+                </div> -->
+                <!--    <div class="col-sm-3">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>D-Vwap-Beta</h3>
@@ -141,7 +130,7 @@
                         </tbody>
                     </table>
                      
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
