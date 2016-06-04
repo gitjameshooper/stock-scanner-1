@@ -40,8 +40,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockAwayPctB: 4, // price away from vwap
         stockBeta: 2,
         stockVolume: {
-            "hr8": 100000,
-            "hr9": 250000,
+            "hr8": 150000,
+            "hr9": 300000,
             "hr10": 600000,
             "hr11": 800000,
             "hr12": 1000000,
