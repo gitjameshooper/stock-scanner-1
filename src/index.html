@@ -17,7 +17,6 @@
     </header>
     <section id="section-1">
         <div class="container-fluid" ng-class="class">
-            <h1 class="page-header">Stock Scanner</h1>
             <button class="btn start" ng-click="startScan()">Start Scan</button>
             <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
@@ -32,9 +31,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksA | orderBy:'-vl'">
+                            <tr class="row" ng-repeat="stockA in stocksA | orderBy:'-vl'">
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                                 <td>{{ stockA.last }}</td>
                             </tr>
                         </tbody>

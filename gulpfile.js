@@ -15,6 +15,8 @@ var gulp = require('gulp'),
 gulp.task('clean', function() {
   return del(['app']);
 });
+
+
 //////////////////////////////////////////////////////////////////
 // Concatenate & Minify JS
 
@@ -37,10 +39,9 @@ gulp.task('bundleScripts', function() {
     .pipe(gulp.dest('app/js'))
     .pipe(browserSync.stream({match: '**/**/*.js'}));
 });
+// copy all other files needed to app
 gulp.task('copy',  function () {
-        return gulp.src(['src/**/*', '!src/**/*.js', '!src/less{,/**}'], {
-            base: 'src'
-        })
+        return gulp.src(['src/**/*', '!src/**/*.js', '!src/less{,/**}', 'node_modules/font-awesome/fonts{,/**}'])
         .pipe(gulp.dest('app'))
         .pipe(browserSync.stream());
     });
