@@ -18,7 +18,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         tkToken: {},
         tkRequestData: {},
         tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
-        symbolsJSONUrl: "/json/symbols-more.json",
+        symbolsJSONUrl: "/json/symbols.json",
         symbolsJSON: {},
         symbolStr: "",
         symbolsCurCount: 0,
@@ -38,7 +38,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockDiffPctA: 5,
         stockAwayPctA: 2,
         stockAwayPctB: 4, // price away from vwap
-        stockBeta: 2,
+        stockSpreadC: .05,
+        stockFastC: .10,
         stockVolume: {
             "hr8": 150000,
             "hr9": 300000,
@@ -56,10 +57,11 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
 
     $s.quotesData = {};
-    // Test Stock Buckets
+    // Stock Buckets
     $s.stocksA = [];
     $s.stocksB = [];
     $s.stocksC = [];
+    $s.stocksCold = [];
     $s.stocksD = [];
 
     // get both json data and tkcreds
@@ -168,7 +170,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
             });
 
         }
-    /*  ALL A TESTS */
+        /*  ALL A TESTS */
         //  test stock for first move up
     $s.lodTestA = function(stock) {
             var stockLo = Number(stock.lo),
@@ -201,7 +203,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
 
     /*  ALL B TESTS */
-        // test if stock is far away from vwap
+    // test if stock is far away from vwap
     $s.vwapTestB = function(stock) {
             var stockVwap = Number(stock.vwap),
                 stockPrice = Number(stock.last),
@@ -212,45 +214,36 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 return true;
             }
         }
-    /*  ALL C TESTS */
-        // test stock below vwap
-    // $s.vwapTestC = function(stock) {
-    //         var stockVwap = Number(stock.vwap),
-    //             stockPrice = Number(stock.last);
+        /*  ALL C TESTS */
+    $s.spreadTestC = function(stock) {
+        var stockBid = Number(stock.bid),
+            stockAsk = Number(stock.ask),
+            stockSpread = stockBid - stockAsk;
 
-    //         if (stockPrice <= stockVwap) {
-    //             return true;
-    //         }
-    //     }
-    //     // test stock above yesterday's close
-    // $s.closeTestC = function(stock) {
-    //         var stockClose = Number(stock.cl),
-    //             stockPrice = Number(stock.last);
+        if (stockSpread <= $s.cfg.stockSpreadC) {
+            return true;
+        }
+    }
+    $s.moveTestC = function(stock) {
+        var stockPrice = Number(stock.last),
+            stockSymbol = stock.symbol,
+            stockFast = 0;
 
-    //         if (stockPrice >= stockClose) {
-    //             return true;
-    //         }
-    //     }
-    // /*  ALL D TESTS */
-    //     // test volatility of stock compared to market
-    // $s.betaTestD = function(stock) {
-    //         var stockBeta = Number(stock.beta);
+        $.each($s.stocksCold, function(key, value) {
 
-    //         if (stockBeta >= $s.cfg.stockBeta) {
-    //             return true;
-    //         }
-    //     }
-    //     // test if stock is away from vwap
-    // $s.vwapTestD = function(stock) {
-    //     var stockVwap = Number(stock.vwap),
-    //         stockPrice = Number(stock.last),
-    //         stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
-    //         stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+            if (stockSymbol === $s.stocksCold[key].symbol) {
 
-    //     if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
-    //         return true;
-    //     }
-    // }
+                stockFast = Math.abs(stockPrice - $s.stocksCold[key].last);
+             
+                if (stockFast >= $s.cfg.stockFastC) {
+                    stock.fast = Number(stockFast);
+                    $s.stocksD.push(stock);
+                }
+            }
+        });
+
+    }
+
 
     /* Global Tests */
     $s.evenTest = function(stock) {
@@ -286,11 +279,11 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
             // run all stocks thru the volume test
             if ($s.volumeTest(stock)) {
+
                 // check if the stock passes all the A Tests
                 if ($s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
                     stock.vl = Number(stock.vl);
                     stock.last = Number(stock.last);
-
                     $s.stocksA.push(stock);
                 }
 
@@ -300,18 +293,19 @@ myApp.controller('stockController', ['$scope', function($scope) {
                     stock.last = Number(stock.last);
                     $s.stocksB.push(stock);
                 }
-                // // check if the stock passes all the C Tests
-                // if ($s.vwapTestC(stock) && $s.closeTestC(stock)) {
-                //     stock.vl = Number(stock.vl);
-                //     stock.last = Number(stock.last);
-                //     $s.stocksC.push(stock);
-                // }
-                // // check if the stock passes all the D Tests
-                // if ($s.betaTestD(stock) ) {
-                //     stock.beta = Number(stock.beta);
-                //     stock.last = Number(stock.last);
-                //     $s.stocksD.push(stock);
-                // }
+                // check if the stock passes all the C Tests
+                if ($s.spreadTestC(stock)) {
+                    stock.vl = Number(stock.vl);
+                    stock.last = Number(stock.last);
+                    $s.stocksC.push(stock);
+                         
+                    if ($s.stocksCold.length > 1) {
+                        
+                        $s.moveTestC(stock);
+                        
+                    }
+                }
+
             }
         });
 
@@ -324,10 +318,11 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 // $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
                 $s.cfg.soundCount = $s.stocksB.length;
             }
-
+                 
             $s.$apply();
             $s.stocksA = [];
             $s.stocksB = [];
+            $s.stocksCold = $s.stocksC;
             $s.stocksC = [];
             $s.stocksD = [];
 
@@ -335,7 +330,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         //  Create loop
         $s.formatSymbols();
     }
-  
+
     $s.startScan = function() {
         $s.cfg.run = true;
         $s.helperFuncs();

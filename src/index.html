@@ -20,7 +20,7 @@
             <button class="btn start" ng-click="startScan()">Start Scan</button>
             <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>A-ABCD</h3>
@@ -39,30 +39,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="col-sm-4">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <h3>VWAP</h3>
-                            <tr>
-                                <th>#</th>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>VWAP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="stockV in stocksVWAP">
-                                <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ stockV.symbol }}</td>
-                                <td>{{ stockV.last }}</td>
-                                <td>{{ stockV.vwap }}</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                     
-                </div> -->
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>B-VWAP Diff</h3>
@@ -83,53 +60,27 @@
                         </tbody>
                     </table>
                 </div>
-                <!--                 <div class="col-sm-3">
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
-                            <h3>C-Vwap-Close</h3>
+                            <h3>D-Fast</h3>
                             <tr>
                                 <th>#</th>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                              
+                                <th>fast</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockC in stocksC | orderBy:'-vl'">
-                                <th scope="row">{{ $index + 1 }}</th>
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
-                                <td>{{ stockC.last }}</td>
-
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                     
-                </div> -->
-                <!--    <div class="col-sm-3">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <h3>D-Vwap-Beta</h3>
-                            <tr>
-                                <th>#</th>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>Beta</th>
-                              
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="stockD in stocksD | orderBy:'-beta'">
+                            <tr ng-repeat="stockD in stocksD | orderBy:'-fast'">
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                                 <td>{{ stockD.last }}</td>
-                                <td>{{ stockD.beta }}</td>
+                                <td>{{ stockD.fast }}</td>
                             </tr>
-                            
                         </tbody>
                     </table>
-                     
-                </div> -->
+                </div>
             </div>
         </div>
     </section>
