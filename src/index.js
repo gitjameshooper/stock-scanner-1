@@ -6,6 +6,7 @@
 // http://finviz.com/screener.ashx?v=111&f=sh_avgvol_o200,sh_price_o1&ft=4&o=-price&r=181
 // for volume cacluation based off time
 // https://github.com/cdituri/node-tradeking  example for websocket
+// https://investor.tradeking.com/Modules/Trading/defaultTrade.php
 
 var myApp = angular.module('stockScannerApp', []);
 
@@ -33,13 +34,14 @@ myApp.controller('stockController', ['$scope', function($scope) {
             [2101, 2450],
             [2451, 2800]
         ],
+        accountVal: 13000,
         dateHours: null,
         symbolsCurTier: 0,
-        stockDiffPctA: 5,
+        stockDiffPctA: 6,
         stockAwayPctA: 2,
-        stockAwayPctB: 4, // price away from vwap
+        stockAwayPctB: 4, // price percentage away from vwap
         stockSpreadC: .05,
-        stockFastC: .10,
+        stockFastC: .10,  // price change 
         stockVolume: {
             "hr8": 150000,
             "hr9": 300000,
@@ -52,7 +54,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         },
 
         soundCount: 0,
-        apiMSecs: 700,
+        apiMSecs: 900,
         run: true
     }
 
@@ -204,16 +206,16 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
     /*  ALL B TESTS */
     // test if stock is far away from vwap
-    $s.vwapTestB = function(stock) {
-            var stockVwap = Number(stock.vwap),
-                stockPrice = Number(stock.last),
-                stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
-                stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+    // $s.vwapTestB = function(stock) {
+    //         var stockVwap = Number(stock.vwap),
+    //             stockPrice = Number(stock.last),
+    //             stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
+    //             stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
 
-            if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
-                return true;
-            }
-        }
+    //         if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
+    //             return true;
+    //         }
+    //     }
         /*  ALL C TESTS */
     $s.spreadTestC = function(stock) {
         var stockBid = Number(stock.bid),
@@ -233,7 +235,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
             if (stockSymbol === $s.stocksCold[key].symbol) {
 
-                stockFast = Math.abs(stockPrice - $s.stocksCold[key].last);
+                stockFast = Math.abs(stockPrice - $s.stocksCold[key].last).toFixed(2);
              
                 if (stockFast >= $s.cfg.stockFastC) {
                     stock.fast = Number(stockFast);
@@ -256,6 +258,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
     $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
+            stock.shares = Number(($s.cfg.accountVal/stock.last)/2).toFixed(0);
         // if outside trading time use after 3/EOD volume
         if ($s.cfg.dateHours > 15 || $s.cfg.dateHours < 8) { $s.cfg.dateHours = 15; }
         if (stockVolume >= $s.cfg.stockVolume['hr' + $s.cfg.dateHours]) {
@@ -288,11 +291,11 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 }
 
                 // check if the stock passes all the B Tests
-                if ($s.vwapTestB(stock)) {
-                    stock.vl = Number(stock.vl);
-                    stock.last = Number(stock.last);
-                    $s.stocksB.push(stock);
-                }
+                // if ($s.vwapTestB(stock)) {
+                //     stock.vl = Number(stock.vl);
+                //     stock.last = Number(stock.last);
+                //     $s.stocksB.push(stock);
+                // }
                 // check if the stock passes all the C Tests
                 if ($s.spreadTestC(stock)) {
                     stock.vl = Number(stock.vl);

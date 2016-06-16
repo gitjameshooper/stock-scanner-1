@@ -7,6 +7,7 @@ module.exports = {
         './node_modules/oauth-1.0a/oauth-1.0a.js',
         './node_modules/angular/angular.js',
         './src/simulator.js',
+        './src/news.js',
         './src/index.js',
       ]
     }
