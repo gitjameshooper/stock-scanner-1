@@ -206,16 +206,18 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
     /*  ALL B TESTS */
     // test if stock is far away from vwap
-    // $s.vwapTestB = function(stock) {
-    //         var stockVwap = Number(stock.vwap),
-    //             stockPrice = Number(stock.last),
-    //             stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
-    //             stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+    $s.vwapTestB = function(stock) {
+            var stockVwap = Number(stock.vwap).toFixed(2),
+                stockPrice = Number(stock.last),
+                stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
+                stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+                stock.vwapDiff = stockDiffPctVwapD;
+                stock.vwap = stockVwap;
 
-    //         if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
-    //             return true;
-    //         }
-    //     }
+            if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
+                return true;
+            }
+        }
         /*  ALL C TESTS */
     $s.spreadTestC = function(stock) {
         var stockBid = Number(stock.bid),
@@ -291,11 +293,11 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 }
 
                 // check if the stock passes all the B Tests
-                // if ($s.vwapTestB(stock)) {
-                //     stock.vl = Number(stock.vl);
-                //     stock.last = Number(stock.last);
-                //     $s.stocksB.push(stock);
-                // }
+                if ($s.vwapTestB(stock)) {
+                    stock.vl = Number(stock.vl);
+                    stock.last = Number(stock.last);
+                    $s.stocksB.push(stock);
+                }
                 // check if the stock passes all the C Tests
                 if ($s.spreadTestC(stock)) {
                     stock.vl = Number(stock.vl);
@@ -328,6 +330,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
             $s.stocksCold = $s.stocksC;
             $s.stocksC = [];
             $s.stocksD = [];
+            window.console.log($s.cfg.stockDiffPctA);
 
         }
         //  Create loop
