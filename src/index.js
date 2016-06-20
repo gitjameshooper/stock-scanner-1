@@ -7,6 +7,8 @@
 // for volume cacluation based off time
 // https://github.com/cdituri/node-tradeking  example for websocket
 // https://investor.tradeking.com/Modules/Trading/defaultTrade.php
+//https://openshift.redhat.com/app/console/applications
+//http://jimhooper-stockscanner.rhcloud.com/
 
 var myApp = angular.module('stockScannerApp', []);
 
@@ -222,8 +224,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
     $s.spreadTestC = function(stock) {
         var stockBid = Number(stock.bid),
             stockAsk = Number(stock.ask),
-            stockSpread = stockBid - stockAsk;
-
+            stockSpread = Number(stockAsk - stockBid).toFixed(2);
+            stock.spread = stockSpread;
         if (stockSpread <= $s.cfg.stockSpreadC) {
             return true;
         }
