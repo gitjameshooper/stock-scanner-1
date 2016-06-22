@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stockScannerApp">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Stock Scanner" />
+    <meta name="keywords" content="Stock Scanner" />
+    <title>Stock Scanner</title>
+    <meta name="author" content="Jim Hooper">
+    <link rel="stylesheet" href="/css/global.css" />
+</head>
+
+<body ng-controller="stockController">
+    <header>
+    </header>
+    <section id="section-1">
+        <div class="container-fluid" ng-class="class">
+            <button class="btn start" ng-click="startScan()">Start Scan</button>
+            <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
+            <div class="row margin-top-20 f-18">
+                <div class="col-sm-4">
+                    <label>% LOD to HOD
+                        <input type="number" class="db" ng-model="cfg.stockDiffPctA" />
+                    </label>
+                    <label>% Pullback from HOD
+                        <input type="number" class="db" ng-model="cfg.stockAwayPctA" />
+                    </label>
+                </div>
+                <div class="col-sm-4">
+                     <label>% Below VWAP
+                        <input type="number" class="db" ng-model="cfg.stockAwayPctB" />
+                    </label>
+                </div>
+                <div class="col-sm-4">
+                    <label>Cents moved in 10 secs.
+                        <input type="number" class="db" step="0.01" ng-model="cfg.stockFastC" />
+                    </label>
+                    <label>Max Bid Ask Spread
+                        <input type="number" class="db" step="0.01" ng-model="cfg.stockSpreadC" />
+                    </label>
+                </div>
+            </div>
+            <div class="row margin-top-20 f-18">
+                <div class="col-sm-4">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>ABCD Test</h3>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <!--  <th>Shares 1/2</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockA in stocksA | orderBy:'-vl'">
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
+                                <td>{{ stockA.last }}</td>
+                                <!--  <td>{{ stockA.shares }}</td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>VWAP Test</h3>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>VWAP</th>
+                                <!--  <th>Shares 1/2</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockB in stocksB | orderBy:'-vwapDiff'">
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockB.symbol }}&src=ctag">{{ stockB.symbol }}</a></td>
+                                <td>{{ stockB.last }}</td>
+                                <td>{{ stockB.vwap }}</td>
+                               
+                               <!--  <td>{{ stockB.vwapDiff }}</td> -->
+                                <!--   <td>{{ stockB.shares }}</td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>Speed Test</h3>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>Change</th>
+                                <!-- <th>Shares 1/2</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockD in stocksD | orderBy:'-fast'">
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
+                                <td>{{ stockD.last }}</td>
+                                <td>{{ stockD.fast }}</td>
+                                <!-- <td>{{ stockD.shares }}</td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearboth"></div>
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <script type="text/javascript" src="/js/global.js"></script>
+</body>
+
+</html>

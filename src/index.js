@@ -43,7 +43,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockAwayPctA: 2,
         stockAwayPctB: 4, // price percentage away from vwap
         stockSpreadC: .05,
-        stockFastC: .10,  // price change 
+        stockFastC: .10, // price change 
         stockVolume: {
             "hr8": 150000,
             "hr9": 300000,
@@ -208,24 +208,24 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
     /*  ALL B TESTS */
     // test if stock is far away from vwap
-    $s.vwapTestB = function(stock) {
-            var stockVwap = Number(stock.vwap).toFixed(2),
-                stockPrice = Number(stock.last),
-                stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
-                stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
-                stock.vwapDiff = stockDiffPctVwapD;
-                stock.vwap = stockVwap;
+    // $s.vwapTestB = function(stock) {
+    //         var stockVwap = Number(stock.vwap).toFixed(2),  
+    //             stockPrice = Number(stock.last),
+    //             stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
+    //             stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+    //             stock.vwapDiff = stockDiffPctVwapD;
+    //             stock.vwap = parseFloat(Math.round(stockVwap * 100) / 100).toFixed(2);
 
-            if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
-                return true;
-            }
-        }
-        /*  ALL C TESTS */
+    //         if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
+    //             return true;
+    //         }
+    //     }
+    /*  ALL C TESTS */
     $s.spreadTestC = function(stock) {
         var stockBid = Number(stock.bid),
             stockAsk = Number(stock.ask),
             stockSpread = Number(stockAsk - stockBid).toFixed(2);
-            stock.spread = stockSpread;
+        stock.spread = stockSpread;
         if (stockSpread <= $s.cfg.stockSpreadC) {
             return true;
         }
@@ -240,10 +240,13 @@ myApp.controller('stockController', ['$scope', function($scope) {
             if (stockSymbol === $s.stocksCold[key].symbol) {
 
                 stockFast = Math.abs(stockPrice - $s.stocksCold[key].last).toFixed(2);
-             
+
                 if (stockFast >= $s.cfg.stockFastC) {
                     stock.fast = Number(stockFast);
-                    $s.stocksD.push(stock);
+                    // check if stock is already in array
+                    if(_.where($s.stocksD, {symbol: stock.symbol}).length == 0){
+                        $s.stocksD.push(stock);
+                    }
                 }
             }
         });
@@ -262,7 +265,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
     $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
-            stock.shares = Number(($s.cfg.accountVal/stock.last)/2).toFixed(0);
+        stock.shares = Number(($s.cfg.accountVal / stock.last) / 2).toFixed(0);
+        stock.last = parseFloat(Math.round(stock.last * 100) / 100).toFixed(2);
         // if outside trading time use after 3/EOD volume
         if ($s.cfg.dateHours > 15 || $s.cfg.dateHours < 8) { $s.cfg.dateHours = 15; }
         if (stockVolume >= $s.cfg.stockVolume['hr' + $s.cfg.dateHours]) {
@@ -280,6 +284,17 @@ myApp.controller('stockController', ['$scope', function($scope) {
         });
 
     }
+    $s.remove = function(stock, stocksArr) {
+        
+        stocksArr.splice(stocksArr.indexOf(stock),1);
+        
+        
+    }
+     $s.removeAll = function(stocksArr) {
+         
+        stocksArr.length = 0;
+        
+    }
     $s.quoteScan = function() {
 
         $.each($s.quotesData, function(key, stock) {
@@ -290,26 +305,23 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 // check if the stock passes all the A Tests
                 if ($s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
                     stock.vl = Number(stock.vl);
-                    stock.last = Number(stock.last);
-                    $s.stocksA.push(stock);
+                   $s.stocksA.push(stock);
                 }
 
                 // check if the stock passes all the B Tests
-                if ($s.vwapTestB(stock)) {
-                    stock.vl = Number(stock.vl);
-                    stock.last = Number(stock.last);
-                    $s.stocksB.push(stock);
-                }
+                // if ($s.vwapTestB(stock)) {
+                //     stock.vl = Number(stock.vl);
+                //     $s.stocksB.push(stock);
+                // }
                 // check if the stock passes all the C Tests
                 if ($s.spreadTestC(stock)) {
                     stock.vl = Number(stock.vl);
-                    stock.last = Number(stock.last);
                     $s.stocksC.push(stock);
-                         
+
                     if ($s.stocksCold.length > 1) {
-                        
+
                         $s.moveTestC(stock);
-                        
+
                     }
                 }
 
@@ -321,19 +333,16 @@ myApp.controller('stockController', ['$scope', function($scope) {
         if ($s.cfg.symbolsCurTier === 0) {
 
             // play sound if vwamp stock found
-            if ($s.stocksB.length && ($s.stocksB.length !== $s.cfg.soundCount)) {
-                // $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
-                $s.cfg.soundCount = $s.stocksB.length;
-            }
-                 
+            // if ($s.stocksB.length && ($s.stocksB.length !== $s.cfg.soundCount)) {
+            //     // $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+            //     $s.cfg.soundCount = $s.stocksB.length;
+            // }
+             
             $s.$apply();
             $s.stocksA = [];
-            $s.stocksB = [];
             $s.stocksCold = $s.stocksC;
             $s.stocksC = [];
-            $s.stocksD = [];
-            window.console.log($s.cfg.stockDiffPctA);
-
+            // $s.stocksD = _.uniq($s.stocksD, 'symbol');
         }
         //  Create loop
         $s.formatSymbols();

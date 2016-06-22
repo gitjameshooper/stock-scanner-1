@@ -6,8 +6,7 @@ module.exports = {
         './node_modules/crypto-js/crypto-js.js',
         './node_modules/oauth-1.0a/oauth-1.0a.js',
         './node_modules/angular/angular.js',
-        './src/simulator.js',
-        './src/news.js',
+        './node_modules/underscore/underscore.js',
         './src/index.js',
       ]
     }

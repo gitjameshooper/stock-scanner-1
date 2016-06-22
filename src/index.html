@@ -17,10 +17,10 @@
     </header>
     <section id="section-1">
         <div class="container-fluid" ng-class="class">
-            <button class="btn start" ng-click="startScan()">Start Scan</button>
-            <button class="btn stop" ng-click="stopScan()">Stop Scan</button>
+            <button class="btn green margin-20" ng-click="startScan()">Start Scan</button>
+            <button class="btn red margin-20" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <label>% LOD to HOD
                         <input type="number" class="db" ng-model="cfg.stockDiffPctA" />
                     </label>
@@ -28,63 +28,39 @@
                         <input type="number" class="db" ng-model="cfg.stockAwayPctA" />
                     </label>
                 </div>
-                <div class="col-sm-4">
-                     <label>% Below VWAP
-                        <input type="number" class="db" ng-model="cfg.stockAwayPctB" />
-                    </label>
-                </div>
-                <div class="col-sm-4">
+               
+                <div class="col-sm-6">
                     <label>Cents moved in 10 secs.
                         <input type="number" class="db" step="0.01" ng-model="cfg.stockFastC" />
                     </label>
                     <label>Max Bid Ask Spread
                         <input type="number" class="db" step="0.01" ng-model="cfg.stockSpreadC" />
                     </label>
+                    
                 </div>
             </div>
             <div class="row margin-top-20 f-18">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>ABCD Test</h3>
                             <tr>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                                <!--  <th>Shares 1/2</th> -->
+                                 <th>Shares 1/2</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksA | orderBy:'-vl'">
+                            <tr ng-repeat="stockA in stocksA | orderBy:'-last'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                                 <td>{{ stockA.last }}</td>
-                                <!--  <td>{{ stockA.shares }}</td> -->
+                                 <td>{{ stockA.shares }}</td>
+                                 
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-4">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <h3>VWAP Test</h3>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>VWAP</th>
-                                <!--  <th>Shares 1/2</th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="stockB in stocksB | orderBy:'-vwapDiff'">
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockB.symbol }}&src=ctag">{{ stockB.symbol }}</a></td>
-                                <td>{{ stockB.last }}</td>
-                                <td>{{ stockB.vwap }}</td>
-                               <!--  <td>{{ stockB.vwapDiff }}</td> -->
-                                <!--   <td>{{ stockB.shares }}</td> -->
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>Speed Test</h3>
@@ -92,7 +68,8 @@
                                 <th>Symbol</th>
                                 <th>Price</th>
                                 <th>Change</th>
-                                <!-- <th>Shares 1/2</th> -->
+                                <th>Shares 1/2</th>
+                                <th><a class="btn red" ng-click="removeAll(stocksD)">Delete All</a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +77,8 @@
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                                 <td>{{ stockD.last }}</td>
                                 <td>{{ stockD.fast }}</td>
-                                <!-- <td>{{ stockD.shares }}</td> -->
+                                <td>{{ stockD.shares }}</td>
+                                <td><a class="btn red margin-0" ng-click="remove(stockD, stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
