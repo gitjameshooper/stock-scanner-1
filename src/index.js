@@ -42,8 +42,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
         stockDiffPctA: 6,
         stockAwayPctA: 2,
         stockAwayPctB: 4, // price percentage away from vwap
-        stockSpreadC: .05,
-        stockFastC: .10, // price change 
+        stockSpreadC: .10,
+        stockFastC: .15, // price change 
         stockVolume: {
             "hr8": 150000,
             "hr9": 300000,
@@ -265,8 +265,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
     $s.volumeTest = function(stock) {
         var stockVolume = Number(stock.vl);
-        stock.shares = Number(($s.cfg.accountVal / stock.last) / 2).toFixed(0);
-        stock.last = parseFloat(Math.round(stock.last * 100) / 100).toFixed(2);
+        stock.shares = Number(($s.cfg.accountVal / stock.last).toFixed(0) / 2);
+        stock.last = Number(parseFloat(Math.round(stock.last * 100) / 100).toFixed(2));
         // if outside trading time use after 3/EOD volume
         if ($s.cfg.dateHours > 15 || $s.cfg.dateHours < 8) { $s.cfg.dateHours = 15; }
         if (stockVolume >= $s.cfg.stockVolume['hr' + $s.cfg.dateHours]) {
@@ -333,9 +333,9 @@ myApp.controller('stockController', ['$scope', function($scope) {
         if ($s.cfg.symbolsCurTier === 0) {
 
             // play sound if vwamp stock found
-            // if ($s.stocksB.length && ($s.stocksB.length !== $s.cfg.soundCount)) {
-            //     // $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
-            //     $s.cfg.soundCount = $s.stocksB.length;
+            // if ($s.stocksD.length != $s.cfg.soundCount) {
+            //     $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+            //     $s.cfg.soundCount = $s.stocksD.length;
             // }
              
             $s.$apply();

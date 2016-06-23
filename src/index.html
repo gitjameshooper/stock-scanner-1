@@ -51,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksA | orderBy:'-last'">
+                            <tr ng-repeat="stockA in stocksA | orderBy:'last'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                                 <td>{{ stockA.last }}</td>
                                  <td>{{ stockA.shares }}</td>
@@ -73,7 +73,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockD in stocksD | orderBy:'-fast'">
+                            <tr ng-repeat="stockD in stocksD | orderBy:'-shares'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                                 <td>{{ stockD.last }}</td>
                                 <td>{{ stockD.fast }}</td>
