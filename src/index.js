@@ -8,7 +8,7 @@
 // https://github.com/cdituri/node-tradeking  example for websocket
 // https://investor.tradeking.com/Modules/Trading/defaultTrade.php
 //https://openshift.redhat.com/app/console/applications
-//http://jimhooper-stockscanner.rhcloud.com/
+ 
 
 var myApp = angular.module('stockScannerApp', []);
 
@@ -66,7 +66,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
     $s.stocksB = [];
     $s.stocksC = [];
     $s.stocksCold = [];
-    $s.stocksD = [];
+    $s.stocksCfin = [];
 
     // get both json data and tkcreds
     $s.initData = function() {
@@ -235,8 +235,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 if (stock.fast >= $s.cfg.stockFastC) {
                    
                     // check if stock is already in array
-                    if(_.where($s.stocksD, {symbol: stock.symbol}).length == 0){
-                        $s.stocksD.push(stock);
+                    if(_.where($s.stocksCfin, {symbol: stock.symbol}).length == 0){
+                        $s.stocksCfin.push(stock);
                     }
                 }
             }
@@ -245,7 +245,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
     }
 
 
-    /* Global Tests */
+    /* Global Funcs */
  
     $s.volumeTest = function(stock) {
     
@@ -279,7 +279,6 @@ myApp.controller('stockController', ['$scope', function($scope) {
     $s.removeStock = function(stock, stocksArr) {
         
         stocksArr.splice(stocksArr.indexOf(stock),1);
-        
         
     }
      $s.removeAll = function(stocksArr) {
@@ -326,16 +325,16 @@ myApp.controller('stockController', ['$scope', function($scope) {
         if ($s.cfg.symbolsCurTier === 0) {
 
             // play sound if vwamp stock found
-            // if ($s.stocksD.length != $s.cfg.soundCount) {
+            // if ($s.stocksCfin.length != $s.cfg.soundCount) {
             //     $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
-            //     $s.cfg.soundCount = $s.stocksD.length;
+            //     $s.cfg.soundCount = $s.stocksCfin.length;
             // }
             
             $s.$apply();
             $s.stocksA = [];
             $s.stocksCold = $s.stocksC;
             $s.stocksC = [];
-            // $s.stocksD = _.uniq($s.stocksD, 'symbol');
+    
         }
         //  Create loop
         $s.formatSymbols();

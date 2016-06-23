@@ -69,16 +69,16 @@
                                 <th>Price</th>
                                 <th>Change</th>
                                 <th>Shares 1/2</th>
-                                <th><a class="btn red" ng-click="removeAll(stocksD)">Delete All</a></th>
+                                <th><a class="btn red" ng-click="removeAll(stocksCfin)">Delete All</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockD in stocksD | orderBy:'-shares'">
+                            <tr ng-repeat="stockD in stocksCfin | orderBy:'-shares'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                                 <td>{{ stockD.last }}</td>
                                 <td>{{ stockD.fast }}</td>
                                 <td>{{ stockD.shares }}</td>
-                                <td><a class="btn red margin-0" ng-click="removeStock(stockD, stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                                <td><a class="btn red margin-0" ng-click="removeStock(stockD, stocksCfin)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
