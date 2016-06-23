@@ -60,3 +60,12 @@
             return true;
         }
     }
+
+       $s.evenTest = function(stock) {
+        var stockPrice = Number(stock.last),
+            stockPriceR = Math.round(stockPrice);
+
+        if (stockPrice <= (stockPriceR + .10) && stockPrice >= (stockPriceR - .10)) {
+            return true;
+        }
+    }

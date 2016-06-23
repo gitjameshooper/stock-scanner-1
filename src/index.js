@@ -177,10 +177,8 @@ myApp.controller('stockController', ['$scope', function($scope) {
         /*  ALL A TESTS */
         //  test stock for first move up
     $s.lodTestA = function(stock) {
-            var stockLo = Number(stock.lo),
-                stockHi = Number(stock.hi),
-                stockDiff = (stockHi - stockLo).toFixed(2),
-                stockDiffPctA = (stockDiff / stockLo).toFixed(3) * 100;
+            var stockDiff = (stock.hi - stock.lo).toFixed(2),
+                stockDiffPctA = (stockDiff / stock.lo).toFixed(3) * 100;
 
             if (stockDiffPctA >= $s.cfg.stockDiffPctA) {
                 return true;
@@ -188,20 +186,18 @@ myApp.controller('stockController', ['$scope', function($scope) {
         }
         //  test stock for pullback
     $s.hodTestA = function(stock) {
-            var stockHi = Number(stock.hi),
-                stockPrice = Number(stock.last),
-                stockDiff = (stockHi - stockPrice).toFixed(2),
-                stockDiffPctA = (stockDiff / stockHi).toFixed(3) * 100;
+             
+            var stockDiff = (stock.hi - stock.last).toFixed(2),
+                stockDiffPctA = (stockDiff / stock.hi).toFixed(3) * 100;
+
             if (stockDiffPctA >= $s.cfg.stockAwayPctA) {
                 return true;
             }
         }
         //  test stock if it is above vwap
     $s.vwapTestA = function(stock) {
-        var stockVwap = Number(stock.vwap),
-            stockPrice = Number(stock.last);
-
-        if (stockPrice >= stockVwap) {
+        
+        if (stock.last >= stock.vwap) {
             return true;
         }
     }
@@ -222,27 +218,22 @@ myApp.controller('stockController', ['$scope', function($scope) {
     //     }
     /*  ALL C TESTS */
     $s.spreadTestC = function(stock) {
-        var stockBid = Number(stock.bid),
-            stockAsk = Number(stock.ask),
-            stockSpread = Number(stockAsk - stockBid).toFixed(2);
-        stock.spread = stockSpread;
-        if (stockSpread <= $s.cfg.stockSpreadC) {
+        
+            stock.spread = Number((stock.ask - stock.bid).toFixed(2));
+        if (stock.spread <= $s.cfg.stockSpreadC) {
             return true;
         }
     }
     $s.moveTestC = function(stock) {
-        var stockPrice = Number(stock.last),
-            stockSymbol = stock.symbol,
-            stockFast = 0;
-
+       
         $.each($s.stocksCold, function(key, value) {
 
-            if (stockSymbol === $s.stocksCold[key].symbol) {
+            if (stock.symbol === $s.stocksCold[key].symbol) {
 
-                stockFast = Math.abs(stockPrice - $s.stocksCold[key].last).toFixed(2);
+                stock.fast = Number(Math.abs(stock.last - $s.stocksCold[key].last).toFixed(2));
 
-                if (stockFast >= $s.cfg.stockFastC) {
-                    stock.fast = Number(stockFast);
+                if (stock.fast >= $s.cfg.stockFastC) {
+                   
                     // check if stock is already in array
                     if(_.where($s.stocksD, {symbol: stock.symbol}).length == 0){
                         $s.stocksD.push(stock);
@@ -255,23 +246,24 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
 
     /* Global Tests */
-    $s.evenTest = function(stock) {
-        var stockPrice = Number(stock.last),
-            stockPriceR = Math.round(stockPrice);
-
-        if (stockPrice <= (stockPriceR + .10) && stockPrice >= (stockPriceR - .10)) {
+ 
+    $s.volumeTest = function(stock) {
+    
+        // if outside trading time use after 3/EOD volume
+        if ($s.cfg.dateHours > 15 || $s.cfg.dateHours < 8) { $s.cfg.dateHours = 15; }
+        if (stock.vl >= $s.cfg.stockVolume['hr' + $s.cfg.dateHours]) {
             return true;
         }
     }
-    $s.volumeTest = function(stock) {
-        var stockVolume = Number(stock.vl);
+    $s.formatStock = function(stock){
+        stock.bid = Number(stock.bid);
+        stock.vwap = Number(stock.vwap);
+        stock.ask = Number(stock.ask);
+        stock.lo = Number(stock.lo);
+        stock.hi = Number(stock.hi);
+        stock.vl = Number(stock.vl);
         stock.shares = Number(($s.cfg.accountVal / stock.last).toFixed(0) / 2);
         stock.last = Number(parseFloat(Math.round(stock.last * 100) / 100).toFixed(2));
-        // if outside trading time use after 3/EOD volume
-        if ($s.cfg.dateHours > 15 || $s.cfg.dateHours < 8) { $s.cfg.dateHours = 15; }
-        if (stockVolume >= $s.cfg.stockVolume['hr' + $s.cfg.dateHours]) {
-            return true;
-        }
     }
     $s.helperFuncs = function() {
         // play sound when new stocks are found
@@ -284,7 +276,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
         });
 
     }
-    $s.remove = function(stock, stocksArr) {
+    $s.removeStock = function(stock, stocksArr) {
         
         stocksArr.splice(stocksArr.indexOf(stock),1);
         
@@ -299,12 +291,14 @@ myApp.controller('stockController', ['$scope', function($scope) {
 
         $.each($s.quotesData, function(key, stock) {
 
+            // format stock values
+            $s.formatStock(stock);
+
             // run all stocks thru the volume test
             if ($s.volumeTest(stock)) {
 
                 // check if the stock passes all the A Tests
                 if ($s.lodTestA(stock) && $s.hodTestA(stock) && $s.vwapTestA(stock)) {
-                    stock.vl = Number(stock.vl);
                    $s.stocksA.push(stock);
                 }
 
@@ -315,7 +309,6 @@ myApp.controller('stockController', ['$scope', function($scope) {
                 // }
                 // check if the stock passes all the C Tests
                 if ($s.spreadTestC(stock)) {
-                    stock.vl = Number(stock.vl);
                     $s.stocksC.push(stock);
 
                     if ($s.stocksCold.length > 1) {
@@ -337,7 +330,7 @@ myApp.controller('stockController', ['$scope', function($scope) {
             //     $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
             //     $s.cfg.soundCount = $s.stocksD.length;
             // }
-             
+            
             $s.$apply();
             $s.stocksA = [];
             $s.stocksCold = $s.stocksC;
