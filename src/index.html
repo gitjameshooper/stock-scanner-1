@@ -20,7 +20,7 @@
             <button class="btn green margin-20" ng-click="startScan()">Start Scan</button>
             <button class="btn red margin-20" ng-click="stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <label>% LOD to HOD
                         <input type="number" class="db" ng-model="cfg.stockDiffPctA" />
                     </label>
@@ -28,8 +28,16 @@
                         <input type="number" class="db" ng-model="cfg.stockAwayPctA" />
                     </label>
                 </div>
-               
-                <div class="col-sm-6">
+                <div class="col-sm-4">
+                    <label>% LOD to VWAP
+                        <input type="number" class="db" step="0.10" ng-model="cfg.stockRangePctB" />
+                    </label>
+                    <label>% LT Away Midpoint
+                        <input type="number" class="db" step="0.10" ng-model="cfg.stockAwayPctB" />
+                    </label>
+                    
+                </div>
+                <div class="col-sm-4">
                     <label>Cents moved in 10 secs.
                         <input type="number" class="db" step="0.01" ng-model="cfg.stockFastC" />
                     </label>
@@ -40,7 +48,7 @@
                 </div>
             </div>
             <div class="row margin-top-20 f-18">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>ABCD Test</h3>
@@ -60,7 +68,27 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <h3>B Test</h3>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                 <th>Shares 1/2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stockB in stocksB | orderBy:'-midAwayB'">
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockB.symbol }}</a> </td>
+                                <td>{{ stockB.last }}</td>
+                                 <td>{{ stockB.shares }}</td>
+                                 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <h3>Speed Test</h3>

@@ -69,3 +69,15 @@
             return true;
         }
     }
+      $s.vwapTestB = function(stock) {
+            var stockVwap = Number(stock.vwap).toFixed(2),  
+                stockPrice = Number(stock.last),
+                stockDiffVwap = (stockVwap - stockPrice).toFixed(2),
+                stockDiffPctVwapD = (stockDiffVwap / stockPrice).toFixed(3) * 100;
+                stock.vwapDiff = stockDiffPctVwapD;
+                stock.vwap = parseFloat(Math.round(stockVwap * 100) / 100).toFixed(2);
+
+            if (stockDiffPctVwapD >= $s.cfg.stockAwayPctB) {
+                return true;
+            }
+        }
