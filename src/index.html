@@ -12,37 +12,37 @@
     <link rel="stylesheet" href="/css/global.css" />
 </head>
 
-<body ng-controller="stockController">
+<body ng-controller="stockController as stockApp">
     <header>
     </header>
     <section id="section-1">
-        <div class="container-fluid" ng-class="class">
-            <button class="btn green margin-20" ng-click="startScan()">Start Scan</button>
-            <button class="btn red margin-20" ng-click="stopScan()">Stop Scan</button>
+        <div class="container-fluid" ng-class="stockApp.class">
+            <button class="btn green margin-20" ng-click="stockApp.startScan()">Start Scan</button>
+            <button class="btn red margin-20" ng-click="stockApp.stopScan()">Stop Scan</button>
             <div class="row margin-top-20 f-18">
                 <div class="col-sm-4">
                     <label>% LOD to HOD
-                        <input type="number" class="db" ng-model="cfg.stockDiffPctA" />
+                        <input type="number" class="db" ng-model="stockApp.cfg.stockDiffPctA" />
                     </label>
                     <label>% Pullback from HOD
-                        <input type="number" class="db" ng-model="cfg.stockAwayPctA" />
+                        <input type="number" class="db" ng-model="stockApp.cfg.stockAwayPctA" />
                     </label>
                 </div>
                 <div class="col-sm-4">
                     <label>% LOD to VWAP
-                        <input type="number" class="db" step="0.10" ng-model="cfg.stockRangePctB" />
+                        <input type="number" class="db" step="0.10" ng-model="stockApp.cfg.stockRangePctB" />
                     </label>
                     <label>% LT Away Midpoint
-                        <input type="number" class="db" step="0.10" ng-model="cfg.stockAwayPctB" />
+                        <input type="number" class="db" step="0.10" ng-model="stockApp.cfg.stockAwayPctB" />
                     </label>
                     
                 </div>
                 <div class="col-sm-4">
                     <label>Cents moved in 10 secs.
-                        <input type="number" class="db" step="0.01" ng-model="cfg.stockFastC" />
+                        <input type="number" class="db" step="0.01" ng-model="stockApp.cfg.stockFastC" />
                     </label>
                     <label>Max Bid Ask Spread
-                        <input type="number" class="db" step="0.01" ng-model="cfg.stockSpreadC" />
+                        <input type="number" class="db" step="0.01" ng-model="stockApp.cfg.stockSpreadC" />
                     </label>
                     
                 </div>
@@ -59,7 +59,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stocksA | orderBy:'last'">
+                            <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'last'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                                 <td>{{ stockA.last }}</td>
                                  <td>{{ stockA.shares }}</td>
@@ -79,7 +79,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockB in stocksB | orderBy:'-midAwayB'">
+                            <tr ng-repeat="stockB in stockApp.stocksB | orderBy:'-midAwayB'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockB.symbol }}</a> </td>
                                 <td>{{ stockB.last }}</td>
                                  <td>{{ stockB.shares }}</td>
@@ -97,16 +97,16 @@
                                 <th>Price</th>
                                 <th>Change</th>
                                 <th>Shares 1/2</th>
-                                <th><a class="btn red" ng-click="removeAll(stocksCfin)">Delete All</a></th>
+                                <th><a class="btn red" ng-click="stockApp.removeAll(stockApp.stocksCfin)">Delete All</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockD in stocksCfin | orderBy:'-shares'">
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
-                                <td>{{ stockD.last }}</td>
-                                <td>{{ stockD.fast }}</td>
-                                <td>{{ stockD.shares }}</td>
-                                <td><a class="btn red margin-0" ng-click="removeStock(stockD, stocksCfin)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                            <tr ng-repeat="stockC in stockApp.stocksCfin | orderBy:'-shares'">
+                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
+                                <td>{{ stockC.last }}</td>
+                                <td>{{ stockC.fast }}</td>
+                                <td>{{ stockC.shares }}</td>
+                                <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockC, stockApp.stocksCfin)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
