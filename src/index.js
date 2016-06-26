@@ -72,7 +72,7 @@
         vm.stocksC = [];
         vm.stocksCold = [];
         vm.stocksCfin = [];
-
+    
         vm.initData = initData;
         vm.formatSymbols = formatSymbols;
         vm.callApi = callApi;
