@@ -46,18 +46,18 @@
             stockDiffPctA: 6,
             stockAwayPctA: 2,
             stockRangePctB: 2, // price percentage range
-            stockAwayPctB: 1, // price percentage away midpoint
+            stockAwayPctB: .5, // price percentage away midpoint
             stockSpreadC: .10,
-            stockFastC: .15, // price change 
+            stockFastC: 1.5, // price percentage change 
             stockVolume: {
-                "hr8": 150000,
-                "hr9": 300000,
-                "hr10": 600000,
-                "hr11": 800000,
-                "hr12": 1000000,
-                "hr13": 1200000,
-                "hr14": 1400000,
-                "hr15": 1400000
+                "hr8": 300000,
+                "hr9": 500000,
+                "hr10": 800000,
+                "hr11": 1000000,
+                "hr12": 1200000,
+                "hr13": 1400000,
+                "hr14": 1600000,
+                "hr15": 1600000
             },
 
             soundCount: 0,
@@ -72,7 +72,7 @@
         vm.stocksC = [];
         vm.stocksCold = [];
         vm.stocksCfin = [];
-    
+
         vm.initData = initData;
         vm.formatSymbols = formatSymbols;
         vm.callApi = callApi;
@@ -85,6 +85,7 @@
         vm.spreadTestC = spreadTestC;
         vm.moveTestC = moveTestC;
         vm.volumeTest = volumeTest;
+        vm.evenTest = evenTest;
         vm.formatStock = formatStock;
         vm.helperFuncs = helperFuncs;
         vm.removeStock = removeStock;
@@ -238,7 +239,7 @@
         function rangeTestB(stock) {
             var stockDiffB = stock.vwap - stock.lo,
                 stockDiffPctB = Number((stockDiffB / stock.last).toFixed(3) * 100);
-            stock.stockDiffPctB = stockDiffPctB;
+            stock.stockDiffPctB = Number(stockDiffPctB.toFixed(2));
             if (stockDiffPctB >= vm.cfg.stockRangePctB) {
                 return true;
             }
@@ -268,7 +269,7 @@
 
                 if (stock.symbol === vm.stocksCold[key].symbol) {
 
-                    stock.fast = Number(Math.abs(stock.last - vm.stocksCold[key].last).toFixed(2));
+                    stock.fast = Number((Math.abs((stock.last - vm.stocksCold[key].last) / stock.last) * 100).toFixed(2));
 
                     if (stock.fast >= vm.cfg.stockFastC) {
 
@@ -287,6 +288,14 @@
             // if outside trading time use after 3/EOD volume
             if (vm.cfg.dateHours > 15 || vm.cfg.dateHours < 8) { vm.cfg.dateHours = 15; }
             if (stock.vl >= vm.cfg.stockVolume['hr' + vm.cfg.dateHours]) {
+                return true;
+            }
+        }
+
+        function evenTest(stock) {
+
+            var stockPriceR = Math.round(stock.last);
+            if (stock.last <= (stockPriceR + .10) && stock.last >= (stockPriceR - .10)) {
                 return true;
             }
         }
@@ -334,7 +343,7 @@
 
                 // run all stocks thru the volume test
                 if (vm.volumeTest(stock)) {
-
+                     
                     // check if the stock passes all the A Tests
                     if (vm.lodTestA(stock) && vm.hodTestA(stock) && vm.vwapTestA(stock)) {
                         vm.stocksA.push(stock);
