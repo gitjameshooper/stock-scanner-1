@@ -68,10 +68,13 @@
         vm.quotesData = {};
         // Stock Buckets
         vm.stocksA = [];
+        vm.stocksATier = [];
         vm.stocksB = [];
+        vm.stocksBTier = [];
         vm.stocksC = [];
-        vm.stocksCold = [];
-        vm.stocksCfin = [];
+        vm.stocksCTier = [];
+        vm.stocksCOTier = [];
+        vm.stocksCTierFin = [];
 
         vm.initData = initData;
         vm.formatSymbols = formatSymbols;
@@ -265,17 +268,17 @@
 
         function moveTestC(stock) {
 
-            $.each(vm.stocksCold, function(key, value) {
+            $.each(vm.stocksCOTier, function(key, value) {
 
-                if (stock.symbol === vm.stocksCold[key].symbol) {
+                if (stock.symbol === vm.stocksCOTier[key].symbol) {
 
-                    stock.fast = Number((Math.abs((stock.last - vm.stocksCold[key].last) / stock.last) * 100).toFixed(2));
+                    stock.fast = Number((Math.abs((stock.last - vm.stocksCOTier[key].last) / stock.last) * 100).toFixed(2));
 
                     if (stock.fast >= vm.cfg.stockFastC) {
 
                         // check if stock is already in array
-                        if (_.where(vm.stocksCfin, { symbol: stock.symbol }).length == 0) {
-                            vm.stocksCfin.push(stock);
+                        if (_.where(vm.stocksCTierFin, { symbol: stock.symbol }).length == 0) {
+                            vm.stocksCTierFin.push(stock);
                         }
                     }
                 }
@@ -304,6 +307,7 @@
             stock.bid = Math.round(stock.bid * 100) / 100;
             stock.vwap = Math.round(stock.vwap * 100) / 100;
             stock.ask = Math.round(stock.ask * 100) / 100;
+            stock.prbook = Math.round(stock.prbook * 100) / 100;
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
@@ -343,21 +347,22 @@
 
                 // run all stocks thru the volume test
                 if (vm.volumeTest(stock)) {
-                     
+                     vm.stocksATier.push(stock);
+
                     // check if the stock passes all the A Tests
                     if (vm.lodTestA(stock) && vm.hodTestA(stock) && vm.vwapTestA(stock)) {
-                        vm.stocksA.push(stock);
+                        
                     }
 
                     // check if the stock passes all the B Tests
                     if (vm.vwapTestB(stock) && vm.rangeTestB(stock) && vm.betweenTestB(stock)) {
-                        vm.stocksB.push(stock);
+                        vm.stocksBTier.push(stock);
                     }
                     // check if the stock passes all the C Tests
                     if (vm.spreadTestC(stock)) {
-                        vm.stocksC.push(stock);
+                        vm.stocksCTier.push(stock);
 
-                        if (vm.stocksCold.length > 1) {
+                        if (vm.stocksCOTier.length > 1) {
 
                             vm.moveTestC(stock);
                         }
@@ -369,16 +374,21 @@
             if (vm.cfg.symbolsCurTier === 0) {
 
                 // play sound if vwamp stock found
-                // if (vm.stocksCfin.length != vm.cfg.soundCount) {
+                // if (vm.stocksCTierfin.length != vm.cfg.soundCount) {
                 //     $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
-                //     vm.cfg.soundCount = vm.stocksCfin.length;
+                //     vm.cfg.soundCount = vm.stocksCTierFin.length;
                 // }
 
                 $scope.$apply();
-                vm.stocksA = [];
-                vm.stocksB = [];
-                vm.stocksCold = vm.stocksC;
-                vm.stocksC = [];
+                vm.stocksA = vm.stocksATier;
+                vm.stocksB = vm.stocksBTier;
+                vm.stocksC = vm.stocksCTierFin;
+                vm.stocksCOTier = vm.stocksCTier;
+
+                //empty tiers
+                vm.stocksATier = [];
+                vm.stocksBTier = [];
+                vm.stocksCTier = [];
 
             }
             //  Create loop

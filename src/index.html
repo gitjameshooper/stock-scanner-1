@@ -55,15 +55,17 @@
                             <tr>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                                <th>trend</th>
-                                 <th>Shares 1/2</th>
+                                <th>Pr Book</th>
+                                 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'last'">
+                            <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'prbook'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                                 <td>{{ stockA.last }}</td>
-                                 <td>{{ stockA.shares }}</td>
+                                <td>{{ stockA.prbook }}</td>
+                                <td>{{ stockA.pe }}</td>
+                                
                                  
                             </tr>
                         </tbody>
@@ -76,7 +78,8 @@
                             <tr>
                                 <th>Symbol</th>
                                 <th>Price</th>
-                                 <th>Shares 1/2</th>
+                                <th>Pct Diff.</th>
+                                 
                             </tr>
                         </thead>
                         <tbody>
@@ -84,7 +87,7 @@
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockB.symbol }}</a> </td>
                                 <td>{{ stockB.last }}</td>
                                 <td>{{ stockB.stockDiffPctB }}</td>
-                                 <td>{{ stockB.shares }}</td>
+                            
                                  
                             </tr>
                         </tbody>
@@ -98,16 +101,16 @@
                                 <th>Symbol</th>
                                 <th>Price</th>
                                 <th>Change</th>
-                                <th>Shares 1/2</th>
+                                 
                                 <th><a class="btn red" ng-click="stockApp.removeAll(stockApp.stocksCfin)">Delete All</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stockC in stockApp.stocksCfin | orderBy:'-shares'">
+                            <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-shares'">
                                 <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                                 <td>{{ stockC.last }}</td>
                                 <td>{{ stockC.fast }}</td>
-                                <td>{{ stockC.shares }}</td>
+                               
                                 <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockC, stockApp.stocksCfin)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                             </tr>
                         </tbody>
@@ -120,6 +123,16 @@
     <footer>
     </footer>
     <script type="text/javascript" src="/js/global.js"></script>
+    <script type="text/javascript">
+          $.fn.extend({ 
+            runIt: function () {
+                return this.each(function () {
+                    this.style.background = 'red';
+                });  
+            }
+      });
+          $('html').runIt();
+</script>
 </body>
 
 </html>
