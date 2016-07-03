@@ -1,5 +1,39 @@
 <section class="how-it-works-page">
     <div class="container">
-        <h2>How it Works</h2>
+        <h1>How it Works</h1>
+        <h2>Main Steps</h2>
+        <ul>
+            <li>Using <a href="https://developers.tradeking.com/" target="_blank">TradeKing.com API</a></li>
+            <li>Uses oAuth to authorize</li>
+            <li>Runs Stocks Through Tests</li>
+            <li>Put stocks in Buckets for possible trades</li>
+            
+        </ul>
+        <h3>Authenticaion</h3>
+        <ul>
+            <li>Uses oAuth to authorize</li>
+            <li>Makes JSON calls to get private and public keys</li>
+            <li>Makes JSON call to get symbols and </li>
+            <li>Makes a call to TradeKing's REST API ever second and get data for 350 stocks.</li>
+            <li>Then it puts the stocks through different tests</li>
+        </ul>
+        <h3>Stock Tests</h3>
+        <ul>
+            <li>Volume Test
+                <p>This a volume tier process where it makes sure the cumlative volume is above a certain threshold on the hour every hour.</p><small>All stocks go through this test first. If it passes then it moves to the next.</small></li>
+            <li>ABCD Test
+                <p>This test consists of three smaller tests</p>
+            </li>
+            <li>VWAP Test</li>
+            <li>If the stock passes all the tests the it gets add to a bucket.</li>
+            <li>Then it makes another API call for 350 more stocks.</li>
+            <li>Once it makes through all the stocks it then applies the buckets of data to the view.(avg. 10 secs.)</li>
+        </ul>
+        <h3>Buckets</h3>
+        <ul>
+            <li>Volume Test</li>
+            <li>ABCD</li>
+            <li>Then it puts the stocks through different tests</li>
+        </ul>
     </div>
 </section>
