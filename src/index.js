@@ -10,9 +10,23 @@
 //https://openshift.redhat.com/app/console/applications
 (function() {
     'use strict';
-
+ 
     angular
-        .module('stockScannerApp', [])
+        .module('stockScannerApp', ['ngRoute'])
+        .config(['$routeProvider', function ($routeProvider) {
+            $routeProvider
+            .when('/', {
+                templateUrl: "views/home.html",
+                controller: stockController
+            })
+            .when('/dog', {
+                templateUrl: "views/dog.html",
+                controller: stockController
+            })
+            .otherwise({
+                redirectTo: "/"
+            });
+        }])
         .controller('stockController', stockController);
     stockController.$inject = ['$scope'];
 

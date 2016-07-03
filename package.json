@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "1.5.5",
+    "angular-route": "1.5.7",
     "bootstrap-less": "3.3.8",
     "browser-sync": "2.12.7",
     "del": "2.2.0",

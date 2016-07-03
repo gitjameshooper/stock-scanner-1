@@ -3,13 +3,13 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     watchify = require('watchify'),
     browserify = require('browserify'),
-   runSequence = require('run-sequence'),
+    runSequence = require('run-sequence'),
     rename = require('gulp-rename'),
     bundle = require('gulp-bundle-assets'),
     del = require('del'),
     less = require('gulp-less'),
     path = require('path'),
-     browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create();
 
 // Delete Build folder
 gulp.task('clean', function() {
@@ -69,9 +69,9 @@ gulp.task('browser-sync', function() {
 });
 // Watch files for changes and 
 gulp.task('watch', function() {
-    gulp.watch('src/*.js', ['bundleScripts']);
+    gulp.watch('src/**/*.js', ['bundleScripts']);
     gulp.watch('src/**/*.less', ['less']);
-    gulp.watch('src/*.html', ['copy']);
+    gulp.watch('src/**/*.html', ['copy']);
     gulp.watch('src/**/*.json', ['copy']);
   
 });
