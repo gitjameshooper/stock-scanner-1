@@ -1,104 +1,13 @@
-
-        <div class="container-fluid" ng-class="stockApp.class">
-            <button class="btn green margin-20" ng-click="stockApp.startScan()">Start Scan</button>
-            <button class="btn red margin-20" ng-click="stockApp.stopScan()">Stop Scan</button>
-            <div class="row margin-top-20 f-18">
-                <div class="col-sm-4">
-                    <label>% LOD to HOD
-                        <input type="number" class="db" ng-model="stockApp.cfg.stockDiffPctA" />
-                    </label>
-                    <label>% Pullback from HOD
-                        <input type="number" class="db" ng-model="stockApp.cfg.stockAwayPctA" />
-                    </label>
-                </div>
-                <div class="col-sm-4">
-                    <label>% LOD to VWAP
-                        <input type="number" class="db" step="0.10" ng-model="stockApp.cfg.stockRangePctB" />
-                    </label>
-                    <label>% LT Away Midpoint
-                        <input type="number" class="db" step="0.10" ng-model="stockApp.cfg.stockAwayPctB" />
-                    </label>
-                    
-                </div>
-                <div class="col-sm-4">
-                    <label>% moved in 10 secs.
-                        <input type="number" class="db" step="0.10" ng-model="stockApp.cfg.stockFastC" />
-                    </label>
-                    <label>Max Bid Ask Spread
-                        <input type="number" class="db" step="0.01" ng-model="stockApp.cfg.stockSpreadC" />
-                    </label>
-                    
-                </div>
-            </div>
-            <div class="row margin-top-20 f-18">
-                <div class="col-sm-4">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <h3>ABCD Test</h3>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>Pr Book</th>
-                                 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'prbook'">
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
-                                <td>{{ stockA.last }}</td>
-                                <td>{{ stockA.prbook }}</td>
-                                <td>{{ stockA.pe }}</td>
-                                
-                                 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm-4">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <h3>B Test</h3>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>Pct Diff.</th>
-                                 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="stockB in stockApp.stocksB | orderBy:'-stockDiffPctB'">
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockB.symbol }}</a> </td>
-                                <td>{{ stockB.last }}</td>
-                                <td>{{ stockB.stockDiffPctB }}</td>
-                            
-                                 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm-4">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <h3>Speed Test</h3>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>Change</th>
-                                 
-                                <th><a class="btn red" ng-click="stockApp.removeAll(stockApp.stocksCfin)">Delete All</a></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-shares'">
-                                <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
-                                <td>{{ stockC.last }}</td>
-                                <td>{{ stockC.fast }}</td>
-                               
-                                <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockC, stockApp.stocksCfin)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="clearboth"></div>
-        </div>
+<section class="home-page">
+    <div class="container">
+        <h1>Welcome!</h1>
+        <p>This is the stock scanner app built for intraday trading.</p>
+        <h2>Features</h2>
+        <ul>
+            <li>Pattern Recognition</li>
+            <li>Scans 3000 stocks in secs.</li>
+            <li>Exchanges NYSE, NASDQ, AMEX</li>
+            <li>Built for day trading</li>
+        </ul>
+    </div>
+</section>

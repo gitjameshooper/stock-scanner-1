@@ -49,9 +49,9 @@ gulp.task('copy',  function () {
 // gulp.task('scripts', ['globalScripts', 'bundleScripts']);
 
 gulp.task('less', function () {
-  return gulp.src('src/less/**/*.less')
+  return gulp.src('src/less/global.less')
     .pipe(less({
-      paths: [ './node_modules/bootstrap-less', path.join(__dirname, 'less', 'includes')]
+      paths: [ './node_modules/bootstrap-less', './node_modules/font-awesome/less', path.join(__dirname, 'less', 'includes')]
     }))
     .pipe(rename('global.css'))
     .pipe(gulp.dest('app/css'))

@@ -9,16 +9,18 @@
     <meta name="keywords" content="Stock Scanner" />
     <title>Stock Scanner</title>
     <meta name="author" content="Jim Hooper">
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/global.css" />
 </head>
 
-<body ng-controller="stockController as stockApp">
+<body>
     <header ng-include="'/views/partials/header.html'">
     </header>
-    <section ng-view id="section-1">
+    <div ng-view class="main">
 
-    </section>
-    <footer>
+    </div>
+    <footer ng-include="'/views/partials/footer.html'">
+
     </footer>
     <script type="text/javascript" src="/js/global.js"></script>
 </body>

@@ -1,60 +1,64 @@
 /*  Include Bootstrap css */
-@import "bootstrap/index";
-@import "node_modules/font-awesome/less/font-awesome.less";
 
-@purple : #462066;
-@orange : #FFB85F;
-@red : #FF7A5A;
-@green : #00AAA0;
-@teal : #8ED2C9;
-@beige : #FCF4D9;
-@black: #333;
+@import "bootstrap/index";
+@import "font-awesome";
+@import "vars";
 
 /* Custom Styles */
-html{
-	background: @black;
-	color: @black;
+
+html {
+	font-family: 'Roboto Condensed', sans-serif;
+  background: @black;
+  color: @black;
+  header {
+    background: @black;
+    color: @white;
+  }
+  .scanner-page {
+    background: @beige;
+    border: 8px solid #8c92ac;
+    &.green {
+      border: 8px solid @green;
+    }
+    &.red {
+      border: 8px solid @red;
+    }
+    &.error {
+      border: 8px solid blue;
+    }
+  }
+  .margin-top-20 {
+    margin-top: 20px;
+  }
+  .f-18 {
+    font-size: 18px;
+  }
+  .margin-20 {
+    margin: 20px;
+  }
+  .btn.green {
+    color: #fff;
+    background: @green;
+  }
+  .btn.red {
+    color: #fff;
+    background: @red;
+  }
+  .text-white{
+  	color: @white;
+  }
+  .border {
+    border: 1px solid #000;
+  }
+  .border-top {
+    border-top: 1px solid #ddd;
+  }
 }
-.container-fluid{
-	background: @beige;
-	border: 8px solid #8c92ac;
-	&.green{
-		border: 8px solid @green;
-	}
-	&.red{
-		border: 8px solid @red;
-	}
-	&.error{
-		border: 8px solid blue;
-	}
-	.margin-top-20{
-		margin-top: 20px;
-	}
-	.f-18{
-		    font-size: 18px;
-	}
-	.margin-20{
-		margin: 20px ; 
-	}
-	.btn.green{
-		color: #fff;
-		background: @green;
-	}
-		.btn.red{
-		color: #fff;
-		background: @red;
-	}
-	.border{
-		border: 1px solid #000;
-	}
-	.border-top{
-		border-top: 1px solid #ddd;
-	}
+
+.db {
+  display: block;
 }
-.db{
-	display: block;
-}
- 
-.clearboth{
-	 clear: both;
+
+.clearboth {
+  clear: both;
 }

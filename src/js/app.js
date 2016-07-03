@@ -17,11 +17,18 @@
             $routeProvider
             .when('/', {
                 templateUrl: "/views/home.html",
-                controller: 'stockController'
+                controller: 'stockController',
+                controllerAs: 'stockApp'
             })
-            .when('/dog', {
-                templateUrl: "/views/dog.html",
-                controller: 'stockController'
+            .when('/how-it-works', {
+                templateUrl: "/views/how-it-works.html",
+                controller: 'stockController',
+                controllerAs: 'stockApp'
+            })
+            .when('/scanner', {
+                templateUrl: "/views/scanner.html",
+                controller: 'stockController',
+                controllerAs: 'stockApp'
             })
             .otherwise({
                 redirectTo: "/"
