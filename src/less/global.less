@@ -7,18 +7,18 @@
 /* Custom Styles */
 
 html {
-
   color: @black;
   position: relative;
   min-height: 100%;
   body {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Oxygen', sans-serif;
     margin: 0 0 20px;
+    background: @offwhite;
     header {
-      background: @black;
+      background: url('/img/grey-bg.png');
     }
     footer {
-    	background: @black;
+      background: @black;
       position: absolute;
       left: 0;
       bottom: 0;
@@ -26,17 +26,49 @@ html {
       width: 100%;
     }
     .scanner-page {
-      background: @grey;
-      border: 8px solid #8c92ac;
+      background: @offwhite;
+      .slide-toggle {
+        .fa-arrow-circle-up {
+          display: none;
+        }
+        &.active {
+          .fa-arrow-circle-down {
+            display: none;
+          }
+          .fa-arrow-circle-up {
+            display: inline-block;
+          }
+        }
+      }
+      .toggle-settings {
+        display: none;
+        padding: 10px 12px 20px;
+      }
+      .status-bar {
+        background: @grey;
+      }
       &.green {
-        border: 8px solid @green;
+        .status-bar {
+          background: @green;
+          color: @white;
+        }
       }
       &.red {
-        border: 8px solid @red;
+        .status-bar {
+          background: @red;
+          color: @white;
+        }
       }
       &.error {
-        border: 8px solid blue;
+        .status-bar {
+          background: @blue;
+          color: @white;
+        }
       }
+    }
+    a.no-hover:hover,
+    a.no-hover:focus {
+      text-decoration: none;
     }
     .margin-top-20 {
       margin-top: 20px;
@@ -44,8 +76,8 @@ html {
     .f-18 {
       font-size: 18px;
     }
-    .margin-0{
-    	margin: 0;
+    .margin-0 {
+      margin: 0;
     }
     .margin-20 {
       margin: 20px;
@@ -64,11 +96,23 @@ html {
     .text-white {
       color: @white;
     }
+    .text-black {
+      color: @black;
+    }
     .text-blue {
       color: @blue;
     }
     .text-green {
       color: @green;
+    }
+    .text-grey {
+      color: @grey;
+    }
+    .text-light {
+      font-weight: 300;
+    }
+    .black {
+      background: @black;
     }
     .border {
       border: 1px solid #000;

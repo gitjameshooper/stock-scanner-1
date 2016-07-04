@@ -1,6 +1,6 @@
 (function() {
     'use strict';
- 
+
     angular
         .module('stockScannerApp')
         .controller('stockController', stockController);
@@ -66,6 +66,7 @@
         vm.stocksCOTier = [];
         vm.stocksCTierFin = [];
 
+        vm.status = 'Ready';
         vm.initData = initData;
         vm.formatSymbols = formatSymbols;
         vm.callApi = callApi;
@@ -96,6 +97,7 @@
             }).fail(function(err) {
                 window.console.log(err.responseText);
                 vm.class = "error";
+                vm.status = "Error";
                 $scope.$apply();
             });
             var xhr2 = $.getJSON(vm.cfg.tkCredsJSONUrl, function(data) {
@@ -120,6 +122,7 @@
             }).fail(function(err) {
                 window.console.log(err.responseText);
                 vm.class = "error";
+                vm.status = "Error";
                 $scope.$apply();
 
             });
@@ -174,6 +177,7 @@
 
             }).error(function(err) {
                 vm.class = "error";
+                vm.status = "Error";
                 $scope.$apply();
                 window.console.log("Bad TK Request", err);
                 // after failed request try api again
@@ -185,6 +189,7 @@
             }).done(function(data) {
 
                 vm.class = "green";
+                vm.status = "Scanning";
                 // set date var
                 vm.cfg.dateHours = new Date().getHours();
                 //run tk data thru tests
@@ -337,11 +342,11 @@
 
                 // run all stocks thru the volume test
                 if (vm.volumeTest(stock)) {
-                     vm.stocksATier.push(stock);
+                    vm.stocksATier.push(stock);
 
                     // check if the stock passes all the A Tests
                     if (vm.lodTestA(stock) && vm.hodTestA(stock) && vm.vwapTestA(stock)) {
-                        
+
                     }
 
                     // check if the stock passes all the B Tests
@@ -390,11 +395,20 @@
             vm.helperFuncs();
             vm.initData();
             vm.class = "green";
+            vm.status = "Scanning";
         }
 
         function stopScan() {
             vm.cfg.run = false;
             vm.class = "red";
+            vm.status = "Stopped";
         }
+          $(".slide-toggle").click(function() {
+              var el = $(this).toggleClass('active').attr('data-toggle');
+
+                $(el).slideToggle("slow", function() {
+
+                });
+            });
     }
 })();
