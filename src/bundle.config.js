@@ -9,6 +9,8 @@ module.exports = {
         './node_modules/angular-route/angular-route.min.js',
         './node_modules/underscore/underscore-min.js',
         './src/js/app.js',
+        './src/js/symbolsService.js',
+        './src/js/oAuthService.js',
         './src/js/stockController.js'
       ]
     }

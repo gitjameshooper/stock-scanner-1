@@ -49,20 +49,26 @@ html {
       }
       &.green {
         .status-bar {
-          background: @green;
-          color: @white;
+          border-top: solid 5px @green;
+          .status-text {
+            color: @green;
+          }
         }
       }
       &.red {
         .status-bar {
-          background: @red;
-          color: @white;
+          border-top: solid 5px @red;
+          .status-text {
+            color: @red;
+          }
         }
       }
       &.error {
         .status-bar {
-          background: @blue;
-          color: @white;
+          border-top: solid 5px @yellow;
+          .status-text {
+            color: @yellow;
+          }
         }
       }
     }
@@ -79,11 +85,14 @@ html {
     .margin-0 {
       margin: 0;
     }
+    .margin-10 {
+      margin: 10px;
+    }
     .margin-20 {
       margin: 20px;
     }
-    .padding-15-tb{
-    	padding: 15px 0;
+    .padding-15-tb {
+      padding: 15px 0;
     }
     .padding-20 {
       padding: 20px;
