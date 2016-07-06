@@ -342,11 +342,11 @@
 
                 // run all stocks thru the volume test
                 if (vm.volumeTest(stock)) {
-                    vm.stocksATier.push(stock);
+                   
 
                     // check if the stock passes all the A Tests
                     if (vm.lodTestA(stock) && vm.hodTestA(stock) && vm.vwapTestA(stock)) {
-
+                         vm.stocksATier.push(stock);
                     }
 
                     // check if the stock passes all the B Tests

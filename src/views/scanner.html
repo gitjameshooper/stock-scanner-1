@@ -7,7 +7,7 @@
                 Status: {{ stockApp.status }}
             </div>
             <div class="col-xs-12 black">
-                <a href="" class="slide-toggle db text-grey no-hover" data-toggle=".toggle-settings">Settings <i class="fa fa-arrow-circle-down text-grey" aria-hidden="true"></i><i class="fa fa-arrow-circle-up text-grey" aria-hidden="true"></i></a>
+                <a href="" class="slide-toggle db text-grey no-hover padding-15-tb" data-toggle=".toggle-settings">Settings <i class="fa fa-arrow-circle-down text-grey" aria-hidden="true"></i><i class="fa fa-arrow-circle-up text-grey" aria-hidden="true"></i></a>
                 <div class="row toggle-settings text-grey">
                     <div class="col-sm-4">
                         <h4>ABCD Test</h4>
@@ -50,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'prbook'">
+                        <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-last'">
                             <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                             <td>{{ stockA.last }}</td>
                         </tr>
@@ -84,15 +84,15 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>Change</th>
-                            <th><a class="btn red" ng-click="stockApp.removeAll(stockApp.stocksCfin)">Delete All</a></th>
+                            <th><a class="btn red" ng-click="stockApp.removeAll(stockApp.stocksC)">Delete All</a></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-shares'">
+                        <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-fast'">
                             <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                             <td>{{ stockC.last }}</td>
                             <td>{{ stockC.fast }}</td>
-                            <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockC, stockApp.stocksCfin)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                            <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockC, stockApp.stocksC)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
