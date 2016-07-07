@@ -45,9 +45,21 @@ html {
         padding: 10px 12px 20px;
       }
       .status-bar {
-        background: @grey;
+        background: @black;
+        border-bottom: 1px solid @grey;
+        .status-text {
+          text-transform: capitalize;
+        }
       }
-      &.green {
+      &.ready {
+        .status-bar {
+          border-top: solid 5px @grey;
+          .status-text {
+            color: @white;
+          }
+        }
+      }
+      &.scanning {
         .status-bar {
           border-top: solid 5px @green;
           .status-text {
@@ -55,7 +67,7 @@ html {
           }
         }
       }
-      &.red {
+      &.stopped {
         .status-bar {
           border-top: solid 5px @red;
           .status-text {
