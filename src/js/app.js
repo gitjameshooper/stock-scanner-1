@@ -36,3 +36,10 @@
         }]);
 
 })();
+
+// var jsonSymbols = [];
+// localStorage.setItem("jsonSymbols", jsonSymbols);
+
+// var jsonSymbols = localStorage.getItem("jsonSymbols");
+// $('.screener-link-primary').each(function(){  var it = $(this).text(); jsonSymbols.push(it); });
+// var url = $('#screener-content .body-table .tab-link').eq( 2 ).attr('href');  window.location = url;
