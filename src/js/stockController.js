@@ -15,7 +15,7 @@
             tkToken: {},
             tkRequestData: {},
             tkApiUrl: "https://api.tradeking.com/v1/market/ext/quotes.json?symbols=",
-            symbolsJSONUrl: "/json/symbols.json",
+            symbolsJSONUrl: "/json/new-symbols.json",
             symbolsJSON: {},
             symbolStr: "",
             symbolsCurCount: 0,
@@ -28,7 +28,23 @@
                 [1401, 1750],
                 [1751, 2100],
                 [2101, 2450],
-                [2451, 2800]
+                [2451, 2800],
+                [2801, 3150],
+                [3151, 3500],
+                [3501, 3850],
+                [3851, 4200],
+                [4201, 4550],
+                [4551, 4900],
+                [4901, 5250],
+                [5251, 5600],
+                [5601, 5950],
+                [5951, 6300],
+                [6301, 6650],
+                [6651, 7000],
+                [7001, 7350],
+                [7351, 7700],
+                [7701, 8050],
+                [8051, 8400]
             ],
             accountVal: 13000,
             dateHours: null,
@@ -92,7 +108,8 @@
         function initData() {
 
             var xhr1 = $.getJSON(vm.cfg.symbolsJSONUrl, function(data) {
-                vm.cfg.symbolsJSON = data.symbols;
+               
+                vm.cfg.symbolsJSON = data;
 
             }).fail(function(err) {
                 window.console.log(err.responseText);
@@ -138,9 +155,9 @@
                 vm.cfg.symbolsBegCount = 0;
 
                 $.each(vm.cfg.symbolsJSON, function(k, v) {
-
+                    
                     if (vm.cfg.symbolsBegCount >= vm.cfg.symbolsTiers[vm.cfg.symbolsCurTier][0] && vm.cfg.symbolsTiers[vm.cfg.symbolsCurTier][0] <= vm.cfg.symbolsCurCount && vm.cfg.symbolsCurCount <= vm.cfg.symbolsTiers[vm.cfg.symbolsCurTier][1]) {
-                        vm.cfg.symbolStr += v + ',';
+                        vm.cfg.symbolStr += k + ',';
                         vm.cfg.symbolsCurCount++;
                     }
                     vm.cfg.symbolsBegCount++;
@@ -391,6 +408,7 @@
         }
 
         function startScan() {
+
             vm.cfg.run = true;
             vm.helperFuncs();
             vm.initData();

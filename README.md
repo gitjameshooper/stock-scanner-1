@@ -26,4 +26,6 @@
 <p>Now you can view the app in localhost:2000 in your browser and start/stop scanning</p>
 
 <p>Note: Currently developing tests to put all the stocks through</p>
+
+
  
