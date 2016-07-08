@@ -11,6 +11,7 @@ module.exports = {
         './src/js/app.js',
         './src/js/symbolsService.js',
         './src/js/oAuthService.js',
+        './src/js/animFactory.js',
         './src/js/stockController.js'
       ]
     }

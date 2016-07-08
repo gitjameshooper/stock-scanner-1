@@ -18,7 +18,7 @@
         }
 
         function getSymbolsDone(response) {
-            return response.data.symbols;
+            return response.data;
         }
 
         function getSymbolsFail(error) {

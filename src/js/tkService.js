@@ -1,0 +1,29 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('stockScannerApp')
+        .factory('tkService', tkService);
+    tkService.$inject = ['$http', '$log'];
+
+    function tkService($http, $log) {
+        return {
+            getStockData: getStockData
+        };
+
+        function getStockData(url, method, oAuthData) {
+            
+            
+            return 'hey';
+        }
+
+        function getStockDone(response) {
+            return response.data;
+        }
+
+        function getStockFail(error) {
+            $log.error('Failed to get Symbols - ' + error.statusText);
+            return false;
+        }
+    }
+})();
