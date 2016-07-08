@@ -10,6 +10,7 @@
         var vm = this;
         // config
         vm.cfg = {
+            status : 'ready',
             tkCredsJSONUrl: "/json/tk-creds.json",
             tkOauth: {},
             tkToken: {},
@@ -66,7 +67,6 @@
         vm.stocksCOTier = [];
         vm.stocksCTierFin = [];
 
-        vm.status = 'Ready';
         vm.initData = initData;
         vm.formatSymbols = formatSymbols;
         vm.callApi = callApi;
@@ -96,8 +96,7 @@
 
             }).fail(function(err) {
                 window.console.log(err.responseText);
-                vm.class = "error";
-                vm.status = "Error";
+                vm.cfg.status = "error";
                 $scope.$apply();
             });
             var xhr2 = $.getJSON(vm.cfg.tkCredsJSONUrl, function(data) {
@@ -121,8 +120,8 @@
                 };
             }).fail(function(err) {
                 window.console.log(err.responseText);
-                vm.class = "error";
-                vm.status = "Error";
+            
+                vm.cfg.status = "error";
                 $scope.$apply();
 
             });
@@ -176,8 +175,8 @@
                 }
 
             }).error(function(err) {
-                vm.class = "error";
-                vm.status = "Error";
+              
+                vm.cfg.status = "error";
                 $scope.$apply();
                 window.console.log("Bad TK Request", err);
                 // after failed request try api again
@@ -188,8 +187,7 @@
                 }, 3000);
             }).done(function(data) {
 
-                vm.class = "green";
-                vm.status = "Scanning";
+                vm.cfg.status = "scanning";
                 // set date var
                 vm.cfg.dateHours = new Date().getHours();
                 //run tk data thru tests
@@ -394,14 +392,12 @@
             vm.cfg.run = true;
             vm.helperFuncs();
             vm.initData();
-            vm.class = "green";
-            vm.status = "Scanning";
+            vm.cfg.status = "scanning";
         }
 
         function stopScan() {
             vm.cfg.run = false;
-            vm.class = "red";
-            vm.status = "Stopped";
+            vm.cfg.status = "stopped";
         }
           $(".slide-toggle").click(function() {
               var el = $(this).toggleClass('active').attr('data-toggle');
