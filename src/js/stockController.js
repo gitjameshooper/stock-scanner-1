@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .controller('stockController', stockController);
-    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'animFactory'];
+    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory'];
 
-    function stockController($scope, $log, symbolsService, oAuthService, animFactory) {
+    function stockController($scope, $log, symbolsService, oAuthService, xtraFactory) {
         var vm = this;
         // config
         vm.cfg = {
@@ -36,7 +36,8 @@
         vm.init = init;
 
         function init(){
-            animFactory.settingsAnim();
+            xtraFactory.settingsAnim();
+            xtraFactory.jQueryExtends();
         }
 
         function getSymbols() {
@@ -148,8 +149,6 @@
             vm.cfg.run = true;
             vm.cfg.status = "scanning";
             vm.getSymbols();
-
-
 
         }
 
