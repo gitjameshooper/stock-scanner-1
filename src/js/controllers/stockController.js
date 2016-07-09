@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .controller('stockController', stockController);
-    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory'];
+    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory','scanFactory'];
 
-    function stockController($scope, $log, symbolsService, oAuthService, xtraFactory) {
+    function stockController($scope, $log, symbolsService, oAuthService, xtraFactory, scanFactory) {
         var vm = this;
         // config
         vm.cfg = {
@@ -33,6 +33,8 @@
         vm.checkData = checkData;
         vm.createTiers = createTiers;
         vm.formatSymbols = formatSymbols;
+        vm.removeStock = scanFactory.removeStock(stock, stocksArr);
+        vm.removeAllStocks = scanFactory.removeAllStocks(stocksArr);
         vm.init = init;
 
         function init(){
