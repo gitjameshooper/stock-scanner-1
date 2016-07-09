@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testVolFactory'];
+    scanFactory.$inject = ['$log', 'testVolFactory', 'testAFactory', 'testBFactory'];
 
-    function scanFactory($log, testVolFactory) {
+    function scanFactory($log, testVolFactory, testAFactory, testBFactory) {
         return {
             scanStocks: scanStocks,
             formatStock: formatStock,
@@ -14,38 +14,39 @@
             removeAllStocks: removeAllStocks
         };
 
-        function scanStocks(quotesData, accountVal, stockVolumeObj) {
-              $.each(quotesData, function(key, stock) {
-                
+        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockDiffPctA, stockAwayPctA, stockRangePctB, stockAwayPctB) {
+
+            $.each(quotesData, function(key, stock) {
+
                 // format stock values
                 formatStock(stock, accountVal);
-               
+                
                 // run all stocks thru the volume test
                 if (testVolFactory.volTest(stock, stockVolumeObj)) {
-                     
-                    window.console.log(stock);
 
                     // check if the stock passes all the A Tests
-                    if (vm.lodTestA(stock) && vm.hodTestA(stock) && vm.vwapTestA(stock)) {
-                         vm.stocksATier.push(stock);
+                    if (testAFactory.allTests(stock, stockDiffPctA, stockAwayPctA)) {
+                        stocksPassed.stocksPassA.push(stock);
                     }
 
                     // check if the stock passes all the B Tests
-                    if (vm.vwapTestB(stock) && vm.rangeTestB(stock) && vm.betweenTestB(stock)) {
-                        vm.stocksBTier.push(stock);
+                     if (testBFactory.allTests(stock, stockRangePctB, stockAwayPctB)) {
+                        stocksPassed.stocksPassB.push(stock);
                     }
-                    // check if the stock passes all the C Tests
-                    if (vm.spreadTestC(stock)) {
-                        vm.stocksCTier.push(stock);
+                    // // check if the stock passes all the C Tests
+                    // if (vm.spreadTestC(stock)) {
+                    //     vm.stocksCTier.push(stock);
 
-                        if (vm.stocksCOTier.length > 1) {
+                    //     if (vm.stocksCOTier.length > 1) {
 
-                            vm.moveTestC(stock);
-                        }
-                    }
+                    //         vm.moveTestC(stock);
+                    //     }
+                    // }
                 }
             });
+            return stocksPassed;
         }
+
         function formatStock(stock, accountVal) {
             stock.bid = Math.round(stock.bid * 100) / 100;
             stock.vwap = Math.round(stock.vwap * 100) / 100;
@@ -57,7 +58,7 @@
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Number(parseFloat(Math.round(stock.last * 100) / 100).toFixed(2));
         }
- 
+
         function removeStock(stock, stocksArr) {
 
             stocksArr.splice(stocksArr.indexOf(stock), 1);
@@ -69,7 +70,7 @@
             stocksArr.length = 0;
 
         }
-        
-       
+
+
     }
 })();

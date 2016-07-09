@@ -12,9 +12,12 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 900,
-                symbolsPerTier: 350,
+                apiMSecs: 1100,
+                symbolsPerTier: 300,
                 stockDiffPctA: 6,
+                stockAwayPctA: 2,
+                stockRangePctB: 2, // price percentage range
+                stockAwayPctB: .5, // price percentage away midpoint
                 accountVal: 13000,
                 stockVolumeObj: {
                 "hr8": 300000,
@@ -26,16 +29,22 @@
                 "hr14": 1600000,
                 "hr15": 1600000
                 }
-
             }
-            // vars
+        // vars
+        vm.tkUrl = '';
         vm.symbolsJSON = {};
         vm.oAuthJSON = {};
         vm.symbolStr = '';
         vm.symbolsBegCount = 0;
         vm.symbolsCurCount = 0;
         vm.symbolsCurTier = 0;
-        vm.symbolsTiers = [];
+        vm.symbolTiers = [];
+        vm.stocksPassed ={
+                stocksPassA :[],
+                stocksPassB : []
+              }
+        vm.stocksA = [];
+        vm.stocksB = [];
 
         // functions
         vm.startScan = startScan;
@@ -46,6 +55,7 @@
         vm.checkData = checkData;
         vm.createTiers = createTiers;
         vm.formatSymbols = formatSymbols;
+        vm.viewStocks = viewStocks;
         vm.scanStocks = scanFactory.scanStocks;
         vm.removeStock = scanFactory.removeStock;
         vm.removeAllStocks = scanFactory.removeAllStocks;
@@ -93,8 +103,34 @@
             }).done(function(data) {
                 vm.cfg.status = "scanning"; 
                 //run tk data thru tests
-                vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj);
+                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockDiffPctA, vm.cfg.stockAwayPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB);
+                vm.viewStocks();
             });    
+        }
+        function viewStocks(){
+            // empty arrays after going thru all tiers
+            if (vm.symbolsCurTier === 0) {
+
+                // play sound if vwamp stock found
+                // if (vm.stocksCTierfin.length != vm.cfg.soundCount) {
+                //     $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+                //     vm.cfg.soundCount = vm.stocksCTierFin.length;
+                // }
+
+                 
+                vm.stocksA = vm.stocksPassed.stocksPassA;
+                vm.stocksB = vm.stocksPassed.stocksPassB;
+                // vm.stocksC = vm.stocksCTierFin;
+                // vm.stocksCOTier = vm.stocksCTier;
+                $scope.$apply();
+                //empty tiers
+                vm.stocksPassed.stocksPassA = [];
+                vm.stocksPassed.stocksPassB = [];
+                // vm.stocksCTier = [];
+
+            }
+            //  Create loop
+            vm.formatSymbols();
         }
 
         function checkData() {
@@ -112,13 +148,13 @@
                 tierEnd = vm.cfg.symbolsPerTier;
 
             for (var i = 1; i < symbolCount; i++) {
-                vm.symbolsTiers.push([tierStart, tierEnd]);
+                vm.symbolTiers.push([tierStart, tierEnd]);
                 tierStart = tierEnd + 1;
                 tierEnd += vm.cfg.symbolsPerTier;
             }
 
             if (symbolCountR !== 0) {
-                vm.symbolsTiers.push([tierStart, symbolCountR + tierStart - 1]);
+                vm.symbolTiers.push([tierStart, symbolCountR + tierStart - 1]);
             }
             vm.formatSymbols();
         }
@@ -132,7 +168,7 @@
                 // cycle thru symbols in a tier
                 $.each(vm.symbolsJSON, function(k, v) {
 
-                    if (vm.symbolsBegCount >= vm.symbolsTiers[vm.symbolsCurTier][0] && vm.symbolsTiers[vm.symbolsCurTier][0] <= vm.symbolsCurCount && vm.symbolsCurCount <= vm.symbolsTiers[vm.symbolsCurTier][1]) {
+                    if (vm.symbolsBegCount >= vm.symbolTiers[vm.symbolsCurTier][0] && vm.symbolTiers[vm.symbolsCurTier][0] <= vm.symbolsCurCount && vm.symbolsCurCount <= vm.symbolTiers[vm.symbolsCurTier][1]) {
                         vm.symbolStr += k + ',';
                         vm.symbolsCurCount++;
                     }
@@ -140,16 +176,16 @@
                 });
 
                 vm.symbolsCurTier++;
-
-                if (vm.symbolsCurTier >= vm.symbolsTiers.length) {
+               
+                if (vm.symbolsCurTier >= vm.symbolTiers.length) {
                     vm.symbolsCurTier = 0;
                     vm.symbolsCurCount = 0;
                 };
                 vm.symbolStr = vm.symbolStr.slice(0, -1);
-               
-                vm.oAuthJSON.tkRequestData.url = vm.oAuthJSON.tkRequestData.url + vm.symbolStr;
+                window.console.log(vm.symbolsCurTier);
+                vm.tkUrl = vm.oAuthJSON.tkRequestData.url + vm.symbolStr;
                 setTimeout(function() {
-                    vm.getStocks(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
+                    vm.getStocks(vm.tkUrl, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 }, vm.cfg.apiMSecs);
             }
         }

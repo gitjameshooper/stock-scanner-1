@@ -6,13 +6,17 @@
         .factory('testAFactory', testAFactory);
     testAFactory.$inject = ['$log'];
 
-    function testAFactory($log, stock, stockDiffPctA, stockAwayPctA) {
+    function testAFactory($log, stock) {
         return {
             allTests: allTests
         
         };
-        function allTests(){
-
+        function allTests(stock, stockDiffPctA, stockAwayPctA){
+            
+            // check if the stock passes all the A Tests
+            if (lodTest(stock, stockDiffPctA) && hodTest(stock, stockAwayPctA) && vwapTest(stock)) {
+                return true; 
+            }
         }
         // test stock for differce between lod and hod
         function lodTest(stock, stockDiffPctA) {

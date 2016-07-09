@@ -81,3 +81,11 @@
                 return true;
             }
         }
+
+        function evenTest(stock) {
+
+            var stockPriceR = Math.round(stock.last);
+            if (stock.last <= (stockPriceR + .10) && stock.last >= (stockPriceR - .10)) {
+                return true;
+            }
+        }
