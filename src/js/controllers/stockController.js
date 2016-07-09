@@ -18,6 +18,8 @@
                 stockAwayPctA: 2,
                 stockRangePctB: 2, // price percentage range
                 stockAwayPctB: .5, // price percentage away midpoint
+                stockSpreadC: .10,
+                stockFastC: 1.5, // price percentage change 
                 accountVal: 13000,
                 stockVolumeObj: {
                 "hr8": 300000,
@@ -41,10 +43,14 @@
         vm.symbolTiers = [];
         vm.stocksPassed ={
                 stocksPassA :[],
-                stocksPassB : []
+                stocksPassB : [],
+                stocksPassC : [],
+                stocksPassCNow : [],
+                stocksPassCPast : []
               }
         vm.stocksA = [];
         vm.stocksB = [];
+        vm.stocksC = [];
 
         // functions
         vm.startScan = startScan;
@@ -103,7 +109,7 @@
             }).done(function(data) {
                 vm.cfg.status = "scanning"; 
                 //run tk data thru tests
-                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockDiffPctA, vm.cfg.stockAwayPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB);
+                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockDiffPctA, vm.cfg.stockAwayPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB, vm.cfg.stockSpreadC, vm.cfg.stockFastC);
                 vm.viewStocks();
             });    
         }
@@ -117,16 +123,17 @@
                 //     vm.cfg.soundCount = vm.stocksCTierFin.length;
                 // }
 
-                 
+                // pass final arrays to view
                 vm.stocksA = vm.stocksPassed.stocksPassA;
                 vm.stocksB = vm.stocksPassed.stocksPassB;
-                // vm.stocksC = vm.stocksCTierFin;
-                // vm.stocksCOTier = vm.stocksCTier;
+                vm.stocksC = vm.stocksPassed.stocksPassC;
+                vm.stocksPassed.stocksPassCPast = vm.stocksPassed.stocksPassCNow;
                 $scope.$apply();
+
                 //empty tiers
                 vm.stocksPassed.stocksPassA = [];
                 vm.stocksPassed.stocksPassB = [];
-                // vm.stocksCTier = [];
+                vm.stocksPassed.stocksPassCNow = [];
 
             }
             //  Create loop

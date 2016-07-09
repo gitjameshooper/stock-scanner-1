@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testVolFactory', 'testAFactory', 'testBFactory'];
+    scanFactory.$inject = ['$log', 'testVolFactory', 'testAFactory', 'testBFactory', 'testCFactory'];
 
-    function scanFactory($log, testVolFactory, testAFactory, testBFactory) {
+    function scanFactory($log, testVolFactory, testAFactory, testBFactory, testCFactory) {
         return {
             scanStocks: scanStocks,
             formatStock: formatStock,
@@ -14,13 +14,13 @@
             removeAllStocks: removeAllStocks
         };
 
-        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockDiffPctA, stockAwayPctA, stockRangePctB, stockAwayPctB) {
+        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockDiffPctA, stockAwayPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
 
             $.each(quotesData, function(key, stock) {
 
                 // format stock values
                 formatStock(stock, accountVal);
-                
+
                 // run all stocks thru the volume test
                 if (testVolFactory.volTest(stock, stockVolumeObj)) {
 
@@ -34,14 +34,14 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // // check if the stock passes all the C Tests
-                    // if (vm.spreadTestC(stock)) {
-                    //     vm.stocksCTier.push(stock);
+                    if (testCFactory.spreadTest(stock, stockSpreadC)) {
+                        stocksPassed.stocksPassCNow.push(stock);
+                        
+                        if (stocksPassed.stocksPassCPast.length > 1) {
 
-                    //     if (vm.stocksCOTier.length > 1) {
-
-                    //         vm.moveTestC(stock);
-                    //     }
-                    // }
+                            testCFactory.moveTest(stock, stocksPassed, stockFastC);
+                        }
+                    }
                 }
             });
             return stocksPassed;
@@ -60,17 +60,10 @@
         }
 
         function removeStock(stock, stocksArr) {
-
             stocksArr.splice(stocksArr.indexOf(stock), 1);
-
         }
-
         function removeAllStocks(stocksArr) {
-
             stocksArr.length = 0;
-
         }
-
-
     }
 })();
