@@ -11,8 +11,9 @@ module.exports = {
         './src/js/app.js',
         './src/js/services/symbolsService.js',
         './src/js/services/oAuthService.js',
-        './src/js/factories/scanFactory.js'
-        './src/js/factories/animFactory.js',
+        './src/js/factories/scanFactory.js',
+        './src/js/factories/xtraFactory.js',
+        './src/js/tests/testVolFactory.js',
         './src/js/tests/testAFactory.js',
         './src/js/tests/testBFactory.js',
         './src/js/tests/testCFactory.js',

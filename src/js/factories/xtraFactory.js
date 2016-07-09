@@ -13,7 +13,7 @@
         };
 
         function settingsAnim() {
-
+            
             $(".slide-toggle").click(function() {
                 var el = $(this).toggleClass('active').attr('data-toggle');
 

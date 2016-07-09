@@ -13,7 +13,20 @@
                 status: 'ready',
                 run: true,
                 apiMSecs: 900,
-                symbolsPerTier: 350
+                symbolsPerTier: 350,
+                stockDiffPctA: 6,
+                accountVal: 13000,
+                stockVolumeObj: {
+                "hr8": 300000,
+                "hr9": 500000,
+                "hr10": 800000,
+                "hr11": 1000000,
+                "hr12": 1200000,
+                "hr13": 1400000,
+                "hr14": 1600000,
+                "hr15": 1600000
+                }
+
             }
             // vars
         vm.symbolsJSON = {};
@@ -33,8 +46,9 @@
         vm.checkData = checkData;
         vm.createTiers = createTiers;
         vm.formatSymbols = formatSymbols;
-        vm.removeStock = scanFactory.removeStock(stock, stocksArr);
-        vm.removeAllStocks = scanFactory.removeAllStocks(stocksArr);
+        vm.scanStocks = scanFactory.scanStocks;
+        vm.removeStock = scanFactory.removeStock;
+        vm.removeAllStocks = scanFactory.removeAllStocks;
         vm.init = init;
 
         function init(){
@@ -77,14 +91,10 @@
                 $scope.$apply();
                 
             }).done(function(data) {
-                vm.cfg.status = "scanning";
-                // set date var
-                vm.dateHours = new Date().getHours();
+                vm.cfg.status = "scanning"; 
                 //run tk data thru tests
-                vm.quoteScan(data.response.quotes.quote);
-       
-            });
-                
+                vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj);
+            });    
         }
 
         function checkData() {
@@ -106,9 +116,9 @@
                 tierStart = tierEnd + 1;
                 tierEnd += vm.cfg.symbolsPerTier;
             }
+
             if (symbolCountR !== 0) {
                 vm.symbolsTiers.push([tierStart, symbolCountR + tierStart - 1]);
-          
             }
             vm.formatSymbols();
         }
@@ -145,8 +155,6 @@
         }
     
         
-
-
         function startScan() {
             vm.cfg.run = true;
             vm.cfg.status = "scanning";

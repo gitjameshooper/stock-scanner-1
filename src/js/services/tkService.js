@@ -22,7 +22,7 @@
         }
 
         function getStockFail(error) {
-            $log.error('Failed to get Symbols - ' + error.statusText);
+            $log.error('Failed to get Stock - ' + error.statusText);
             return false;
         }
     }
