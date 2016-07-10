@@ -15,7 +15,7 @@
                 apiMSecs: 1100,
                 symbolsPerTier: 300,
                 stockDiffPctA: 6,
-                stockAwayPctA: 2,
+                stockVwapBoxPctA: 2,
                 stockRangePctB: 2, // price percentage range
                 stockAwayPctB: .5, // price percentage away midpoint
                 stockSpreadC: .10,
@@ -109,7 +109,7 @@
             }).done(function(data) {
                 vm.cfg.status = "scanning"; 
                 //run tk data thru tests
-                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockDiffPctA, vm.cfg.stockAwayPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB, vm.cfg.stockSpreadC, vm.cfg.stockFastC);
+                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockDiffPctA, vm.cfg.stockVwapBoxPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB, vm.cfg.stockSpreadC, vm.cfg.stockFastC);
                 vm.viewStocks();
             });    
         }
@@ -126,14 +126,14 @@
                 // pass final arrays to view
                 vm.stocksA = vm.stocksPassed.stocksPassA;
                 vm.stocksB = vm.stocksPassed.stocksPassB;
-                vm.stocksC = vm.stocksPassed.stocksPassC;
-                vm.stocksPassed.stocksPassCPast = vm.stocksPassed.stocksPassCNow;
+                // vm.stocksC = vm.stocksPassed.stocksPassC;
+                // vm.stocksPassed.stocksPassCPast = vm.stocksPassed.stocksPassCNow;
                 $scope.$apply();
 
                 //empty tiers
                 vm.stocksPassed.stocksPassA = [];
                 vm.stocksPassed.stocksPassB = [];
-                vm.stocksPassed.stocksPassCNow = [];
+                // vm.stocksPassed.stocksPassCNow = [];
 
             }
             //  Create loop

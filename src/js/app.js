@@ -6,14 +6,10 @@
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
             .when('/', {
-                templateUrl: "/views/home.html",
-                controller: 'stockController',
-                controllerAs: 'stockApp'
+                templateUrl: "/views/home.html"
             })
             .when('/how-it-works', {
-                templateUrl: "/views/how-it-works.html",
-                controller: 'stockController',
-                controllerAs: 'stockApp'
+                templateUrl: "/views/how-it-works.html"
             })
             .when('/scanner', {
                 templateUrl: "/views/scanner.html",

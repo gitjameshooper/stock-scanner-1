@@ -103,6 +103,9 @@ html {
     .margin-20 {
       margin: 20px;
     }
+    .margin-50-tb {
+      margin: 50px 0;
+    }
     .padding-15-tb {
       padding: 15px 0;
     }
@@ -120,6 +123,9 @@ html {
     .text-white {
       color: @white;
     }
+    .text-white-hover:hover {
+      color: @white;
+    }
     .text-black {
       color: @black;
     }
@@ -135,6 +141,9 @@ html {
     .text-light {
       font-weight: 300;
     }
+    .text-spacing-1{
+      letter-spacing: 1px;
+    }
     .black {
       background: @black;
     }
@@ -149,6 +158,41 @@ html {
     }
     .clearboth {
       clear: both;
+    }
+    /* Pop */
+    @-webkit-keyframes hvr-pop {
+      50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+      }
+    }
+    @keyframes hvr-pop {
+      50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+      }
+    }
+    .hvr-pop i{
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .hvr-pop:hover i,
+    .hvr-pop:focus i,
+    .hvr-pop:active i{
+      -webkit-animation-name: hvr-pop;
+      animation-name: hvr-pop;
+      -webkit-animation-duration: 0.3s;
+      animation-duration: 0.3s;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+      -webkit-animation-iteration-count: 1;
+      animation-iteration-count: 1;
     }
   }
 }

@@ -14,7 +14,7 @@
             removeAllStocks: removeAllStocks
         };
 
-        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockDiffPctA, stockAwayPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
+        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockDiffPctA, stockVwapBoxPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
 
             $.each(quotesData, function(key, stock) {
 
@@ -25,7 +25,7 @@
                 if (testVolFactory.volTest(stock, stockVolumeObj)) {
 
                     // check if the stock passes all the A Tests
-                    if (testAFactory.allTests(stock, stockDiffPctA, stockAwayPctA)) {
+                    if (testAFactory.allTests(stock, stockDiffPctA, stockVwapBoxPctA)) {
                         stocksPassed.stocksPassA.push(stock);
                     }
 
@@ -34,14 +34,14 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // // check if the stock passes all the C Tests
-                    if (testCFactory.spreadTest(stock, stockSpreadC)) {
-                        stocksPassed.stocksPassCNow.push(stock);
+                    // if (testCFactory.spreadTest(stock, stockSpreadC)) {
+                    //     stocksPassed.stocksPassCNow.push(stock);
                         
-                        if (stocksPassed.stocksPassCPast.length > 1) {
+                    //     if (stocksPassed.stocksPassCPast.length > 1) {
 
-                            testCFactory.moveTest(stock, stocksPassed, stockFastC);
-                        }
-                    }
+                    //         testCFactory.moveTest(stock, stocksPassed, stockFastC);
+                    //     }
+                    // }
                 }
             });
             return stocksPassed;
