@@ -22,7 +22,7 @@
         function lodHodTest(stock, stockDiffPctA) {
             var stockDiff = Number((stock.hi - stock.lo).toFixed(2)),
                 stockDiffPct = Number((stockDiff / stock.lo).toFixed(3) * 100);
-                stock.stockDiffPctLH = stockDiffPct;
+                stock.stockDiffPctLH = Number((stockDiffPct).toFixed(2));
             if (stockDiffPct >= stockDiffPctA) {
                 return true;
             }

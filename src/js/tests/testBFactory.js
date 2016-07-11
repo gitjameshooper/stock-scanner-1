@@ -13,7 +13,7 @@
         };
         // check if the stock passes all the A Tests
         function allTests(stock, stockRangePctB, stockAwayPctB) {
-            if (rangeTestB(stock, stockRangePctB) && betweenTestB(stock, stockAwayPctB) && vwapTest(stock)) {
+            if (rangeTestB(stock, stockRangePctB) && betweenTestB(stock, stockAwayPctB)) {
                 return true;
             }
         }
@@ -32,13 +32,6 @@
                 stockAwayMidB = Math.abs((midPoint / stock.last) - 1) * 100;
                 stock.midAwayB = Math.round(stockAwayMidB * 100) / 100;
             if (stockAwayMidB < stockAwayPctB) {
-                return true;
-            }
-        }
-
-        //  test stock if it is above vwap
-        function vwapTest(stock) {
-            if (stock.last >= stock.vwap) {
                 return true;
             }
         }

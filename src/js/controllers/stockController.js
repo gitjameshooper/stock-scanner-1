@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .controller('stockController', stockController);
-    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory','scanFactory'];
+    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory','scanFactory', 'tierFactory'];
 
-    function stockController($scope, $log, symbolsService, oAuthService, xtraFactory, scanFactory) {
+    function stockController($scope, $log, symbolsService, oAuthService, xtraFactory, scanFactory, tierFactory) {
         var vm = this;
         // config
         vm.cfg = {
@@ -36,11 +36,8 @@
         vm.tkUrl = '';
         vm.symbolsJSON = {};
         vm.oAuthJSON = {};
-        vm.symbolStr = '';
-        vm.symbolsBegCount = 0;
-        vm.symbolsCurCount = 0;
-        vm.symbolsCurTier = 0;
         vm.symbolTiers = [];
+        vm.symbolStr = '';
         vm.stocksPassed ={
                 stocksPassA :[],
                 stocksPassB : [],
@@ -59,8 +56,10 @@
         vm.getStocks = getStocks;
         vm.getOAuth = getOAuth;
         vm.checkData = checkData;
-        vm.createTiers = createTiers;
-        vm.formatSymbols = formatSymbols;
+        vm.createTiers = tierFactory.createTiers;
+        vm.formatTierSymbols = tierFactory.formatTierSymbols;
+        vm.allTiersComplete = tierFactory.allTiersComplete;
+        vm.loopTiers = loopTiers;
         vm.viewStocks = viewStocks;
         vm.scanStocks = scanFactory.scanStocks;
         vm.removeStock = scanFactory.removeStock;
@@ -115,13 +114,7 @@
         }
         function viewStocks(){
             // empty arrays after going thru all tiers
-            if (vm.symbolsCurTier === 0) {
-
-                // play sound if vwamp stock found
-                // if (vm.stocksCTierfin.length != vm.cfg.soundCount) {
-                //     $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
-                //     vm.cfg.soundCount = vm.stocksCTierFin.length;
-                // }
+            if (vm.allTiersComplete()) {
 
                 // pass final arrays to view
                 vm.stocksA = vm.stocksPassed.stocksPassA;
@@ -130,74 +123,35 @@
                 // vm.stocksPassed.stocksPassCPast = vm.stocksPassed.stocksPassCNow;
                 $scope.$apply();
 
-                //empty tiers
+                //empty symbols from arrays
                 vm.stocksPassed.stocksPassA = [];
                 vm.stocksPassed.stocksPassB = [];
                 // vm.stocksPassed.stocksPassCNow = [];
 
             }
             //  Create loop
-            vm.formatSymbols();
+            vm.loopTiers();
         }
 
         function checkData() {
             if (vm.symbolsJSON && vm.oAuthJSON) {
-                vm.createTiers();
+
+                vm.symbolTiers = vm.createTiers(vm.symbolsJSON, vm.cfg.symbolsPerTier);
+                vm.loopTiers();
             } else {
                 vm.cfg.status = "error";
             }
         }
 
-        function createTiers() {
-            var symbolCount = Object.keys(vm.symbolsJSON).length / vm.cfg.symbolsPerTier,
-                symbolCountR = Object.keys(vm.symbolsJSON).length % vm.cfg.symbolsPerTier,
-                tierStart = 0,
-                tierEnd = vm.cfg.symbolsPerTier;
-
-            for (var i = 1; i < symbolCount; i++) {
-                vm.symbolTiers.push([tierStart, tierEnd]);
-                tierStart = tierEnd + 1;
-                tierEnd += vm.cfg.symbolsPerTier;
-            }
-
-            if (symbolCountR !== 0) {
-                vm.symbolTiers.push([tierStart, symbolCountR + tierStart - 1]);
-            }
-            vm.formatSymbols();
-        }
-
-        function formatSymbols() {
+        function loopTiers() {
             if (vm.cfg.run) {
-
-                vm.symbolStr = '';
-                vm.symbolsBegCount = 0;
-
-                // cycle thru symbols in a tier
-                $.each(vm.symbolsJSON, function(k, v) {
-
-                    if (vm.symbolsBegCount >= vm.symbolTiers[vm.symbolsCurTier][0] && vm.symbolTiers[vm.symbolsCurTier][0] <= vm.symbolsCurCount && vm.symbolsCurCount <= vm.symbolTiers[vm.symbolsCurTier][1]) {
-                        vm.symbolStr += k + ',';
-                        vm.symbolsCurCount++;
-                    }
-                    vm.symbolsBegCount++;
-                });
-
-                vm.symbolsCurTier++;
-               
-                if (vm.symbolsCurTier >= vm.symbolTiers.length) {
-                    vm.symbolsCurTier = 0;
-                    vm.symbolsCurCount = 0;
-                };
-                vm.symbolStr = vm.symbolStr.slice(0, -1);
-                window.console.log(vm.symbolsCurTier);
-                vm.tkUrl = vm.oAuthJSON.tkRequestData.url + vm.symbolStr;
+                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON,vm.symbolTiers, vm.oAuthJSON);
                 setTimeout(function() {
                     vm.getStocks(vm.tkUrl, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 }, vm.cfg.apiMSecs);
             }
         }
     
-        
         function startScan() {
             vm.cfg.run = true;
             vm.cfg.status = "scanning";

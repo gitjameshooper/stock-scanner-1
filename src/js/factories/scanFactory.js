@@ -56,7 +56,7 @@
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
-            stock.last = Number(parseFloat(Math.round(stock.last * 100) / 100).toFixed(2));
+            stock.last = Math.round(stock.last * 100) / 100;
         }
 
         function removeStock(stock, stocksArr) {
