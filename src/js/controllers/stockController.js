@@ -12,7 +12,7 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 400,
+                apiMSecs: 600,
                 symbolsPerTier: 340,
                 stockDiffPctA: 6,
                 stockVwapBoxPctA: 2,

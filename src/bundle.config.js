@@ -14,7 +14,7 @@ module.exports = {
         './src/js/factories/scanFactory.js',
         './src/js/factories/xtraFactory.js',
         './src/js/factories/tierFactory.js',
-        './src/js/tests/testVolFactory.js',
+        './src/js/tests/testOFactory.js',
         './src/js/tests/testAFactory.js',
         './src/js/tests/testBFactory.js',
         './src/js/tests/testCFactory.js',

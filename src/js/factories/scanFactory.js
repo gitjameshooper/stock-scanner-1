@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testVolFactory', 'testAFactory', 'testBFactory', 'testCFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory'];
 
-    function scanFactory($log, testVolFactory, testAFactory, testBFactory, testCFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory) {
         return {
             scanStocks: scanStocks,
             formatStock: formatStock,
@@ -22,7 +22,7 @@
                 formatStock(stock, accountVal);
 
                 // run all stocks thru the volume test
-                if (testVolFactory.volTest(stock, stockVolumeObj)) {
+                if (testOFactory.volTest(stock, stockVolumeObj) && testOFactory.priceTest(stock)) {
 
                     // check if the stock passes all the A Tests
                     if (testAFactory.allTests(stock, stockDiffPctA, stockVwapBoxPctA)) {
