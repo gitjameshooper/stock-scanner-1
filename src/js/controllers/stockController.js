@@ -12,8 +12,8 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 1100,
-                symbolsPerTier: 300,
+                apiMSecs: 800,
+                symbolsPerTier: 320,
                 stockDiffPctA: 6,
                 stockVwapBoxPctA: 2,
                 stockRangePctB: 2, // price percentage range
@@ -115,7 +115,7 @@
         function viewStocks(){
             // empty arrays after going thru all tiers
             if (vm.allTiersComplete()) {
-
+                window.alert('Complete');
                 // pass final arrays to view
                 vm.stocksA = vm.stocksPassed.stocksPassA;
                 vm.stocksB = vm.stocksPassed.stocksPassB;
