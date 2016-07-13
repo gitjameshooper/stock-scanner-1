@@ -15,7 +15,7 @@
             removeAllStocks: removeAllStocks
         };
 
-        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockMinPrice, stockDiffPctA, stockVwapBoxPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
+        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockMinPrice, stockMaxPrice, stockDiffPctA, stockVwapBoxPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
 
             $.each(quotesData, function(key, stock) {
 
@@ -23,7 +23,7 @@
                 formatStock(stock, accountVal);
 
                 // run all stocks thru the volume test
-                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, stockVolumeObj) && testOFactory.priceTest(stock, stockMinPrice)) {
+                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, stockVolumeObj) && testOFactory.priceTest(stock, stockMinPrice, stockMaxPrice)) {
 
                     // check if the stock passes all the A Tests
                     if (testAFactory.allTests(stock, stockDiffPctA, stockVwapBoxPctA)) {
@@ -56,6 +56,7 @@
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
+            stock.plo = Math.round(stock.plo * 100) / 100;
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
         }

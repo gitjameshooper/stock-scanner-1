@@ -23,9 +23,9 @@
             }
         }
         // filter out stock by minimum price
-        function priceTest(stock, stockMinPrice) {
+        function priceTest(stock, stockMinPrice, stockMaxPrice) {
             
-            if (stock.last >= stockMinPrice) {
+            if ((stock.last > stockMinPrice) && (stock.last < stockMaxPrice)) {
                 return true;
             }
         }

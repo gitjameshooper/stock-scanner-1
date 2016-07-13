@@ -14,7 +14,7 @@
         function allTests(stock, stockDiffPctA, stockVwapBoxPctA){
             
             // check if the stock passes all the A Tests
-            if (lodHodTest(stock, stockDiffPctA) && vwapTest(stock, stockVwapBoxPctA)) {
+            if (priorDayTest(stock) && lodHodTest(stock, stockDiffPctA) && vwapTest(stock, stockVwapBoxPctA)) {
                 return true; 
             }
         }
@@ -33,6 +33,12 @@
                 vwapPriceHi = stock.vwap + vwapPriceDiff,
                 vwapPriceLo = stock.vwap - vwapPriceDiff;
             if ((stock.last <= vwapPriceHi) && (stock.last >= vwapPriceLo)) {
+                return true;
+            }
+        }
+        // test stock if higher than prior day lo
+        function priorDayTest(stock) {
+            if (stock.plo < stock.lo) {
                 return true;
             }
         }
