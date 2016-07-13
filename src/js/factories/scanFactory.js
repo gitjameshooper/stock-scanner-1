@@ -7,6 +7,7 @@
     scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory'];
 
     function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory) {
+        var delistArr = [];
         return {
             scanStocks: scanStocks,
             formatStock: formatStock,
@@ -14,7 +15,7 @@
             removeAllStocks: removeAllStocks
         };
 
-        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockDiffPctA, stockVwapBoxPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
+        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockMinPrice, stockDiffPctA, stockVwapBoxPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
 
             $.each(quotesData, function(key, stock) {
 
@@ -22,7 +23,7 @@
                 formatStock(stock, accountVal);
 
                 // run all stocks thru the volume test
-                if (testOFactory.volTest(stock, stockVolumeObj) && testOFactory.priceTest(stock)) {
+                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, stockVolumeObj) && testOFactory.priceTest(stock, stockMinPrice)) {
 
                     // check if the stock passes all the A Tests
                     if (testAFactory.allTests(stock, stockDiffPctA, stockVwapBoxPctA)) {
@@ -58,9 +59,10 @@
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
         }
-
+        // remove stock from view - add to the delist array
         function removeStock(stock, stocksArr) {
             stocksArr.splice(stocksArr.indexOf(stock), 1);
+            delistArr.push(stock.symbol);
         }
         function removeAllStocks(stocksArr) {
             stocksArr.length = 0;

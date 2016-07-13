@@ -12,7 +12,7 @@
         };
 
         function getSymbols() {
-            return $http.get('/json/symbols.json')
+            return $http.get('/json/sample-symbols.json')
                 .then(getSymbolsDone)
                 .catch(getSymbolsFail);
         }

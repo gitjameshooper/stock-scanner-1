@@ -12,8 +12,9 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 600,
+                apiMSecs: 400,
                 symbolsPerTier: 340,
+                stockMinPrice: 2,
                 stockDiffPctA: 6,
                 stockVwapBoxPctA: 2,
                 stockRangePctB: 2, // price percentage range
@@ -108,7 +109,7 @@
             }).done(function(data) {
                 vm.cfg.status = "scanning"; 
                 //run tk data thru tests
-                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockDiffPctA, vm.cfg.stockVwapBoxPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB, vm.cfg.stockSpreadC, vm.cfg.stockFastC);
+                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.cfg.accountVal, vm.cfg.stockVolumeObj, vm.stocksPassed, vm.cfg.stockMinPrice, vm.cfg.stockDiffPctA, vm.cfg.stockVwapBoxPctA, vm.cfg.stockRangePctB, vm.cfg.stockAwayPctB, vm.cfg.stockSpreadC, vm.cfg.stockFastC);
                 vm.viewStocks();
             });    
         }

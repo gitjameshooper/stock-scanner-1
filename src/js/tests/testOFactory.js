@@ -10,9 +10,10 @@
         return {
             volTest: volTest,
             priceTest: priceTest,
+            delistTest: delistTest
 
         };
-
+        // check liquidity of stock throughout the day
         function volTest(stock, stockVolumeObj) {
             var dateHours = new Date().getHours();
             // if outside trading time use after 3pm/EOD volume
@@ -21,12 +22,20 @@
                 return true;
             }
         }
-
-        function priceTest(stock) {
+        // filter out stock by minimum price
+        function priceTest(stock, stockMinPrice) {
             
-            if (stock.last >= 2) {
+            if (stock.last >= stockMinPrice) {
                 return true;
             }
+        }
+        // check if stock has been added to delist
+        function delistTest(stock, delistArr){
+
+           if(_.indexOf(delistArr, stock.symbol) < 0){
+            
+              return true;
+           }
         }
     }
 })();
