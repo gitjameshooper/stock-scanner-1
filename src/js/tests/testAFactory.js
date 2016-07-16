@@ -38,7 +38,8 @@
         }
         // test stock if higher than prior day lo
         function priorDayTest(stock) {
-            if (stock.plo < stock.lo) {
+            var stockMidPrior = (stock.plo + stock.phi) / 2;
+            if (stockMidPrior < stock.lo) {
                 return true;
             }
         }

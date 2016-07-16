@@ -11,27 +11,27 @@
             allTests: allTests
 
         };
-        // check if the stock passes all the A Tests
-        function allTests(stock, stockRangePctB, stockAwayPctB) {
-            if (rangeTestB(stock, stockRangePctB) && betweenTestB(stock, stockAwayPctB)) {
+        // check if the stock passes all the B Tests
+        function allTests(stock, stockVwapPctB, stockVwapHighPctB) {
+            if (vwapTestB(stock, stockVwapPctB, stockVwapHighPctB)) {
                 return true;
             }
         }
-        // stock has good range
-        function rangeTestB(stock, stockRangePctB) {
-            var stockDiffB = stock.vwap - stock.lo,
-                stockDiffPctB = Number((stockDiffB / stock.last).toFixed(3) * 100);
-                stock.stockDiffPctB = Number(stockDiffPctB.toFixed(2));
-            if (stockDiffPctB >= stockRangePctB) {
-                return true;
-            }
-        }
-        // stock near midpoint(between lod and vwap)
-        function betweenTestB(stock, stockAwayPctB) {
-            var midPoint = (stock.vwap + stock.lo) / 2,
-                stockAwayMidB = Math.abs((midPoint / stock.last) - 1) * 100;
-                stock.midAwayB = Math.round(stockAwayMidB * 100) / 100;
-            if (stockAwayMidB < stockAwayPctB) {
+        // stock is away from vwap
+        function vwapTestB(stock, stockVwapPctB, stockVwapHighPctB) {
+           
+             var stockDiffVwap = Number((stock.last - stock.vwap).toFixed(2)),
+                stockDiffPctVwapD = (stockDiffVwap / stock.last).toFixed(3) * 100,
+                stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
+                stock.vwapDiff = Number(stockDiffPctVwapD.toFixed(2));
+                stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
+
+            if (stockDiffVwapDPos >= stockVwapPctB) {
+                // alert if high interest
+                if(stockDiffVwapDPos > stockVwapHighPctB){
+                    stock.class = 'green';
+                    $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+                }
                 return true;
             }
         }

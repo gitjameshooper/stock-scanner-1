@@ -15,32 +15,32 @@
             removeAllStocks: removeAllStocks
         };
 
-        function scanStocks(quotesData, accountVal, stockVolumeObj, stocksPassed, stockMinPrice, stockMaxPrice, stockDiffPctA, stockVwapBoxPctA, stockRangePctB, stockAwayPctB, stockSpreadC, stockFastC) {
+        function scanStocks(quotesData, stocksPassed, cfg) {
 
             $.each(quotesData, function(key, stock) {
 
                 // format stock values
-                formatStock(stock, accountVal);
+                formatStock(stock, cfg.accountVal);
 
                 // run all stocks thru the volume test
-                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, stockVolumeObj) && testOFactory.priceTest(stock, stockMinPrice, stockMaxPrice)) {
+                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
 
                     // check if the stock passes all the A Tests
-                    if (testAFactory.allTests(stock, stockDiffPctA, stockVwapBoxPctA)) {
+                    if (testAFactory.allTests(stock, cfg.stockDiffPctA, cfg.stockVwapBoxPctA)) {
                         stocksPassed.stocksPassA.push(stock);
                     }
 
                     // check if the stock passes all the B Tests
-                     if (testBFactory.allTests(stock, stockRangePctB, stockAwayPctB)) {
+                     if (testBFactory.allTests(stock, cfg.stockRangePctB, cfg.stockVwapHighPctB)) {
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // // check if the stock passes all the C Tests
-                    // if (testCFactory.spreadTest(stock, stockSpreadC)) {
+                    // if (testCFactory.spreadTest(stock, cfg.stockSpreadC)) {
                     //     stocksPassed.stocksPassCNow.push(stock);
                         
                     //     if (stocksPassed.stocksPassCPast.length > 1) {
 
-                    //         testCFactory.moveTest(stock, stocksPassed, stockFastC);
+                    //         testCFactory.moveTest(stock, stocksPassed, cfg.stockFastC);
                     //     }
                     // }
                 }
@@ -57,6 +57,7 @@
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
             stock.plo = Math.round(stock.plo * 100) / 100;
+            stock.phi = Math.round(stock.phi * 100) / 100;
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
         }
