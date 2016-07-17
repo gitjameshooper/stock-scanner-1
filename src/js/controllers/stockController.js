@@ -43,9 +43,7 @@
         vm.stocksPassed ={
                 stocksPassA :[],
                 stocksPassB : [],
-                stocksPassC : [],
-                stocksPassCNow : [],
-                stocksPassCPast : []
+                stocksPassC : []
               }
         vm.stocksA = [];
         vm.stocksB = [];
@@ -120,15 +118,15 @@
                 // pass final arrays to view
                 vm.stocksA = vm.stocksPassed.stocksPassA;
                 vm.stocksB = vm.stocksPassed.stocksPassB;
-                // vm.stocksC = vm.stocksPassed.stocksPassC;
-                // vm.stocksPassed.stocksPassCPast = vm.stocksPassed.stocksPassCNow;
+                vm.stocksC = vm.stocksPassed.stocksPassC;
+              
                 $scope.$apply();
 
                 //empty symbols from arrays
                 vm.stocksPassed.stocksPassA = [];
                 vm.stocksPassed.stocksPassB = [];
-                // vm.stocksPassed.stocksPassCNow = [];
-
+                vm.stocksPassed.stocksPassC = [];
+               
             }
             //  Create loop
             vm.loopTiers();

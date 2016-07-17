@@ -35,14 +35,9 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // // check if the stock passes all the C Tests
-                    // if (testCFactory.spreadTest(stock, cfg.stockSpreadC)) {
-                    //     stocksPassed.stocksPassCNow.push(stock);
-                        
-                    //     if (stocksPassed.stocksPassCPast.length > 1) {
-
-                    //         testCFactory.moveTest(stock, stocksPassed, cfg.stockFastC);
-                    //     }
-                    // }
+                    if (testCFactory.allTests(stock)) {
+                        stocksPassed.stocksPassC.push(stock);
+                    }
                 }
             });
             return stocksPassed;
