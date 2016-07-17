@@ -11,16 +11,40 @@
             allTests: allTests
 
         };
-        // check if the stock passes all the B Tests
-        function allTests(stock) {
-            if (priorDayTestC(stock)) {
+        // check if the stock passes all the C Tests
+        function allTests(stock, stockDiffPctC) {
+            if (priorDayGreenTestC(stock) && priorDayRangeTest(stock, stockDiffPctC) && midPointTest(stock) && belowPriorDayTest(stock)) {
                 return true;
             }
         }
-        // stock prior day move
-        function priorDayTestC(stock) {
-           
-            
+        // stock prior day green
+        function priorDayGreenTestC(stock) {
+            if (stock.prchg > 0) {
+
+                return true;
+            }
+        }
+
+        function priorDayRangeTest(stock, stockDiffPctC) {
+            var stockDiff = Number((stock.phi - stock.plo).toFixed(2)),
+                stockDiffPct = Number((stockDiff / stock.plo).toFixed(3) * 100);
+            stock.stockPRDiffPctLH = Number((stockDiffPct).toFixed(2));
+            if (stockDiffPct >= stockDiffPctC) {
+                return true;
+            }
+        }
+
+        function midPointTest(stock) {
+            var stockMidPoint = Number((stock.phi + stock.plo).toFixed(2) / 2);
+            if ((stock.last >= stockMidPoint) && (stock.last < stock.vwap)) {
+                return true;
+            }
+        }
+
+        function belowPriorDayTest(stock) {
+            if (stock.last < stock.pcls) {
+                return true;
+            }
         }
     }
 })();

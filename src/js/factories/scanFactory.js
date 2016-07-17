@@ -35,7 +35,7 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // // check if the stock passes all the C Tests
-                    if (testCFactory.allTests(stock)) {
+                    if (testCFactory.allTests(stock, cfg.stockDiffPctC)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                 }
@@ -53,6 +53,8 @@
             stock.vl = Number(stock.vl);
             stock.plo = Math.round(stock.plo * 100) / 100;
             stock.phi = Math.round(stock.phi * 100) / 100;
+            stock.pcls = Math.round(stock.pcls * 100) / 100;
+            stock.prchg = Number(stock.prchg);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
         }

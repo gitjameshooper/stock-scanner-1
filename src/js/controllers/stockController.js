@@ -20,8 +20,7 @@
                 stockVwapBoxPctA: 2,
                 stockVwapPctB: 4, // price percentage away from vwap
                 stockVwapHighPctB: 15, // high percentage away from vwap
-                stockSpreadC: .10,
-                stockFastC: 1.5, // price percentage change 
+                stockDiffPctC: 5,
                 accountVal: 13000,
                 stockVolumeObj: {
                 "hr8": 300000,
