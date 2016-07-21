@@ -12,7 +12,7 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 500,
+                apiMSecs: 600,
                 symbolsPerTier: 340,
                 stockMinPrice: 2,
                 stockMaxPrice: 200,
@@ -61,8 +61,7 @@
         vm.loopTiers = loopTiers;
         vm.viewStocks = viewStocks;
         vm.scanStocks = scanFactory.scanStocks;
-        vm.removeStock = scanFactory.removeStock;
-        vm.removeAllStocks = scanFactory.removeAllStocks;
+        vm.delistStock = scanFactory.delistStock;
         vm.init = init;
 
         function init(){
@@ -103,30 +102,26 @@
                 vm.cfg.status = "error";
                 $log.error('Bad TK Request - ' + err.statusText);
                 $scope.$apply();
+                // start scan if error
+                setTimeout(function(){
+                    vm.startScan();
+                }, 10000);
                 
             }).done(function(data) {
-                vm.cfg.status = "scanning"; 
                 //run tk data thru tests
                 vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.cfg);
                 vm.viewStocks();
             });    
         }
         function viewStocks(){
-            // empty arrays after going thru all tiers
-            if (vm.allTiersComplete()) {
-                // pass final arrays to view
-                vm.stocksA = vm.stocksPassed.stocksPassA;
-                vm.stocksB = vm.stocksPassed.stocksPassB;
-                vm.stocksC = vm.stocksPassed.stocksPassC;
+            
+            // pass final arrays to view
+            vm.stocksA = vm.stocksPassed.stocksPassA;
+            vm.stocksB = vm.stocksPassed.stocksPassB;
+            vm.stocksC = vm.stocksPassed.stocksPassC;
               
-                $scope.$apply();
+            $scope.$apply();
 
-                //empty symbols from arrays
-                vm.stocksPassed.stocksPassA = [];
-                vm.stocksPassed.stocksPassB = [];
-                vm.stocksPassed.stocksPassC = [];
-               
-            }
             //  Create loop
             vm.loopTiers();
         }
@@ -143,7 +138,7 @@
 
         function loopTiers() {
             if (vm.cfg.run) {
-                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON,vm.symbolTiers, vm.oAuthJSON);
+                    vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON,vm.symbolTiers, vm.oAuthJSON);
                 setTimeout(function() {
                     vm.getStocks(vm.tkUrl, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 }, vm.cfg.apiMSecs);

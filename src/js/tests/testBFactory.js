@@ -27,6 +27,7 @@
                 stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
 
             if (stockDiffVwapDPos >= stockVwapPctB) {
+               
                 // alert if high interest
                 if(stockDiffVwapDPos > stockVwapHighPctB){
                     stock.class = 'green';

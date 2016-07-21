@@ -71,7 +71,7 @@
                             <td>{{ stockA.last }}</td>
                             <td>{{ stockA.stockDiffPctLH }}</td>
                             <td>{{ stockA.shares }}</td>
-                            <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockA, stockApp.stocksA)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                            <td><a class="btn red margin-0" ng-click="stockApp.delistStock(stockA, stockApp.stocksA)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,7 +94,7 @@
                             <td>{{ stockB.last }}</td>
                             <td>{{ stockB.vwapDiff }}</td>
                             <td>{{ stockB.shares }}</td>
-                             <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockB, stockApp.stocksB)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                             <td><a class="btn red margin-0" ng-click="stockApp.delistStock(stockB, stockApp.stocksB)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -106,7 +106,6 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Change</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
@@ -114,8 +113,7 @@
                         <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-last'">
                             <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                             <td>{{ stockC.last }}</td>
-                            <td>{{ stockC.fast }}</td>
-                            <td><a class="btn red margin-0" ng-click="stockApp.removeStock(stockC, stockApp.stocksC)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                            <td><a class="btn red margin-0" ng-click="stockApp.delistStock(stockC, stockApp.stocksC)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

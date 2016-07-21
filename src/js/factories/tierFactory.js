@@ -13,8 +13,7 @@
         }
         return {
             createTiers: createTiers,
-            formatTierSymbols: formatTierSymbols,
-            allTiersComplete: allTiersComplete
+            formatTierSymbols: formatTierSymbols
         };
 
         function createTiers(symbolsJSON, symbolsPerTier) {
@@ -40,6 +39,7 @@
             
                 var symbolStr = '',
                     symbolsBegCount = 0;
+
                 // cycle thru symbols in a tier
                 $.each(symbolsJSON, function(k, v) {
 
@@ -61,11 +61,6 @@
                 // return url with symbols
                 return oAuthJSON.tkRequestData.url + symbolStr;
               
-        }
-        function allTiersComplete(){
-            if (cfg.symbolsCurTier === 0) {
-                return true;
-            }  
         }
     }
 })();

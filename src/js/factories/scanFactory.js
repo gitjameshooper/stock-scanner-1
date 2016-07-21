@@ -8,11 +8,11 @@
 
     function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory) {
         var delistArr = [];
+
         return {
             scanStocks: scanStocks,
             formatStock: formatStock,
-            removeStock: removeStock,
-            removeAllStocks: removeAllStocks
+            delistStock: delistStock
         };
 
         function scanStocks(quotesData, stocksPassed, cfg) {
@@ -22,20 +22,20 @@
                 // format stock values
                 formatStock(stock, cfg.accountVal);
 
-                // run all stocks thru the volume test
+                // run all stocks thru the delist, volume, price test
                 if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
 
                     // check if the stock passes all the A Tests
-                    if (testAFactory.allTests(stock, cfg.stockDiffPctA, cfg.stockVwapBoxPctA)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, cfg.stockDiffPctA, cfg.stockVwapBoxPctA)) {
                         stocksPassed.stocksPassA.push(stock);
                     }
 
                     // check if the stock passes all the B Tests
-                     if (testBFactory.allTests(stock, cfg.stockRangePctB, cfg.stockVwapHighPctB)) {
+                     if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
                         stocksPassed.stocksPassB.push(stock);
                     }
-                    // // check if the stock passes all the C Tests
-                    if (testCFactory.allTests(stock, cfg.stockDiffPctC)) {
+                    // check if the stock passes all the C Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, cfg.stockDiffPctC)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                 }
@@ -58,13 +58,17 @@
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
         }
+        function duplicateStock(stock, stocksArr){
+             var stockIndex = _.findIndex(stocksArr, {symbol : stock.symbol});
+             if(stockIndex !== -1){ 
+                stocksArr.splice(stockIndex,1);  
+            }
+            return true;     
+        }
         // remove stock from view - add to the delist array
-        function removeStock(stock, stocksArr) {
+        function delistStock(stock, stocksArr) {
             stocksArr.splice(stocksArr.indexOf(stock), 1);
             delistArr.push(stock.symbol);
-        }
-        function removeAllStocks(stocksArr) {
-            stocksArr.length = 0;
         }
     }
 })();

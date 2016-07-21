@@ -14,7 +14,7 @@
         function getStockData(url, method, oAuthData) {
             
             
-            return 'hey';
+             
         }
 
         function getStockDone(response) {

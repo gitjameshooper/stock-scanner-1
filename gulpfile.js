@@ -9,7 +9,29 @@ var gulp = require('gulp'),
     del = require('del'),
     less = require('gulp-less'),
     path = require('path'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    MongoClient = require('mongodb').MongoClient,
+    assert = require('assert'),
+    exec = require('child_process').exec;
+
+// Mongo Start Server
+// gulp.task('mongo-serve', function (cb) {
+//   exec('mongod --dbpath //Users/jim_hooper/Documents/github/stock-scanner/data', function (err, stdout, stderr) {
+//     console.log(stdout);
+//     console.log(stderr);
+//     cb(err);
+//   });
+// })
+// // Connection URL 
+// gulp.task('mongo-db', function() {
+//     var url = 'mongodb://localhost:27017/stock-scanner';
+//     // Use connect method to connect to the Server 
+//     MongoClient.connect(url, function(err, db) {
+//         assert.equal(null, err);
+//         console.log("Connected correctly to server");
+//     });
+// });
+
 
 // Delete Build folder
 gulp.task('clean', function() {
@@ -78,6 +100,11 @@ gulp.task('watch', function() {
 
 gulp.task('serve', function(callback) {
   runSequence('clean', ['copy', 'less','bundleScripts','watch'],
+              'browser-sync',
+              callback);
+});
+gulp.task('serve-m', function(callback) {
+  runSequence('clean', ['copy', 'less','bundleScripts','watch','mongo-db'],
               'browser-sync',
               callback);
 });
