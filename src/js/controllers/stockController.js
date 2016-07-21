@@ -17,7 +17,6 @@
                 stockMinPrice: 2,
                 stockMaxPrice: 200,
                 stockDiffPctA: 6,
-                stockVwapBoxPctA: 2,
                 stockVwapPctB: 4, // price percentage away from vwap
                 stockVwapHighPctB: 15, // high percentage away from vwap
                 stockDiffPctC: 5,

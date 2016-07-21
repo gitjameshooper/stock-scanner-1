@@ -89,3 +89,13 @@
                 return true;
             }
         }
+
+         // test stock if close to vwap
+        function vwapTest(stock, stockVwapBoxPctA) {
+            var vwapPriceDiff = stock.vwap * (stockVwapBoxPctA / 100),
+                vwapPriceHi = stock.vwap + vwapPriceDiff,
+                vwapPriceLo = stock.vwap - vwapPriceDiff;
+            if ((stock.last <= vwapPriceHi) && (stock.last >= vwapPriceLo)) {
+                return true;
+            }
+        }

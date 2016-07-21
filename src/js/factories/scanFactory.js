@@ -26,7 +26,7 @@
                 if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
 
                     // check if the stock passes all the A Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, cfg.stockDiffPctA, cfg.stockVwapBoxPctA)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, cfg.stockDiffPctA)) {
                         stocksPassed.stocksPassA.push(stock);
                     }
 

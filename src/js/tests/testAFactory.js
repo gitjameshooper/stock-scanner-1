@@ -11,10 +11,10 @@
             allTests: allTests
         
         };
-        function allTests(stock, stockDiffPctA, stockVwapBoxPctA){
+        function allTests(stock, stockDiffPctA){
             
             // check if the stock passes all the A Tests
-            if (priorDayTest(stock) && lodHodTest(stock, stockDiffPctA) && vwapTest(stock, stockVwapBoxPctA)) {
+            if (priorDayTest(stock) && lodHodTest(stock, stockDiffPctA) && vwapTest(stock)) {
                 return true; 
             }
         }
@@ -28,11 +28,10 @@
             }
         }
         // test stock if close to vwap
-        function vwapTest(stock, stockVwapBoxPctA) {
-            var vwapPriceDiff = stock.vwap * (stockVwapBoxPctA / 100),
-                vwapPriceHi = stock.vwap + vwapPriceDiff,
-                vwapPriceLo = stock.vwap - vwapPriceDiff;
-            if ((stock.last <= vwapPriceHi) && (stock.last >= vwapPriceLo)) {
+        function vwapTest(stock) {
+               var stockVwapMidpoint = (stock.vwap + stock.hi) / 2;
+              
+            if ((stock.last <= stockVwapMidpoint) && (stock.last >= stock.vwap)) {
                 return true;
             }
         }
