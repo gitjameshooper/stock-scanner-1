@@ -4,14 +4,14 @@
     angular
         .module('stockScannerApp')
         .factory('testAFactory', testAFactory);
-    testAFactory.$inject = ['$log'];
+    testAFactory.$inject = ['$log', 'testOFactory'];
 
-    function testAFactory($log, stock) {
+    function testAFactory($log, testOFactory) {
         return {
             allTests: allTests
         
         };
-        function allTests(stock, stockDiffPctA){
+        function allTests(stock, stocksAlert, stockDiffPctA){
             
             // check if the stock passes all the A Tests
             if (priorDayTest(stock) && lodHodTest(stock, stockDiffPctA) && vwapTest(stock)) {

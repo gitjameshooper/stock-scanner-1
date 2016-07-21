@@ -10,7 +10,8 @@
         return {
             volTest: volTest,
             priceTest: priceTest,
-            delistTest: delistTest
+            delistTest: delistTest,
+            stockAlert: stockAlert
 
         };
         // check liquidity of stock throughout the day
@@ -36,6 +37,18 @@
             
               return true;
            }
+        }
+        function stockAlert(stock, stocksArr, stockAdd){
+            var stockIndex = _.indexOf(stocksArr, stock.symbol);
+            if(stockAdd && stockIndex < 0){
+                stock.class = 'green';
+                stocksArr.push(stock.symbol);
+                $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+            }else if(!stockAdd && stockIndex >= 0){
+                 stocksArr.splice(stockIndex,1);
+            }else if(stockAdd){
+                stock.class = 'green';
+            }
         }
     }
 })();

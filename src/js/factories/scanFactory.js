@@ -26,16 +26,16 @@
                 if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
 
                     // check if the stock passes all the A Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, cfg.stockDiffPctA)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctA)) {
                         stocksPassed.stocksPassA.push(stock);
                     }
 
                     // check if the stock passes all the B Tests
-                     if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+                     if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // check if the stock passes all the C Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, cfg.stockDiffPctC)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctC)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                 }

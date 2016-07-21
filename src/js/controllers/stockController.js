@@ -18,7 +18,7 @@
                 stockMaxPrice: 200,
                 stockDiffPctA: 6,
                 stockVwapPctB: 4, // price percentage away from vwap
-                stockVwapHighPctB: 15, // high percentage away from vwap
+                stockVwapHighPctB: 12, // high percentage away from vwap
                 stockDiffPctC: 5,
                 accountVal: 13000,
                 stockVolumeObj: {
@@ -41,7 +41,8 @@
         vm.stocksPassed ={
                 stocksPassA :[],
                 stocksPassB : [],
-                stocksPassC : []
+                stocksPassC : [],
+                stocksAlert :[]
               }
         vm.stocksA = [];
         vm.stocksB = [];

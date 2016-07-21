@@ -4,15 +4,15 @@
     angular
         .module('stockScannerApp')
         .factory('testCFactory', testCFactory);
-    testCFactory.$inject = ['$log'];
+    testCFactory.$inject = ['$log', 'testOFactory'];
 
-    function testCFactory($log, stock) {
+    function testCFactory($log, testOFactory) {
         return {
             allTests: allTests
 
         };
         // check if the stock passes all the C Tests
-        function allTests(stock, stockDiffPctC) {
+        function allTests(stock, stocksAlert, stockDiffPctC) {
             if (priorDayGreenTestC(stock) && priorDayRangeTest(stock, stockDiffPctC) && midPointTest(stock) && belowPriorDayTest(stock)) {
                 return true;
             }
