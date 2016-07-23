@@ -7,33 +7,31 @@
     testDFactory.$inject = ['$log'];
 
     function testDFactory($log, stock) {
+        var etfArr = ["CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"];
         return {
             allTests: allTests
 
         };
         // check if the stock passes all the A Tests
-        function allTests(stock, stockRangePctB, stockAwayPctB) {
-            if (rangeTestB(stock, stockRangePctB) && betweenTestB(stock, stockAwayPctB)) {
+        function allTests(stock, stocksAlert) {
+            if (sharesTestD(stock) && excludeTestD(stock)) {
                 return true;
             }
+        }
+        // exclude etfs
+        function excludeTestD(stock){
+            if(_.indexOf(etfArr, stock.symbol) < 0){
+            
+              return true;
+           }
         }
         // stock has good range
-        function rangeTestB(stock, stockRangePctB) {
-            var stockDiffB = stock.vwap - stock.lo,
-                stockDiffPctB = Number((stockDiffB / stock.last).toFixed(3) * 100);
-                stock.stockDiffPctB = Number(stockDiffPctB.toFixed(2));
-            if (stockDiffPctB >= stockRangePctB) {
+        function sharesTestD(stock) {
+             stock.float = Math.round((stock.vl / stock.sho) * 100) / 100;
+             if(stock.float !== Infinity && stock.float > .50){
                 return true;
             }
         }
-        // stock near midpoint(between lod and vwap)
-        function betweenTestB(stock, stockAwayPctB) {
-            var midPoint = (stock.vwap + stock.lo) / 2,
-                stockAwayMidB = Math.abs((midPoint / stock.last) - 1) * 100;
-                stock.midAwayB = Math.round(stockAwayMidB * 100) / 100;
-            if (stockAwayMidB < stockAwayPctB) {
-                return true;
-            }
-        }
+         
     }
 })();

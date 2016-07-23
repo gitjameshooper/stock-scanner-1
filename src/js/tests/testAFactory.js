@@ -12,7 +12,6 @@
         
         };
         function allTests(stock, stocksAlert, stockDiffPctA){
-            
             // check if the stock passes all the A Tests
             if (priorDayTest(stock) && lodHodTest(stock, stockDiffPctA) && vwapTest(stock)) {
                 return true; 
@@ -20,6 +19,7 @@
         }
         // test stock for difference between lod and hod
         function lodHodTest(stock, stockDiffPctA) {
+
             var stockDiff = Number((stock.hi - stock.lo).toFixed(2)),
                 stockDiffPct = Number((stockDiff / stock.lo).toFixed(3) * 100);
                 stock.stockDiffPctLH = Number((stockDiffPct).toFixed(2));

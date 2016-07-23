@@ -99,6 +99,27 @@
             <div class="col-sm-4">
                 <table class="table table-bordered table-responsive">
                     <thead>
+                        <h3>Float Test</h3>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Float</th>
+                            <th>Delist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stockD in stockApp.stocksD | orderBy:'-float'">
+                            <td><a target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
+                            <td>{{ stockD.last }}</td>
+                            <td>{{ stockD.float }}</td>
+                            <td><a class="btn red margin-0" ng-click="stockApp.delistStock(stockD, stockApp.stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-sm-4">
+                <table class="table table-bordered table-responsive">
+                    <thead>
                         <h3>Red to Green Test</h3>
                         <tr>
                             <th>Symbol</th>
@@ -114,7 +135,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
         <div class="clearboth"></div>
     </div>

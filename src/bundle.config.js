@@ -18,6 +18,7 @@ module.exports = {
         './src/js/tests/testAFactory.js',
         './src/js/tests/testBFactory.js',
         './src/js/tests/testCFactory.js',
+        './src/js/tests/testDFactory.js',
         './src/js/controllers/stockController.js'
       ]
     }

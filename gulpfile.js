@@ -26,6 +26,7 @@ var gulp = require('gulp'),
 // gulp.task('mongo-db', function() {
 //     var url = 'mongodb://localhost:27017/stock-scanner';
 //     // Use connect method to connect to the Server 
+//     var db = 'stock';
 //     MongoClient.connect(url, function(err, db) {
 //         assert.equal(null, err);
 //         console.log("Connected correctly to server");

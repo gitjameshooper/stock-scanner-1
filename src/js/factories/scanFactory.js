@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory) {
         var delistArr = [];
 
         return {
@@ -31,12 +31,16 @@
                     }
 
                     // check if the stock passes all the B Tests
-                     if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // check if the stock passes all the C Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctC)) {
                         stocksPassed.stocksPassC.push(stock);
+                    }
+                    // check if the stock passes all the D Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                        stocksPassed.stocksPassD.push(stock);
                     }
                 }
             });
@@ -51,6 +55,7 @@
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
+            stock.sho = Number(stock.sho);
             stock.plo = Math.round(stock.plo * 100) / 100;
             stock.phi = Math.round(stock.phi * 100) / 100;
             stock.pcls = Math.round(stock.pcls * 100) / 100;

@@ -42,11 +42,13 @@
                 stocksPassA :[],
                 stocksPassB : [],
                 stocksPassC : [],
+                stocksPassD : [],
                 stocksAlert :[]
               }
         vm.stocksA = [];
         vm.stocksB = [];
         vm.stocksC = [];
+        vm.stocksD = [];
 
         // functions
         vm.startScan = startScan;
@@ -119,6 +121,7 @@
             vm.stocksA = vm.stocksPassed.stocksPassA;
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
+            vm.stocksD = vm.stocksPassed.stocksPassD;
               
             $scope.$apply();
 
