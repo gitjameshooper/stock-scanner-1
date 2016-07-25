@@ -11,16 +11,14 @@
 angular
   .module('clientApp', [
     'ngRoute',
-    'restangular',
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngSanitize',
     'ngTouch'
   ])
-  .config(function ($routeProvider, RestangularProvider) {
-    RestangularProvider.setBaseUrl('http://localhost:3000');
-
+  .config(function ($routeProvider) {
+    
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -36,15 +34,4 @@ angular
         redirectTo: '/'
       });
       
-  })
-  .factory('StockRestangular', function(Restangular){
-    return Restangular.withConfig(function(RestangularCongfigurer){
-      RestangularCongfigurer.setRestangularFields({
-        id: '_id'
-      });
-    });
-  })
-  .factory('Stock', function(StockRestangular){
-    return StockRestangular.service('stocks');
-
   });

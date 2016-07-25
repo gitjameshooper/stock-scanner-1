@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 // Create Stock Schema
-
 var stockSchema = new mongoose.Schema({
 	  symbol:{
 	  	type: String,
@@ -13,5 +12,5 @@ var stockSchema = new mongoose.Schema({
 	  }
 });
 
-// Export the model Schema
-module.exports = stockSchema;
+// Export the model 
+module.exports = mongoose.model("Stock", stockSchema);
