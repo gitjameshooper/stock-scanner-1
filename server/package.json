@@ -1,0 +1,19 @@
+{
+  "name": "stock-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Jim Hooper <jim_hooper@volusion.com> (https://material.com)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "lodash": "4.13.1",
+    "method-override": "2.3.6",
+    "mongoose": "4.5.6"
+  }
+}
