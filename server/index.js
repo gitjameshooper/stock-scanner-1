@@ -24,6 +24,8 @@ app.use(function(req, res, next){
   next();
 });
 
+app.disable('x-powered-by');
+
 // Load the models
 app.models = require('./models/index');
 
