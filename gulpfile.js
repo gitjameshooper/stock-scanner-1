@@ -9,50 +9,13 @@ var gulp = require('gulp'),
     del = require('del'),
     less = require('gulp-less'),
     path = require('path'),
-    browserSync = require('browser-sync').create(),
-    MongoClient = require('mongodb').MongoClient,
-    assert = require('assert'),
-    exec = require('child_process').exec;
-
-// Mongo Start Server
-// gulp.task('mongo-serve', function (cb) {
-//   exec('mongod --dbpath //Users/jim_hooper/Documents/github/stock-scanner/data', function (err, stdout, stderr) {
-//     console.log(stdout);
-//     console.log(stderr);
-//     cb(err);
-//   });
-// })
-// // Connection URL 
-// gulp.task('mongo-db', function() {
-//     var url = 'mongodb://localhost:27017/stock-scanner';
-//     // Use connect method to connect to the Server 
-//     var db = 'stock';
-//     MongoClient.connect(url, function(err, db) {
-//         assert.equal(null, err);
-//         console.log("Connected correctly to server");
-//     });
-// });
-
-
+    browserSync = require('browser-sync').create();
+ 
 // Delete Build folder
 gulp.task('clean', function() {
   return del(['app']);
 });
 
-
-//////////////////////////////////////////////////////////////////
-// Concatenate & Minify JS
-
-// Ignores files used for bundle task
-// gulp.task('globalScripts', function() {
-//     return gulp.src(['src/assets/js/global-scripts/*.js'])
-//         .pipe(concat('global.js'))
-//         .pipe(gulp.dest('build/assets/javascript'))
-//         .pipe(rename('global.min.js'))
-//         .pipe(uglify())
-//         .pipe(gulp.dest('build/assets/javascript'))
-//         .pipe(browserSync.stream({match: '**/**/*.js'}));
-// });
 
 // Uses bundle.config.js to find npm js files and bundles/uglifys them
 gulp.task('bundleScripts', function() {
@@ -69,7 +32,6 @@ gulp.task('copy',  function () {
         .pipe(browserSync.stream());
     });
 
-// gulp.task('scripts', ['globalScripts', 'bundleScripts']);
 
 gulp.task('less', function () {
   return gulp.src('src/less/global.less')
@@ -101,11 +63,6 @@ gulp.task('watch', function() {
 
 gulp.task('serve', function(callback) {
   runSequence('clean', ['copy', 'less','bundleScripts','watch'],
-              'browser-sync',
-              callback);
-});
-gulp.task('serve-m', function(callback) {
-  runSequence('clean', ['copy', 'less','bundleScripts','watch','mongo-db'],
               'browser-sync',
               callback);
 });
