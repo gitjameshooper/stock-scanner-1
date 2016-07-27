@@ -1,7 +1,7 @@
 <h1>Stock Scanner using the Trade King API.</h1>
 <p>(You must have a tradeking account to use this)</p>
 
-<p>Currently set up to scan 2800 stocks in 10 secs.</p>
+<p>Currently set up to scan 7500 stocks in 25 secs.</p>
 
 <h3>Steps for Use:</h3>
 <ol>
@@ -23,7 +23,9 @@
 <li>Run 'gulp serve' in your terminal.</li>
 </ol>
 
-<p>Now you can view the app in localhost:2000 in your browser and start/stop scanning</p>
+<p>Now you can view the app in localhost:2000 in your browser and start scanning</p>
 
 <p>Note: Currently developing tests to put all the stocks through</p>
+
+
  

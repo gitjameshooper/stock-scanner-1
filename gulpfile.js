@@ -10,26 +10,12 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     path = require('path'),
     browserSync = require('browser-sync').create();
-
+ 
 // Delete Build folder
 gulp.task('clean', function() {
   return del(['app']);
 });
 
-
-//////////////////////////////////////////////////////////////////
-// Concatenate & Minify JS
-
-// Ignores files used for bundle task
-// gulp.task('globalScripts', function() {
-//     return gulp.src(['src/assets/js/global-scripts/*.js'])
-//         .pipe(concat('global.js'))
-//         .pipe(gulp.dest('build/assets/javascript'))
-//         .pipe(rename('global.min.js'))
-//         .pipe(uglify())
-//         .pipe(gulp.dest('build/assets/javascript'))
-//         .pipe(browserSync.stream({match: '**/**/*.js'}));
-// });
 
 // Uses bundle.config.js to find npm js files and bundles/uglifys them
 gulp.task('bundleScripts', function() {
@@ -46,7 +32,6 @@ gulp.task('copy',  function () {
         .pipe(browserSync.stream());
     });
 
-// gulp.task('scripts', ['globalScripts', 'bundleScripts']);
 
 gulp.task('less', function () {
   return gulp.src('src/less/global.less')
