@@ -102,6 +102,12 @@ html {
     .f-18 {
       font-size: 18px;
     }
+    .f-16{
+      font-size: 16px;
+    }
+    .f-15{
+      font-size: 15px;
+    }
     .margin-0 {
       margin: 0;
     }
@@ -127,6 +133,9 @@ html {
     .btn.red {
       color: #fff;
       background: @red;
+      &.padding-adjust{
+      padding: 5px 10px !important;
+      }
     }
     .text-white {
       color: @white;
@@ -167,6 +176,12 @@ html {
     .clearboth {
       clear: both;
     }
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 6px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1;
+  }
     /* Pop */
     @-webkit-keyframes hvr-pop {
       50% {

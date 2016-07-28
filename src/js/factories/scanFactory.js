@@ -35,12 +35,13 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // check if the stock passes all the C Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctC)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                     // check if the stock passes all the D Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
                         stocksPassed.stocksPassD.push(stock);
+
                     }
                 }
             });

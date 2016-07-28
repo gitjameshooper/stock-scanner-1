@@ -1,3 +1,4 @@
+// Test Notes:  Used to find a morning push and pullback near vwap for entry to go long
 (function() {
     'use strict';
 
@@ -17,7 +18,7 @@
                 return true; 
             }
         }
-        // test stock for difference between lod and hod
+        // for difference between lod and hod
         function lodHodTest(stock, stockDiffPctA) {
 
             var stockDiff = Number((stock.hi - stock.lo).toFixed(2)),
@@ -27,7 +28,7 @@
                 return true;
             }
         }
-        // test stock if close to vwap
+        // if close to vwap
         function vwapTest(stock) {
                var stockVwapMidpoint = (stock.vwap + stock.hi) / 2;
               
@@ -35,7 +36,7 @@
                 return true;
             }
         }
-        // test stock if higher than prior day lo
+        // if higher than midpoint between prior day HOD and LOD
         function priorDayTest(stock) {
             var stockMidPrior = (stock.plo + stock.phi) / 2;
             if (stockMidPrior < stock.lo) {

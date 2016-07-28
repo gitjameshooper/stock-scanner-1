@@ -1,18 +1,19 @@
+// Test Notes:  Used to find stocks with float rotation
 (function() {
     'use strict';
 
     angular
         .module('stockScannerApp')
         .factory('testDFactory', testDFactory);
-    testDFactory.$inject = ['$log'];
+    testDFactory.$inject = ['$log', 'testOFactory'];
 
-    function testDFactory($log, stock) {
-        var etfArr = ["PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"];
+    function testDFactory($log, testOFactory) {
+        var etfArr = ["UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"];
         return {
             allTests: allTests
 
         };
-        // check if the stock passes all the A Tests
+        // check if the stock passes all the D Tests
         function allTests(stock, stocksAlert) {
             if (sharesTestD(stock) && excludeTestD(stock)) {
                 return true;
@@ -25,7 +26,7 @@
               return true;
            }
         }
-        // stock has good range
+        // trading most shares outstanding
         function sharesTestD(stock) {
              stock.float = Math.round((stock.vl / stock.sho) * 100) / 100;
              if(stock.float !== Infinity && stock.float > .50){

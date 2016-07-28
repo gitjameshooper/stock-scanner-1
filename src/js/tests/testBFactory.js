@@ -1,3 +1,4 @@
+// Test Notes:  Used to find huge VWAP Difference. Mainly for shorting above 15% Difference
 (function() {
     'use strict';
 
@@ -17,7 +18,7 @@
                 return true;
             }
         }
-        // stock is away from vwap
+        // stock is far away from vwap
         function vwapTestB(stock, stocksAlert, stockVwapPctB, stockVwapHighPctB) {
            
              var stockDiffVwap = Number((stock.last - stock.vwap).toFixed(2)),
