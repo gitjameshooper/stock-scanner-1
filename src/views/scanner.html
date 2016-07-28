@@ -22,22 +22,36 @@
                         <label class="text-light">Account Value
                             <input type="number" class="db text-black" ng-model="stockApp.cfg.accountVal" />
                         </label>
+                        <div class="dib">
+                            <label class="text-light left">Pullback Test
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testA" ng-click="stockApp.toggleTest(stockApp.cfg.showTest.testA)" />
+                            </label>
+                            <label class="text-light left">R to G Test
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testC" />
+                            </label>
+                            <label class="text-light left">VWAP Test
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testB" />
+                            </label>
+                            <label class="text-light left">Float Test
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testD" />
+                            </label>
+                            <label class="text-light left">Test E
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testE" />
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="row toggle-settings text-grey">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testA">
                         <h4>PullBack Test</h4>
                         <label class="text-light">% LOD to HOD
                             <input type="number" class="db text-black" ng-model="stockApp.cfg.stockDiffPctA" />
                         </label>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testC">
                         <h4>Red to Green Test</h4>
-                        <label class="text-light">% Prior Day
-                            <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockDiffPctC" />
-                        </label>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testB">
                         <h4>VWAP Test</h4>
                         <label class="text-light">% AWAY VWAP
                             <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockVwapPctB" />
@@ -46,11 +60,14 @@
                             <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockVwapHighPctB" />
                         </label>
                     </div>
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
+                        <h4>Float Test</h4>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row margin-top-20 f-15">
-            <div class="col-sm-3">
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testA">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>PullBack Test</h3>
@@ -58,7 +75,8 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>DiffPctL-H</th>
-                            <th>1/2<br />Shares</th>
+                            <th>1/2
+                                <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
@@ -73,19 +91,20 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testC">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>Red to Green Test</h3>
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>1/2<br />Shares</th>
+                            <th>1/2
+                                <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-stockDiffPriorPctLtoH'">
+                        <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-stockDiffPriorPctCtoH'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                             <td>{{ stockC.last }}</td>
                             <td>{{ stockC.shares }}</td>
@@ -94,7 +113,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testB">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>VWAP Test</h3>
@@ -102,7 +121,8 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>Pct Diff.</th>
-                            <th>1/2<br />Shares</th>
+                            <th>1/2
+                                <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
@@ -117,7 +137,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>Float Test</h3>
@@ -125,7 +145,8 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>Float</th>
-                            <th>1/2<br />Shares</th>
+                            <th>1/2
+                                <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>

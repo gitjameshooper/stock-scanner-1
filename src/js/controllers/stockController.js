@@ -15,12 +15,18 @@
                 apiMSecs: 600,
                 symbolsPerTier: 340,
                 stockMinPrice: 2,
-                stockMaxPrice: 200,
+                stockMaxPrice: 100,
                 stockDiffPctA: 6,
                 stockVwapPctB: 8, // price percentage away from vwap
-                stockVwapHighPctB: 30, // high percentage away from vwap
-                stockDiffPctC: 5,
+                stockVwapHighPctB: 12, // high percentage away from vwap
                 accountVal: 10000,
+                showTest: {
+                    testA : true,
+                    testB : true,
+                    testC : true,
+                    testD : false,
+                    testE : true
+                },
                 stockVolumeObj: {
                 "hr8": 300000,
                 "hr9": 500000,
@@ -43,14 +49,12 @@
                 stocksPassB : [],
                 stocksPassC : [],
                 stocksPassD : [],
-                stocksPassE : [],
                 stocksAlert :[]
               }
         vm.stocksA = [];
         vm.stocksB = [];
         vm.stocksC = [];
         vm.stocksD = [];
-        vm.stocksE = [];
 
         // functions
         vm.startScan = startScan;
@@ -124,7 +128,6 @@
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
             vm.stocksD = vm.stocksPassed.stocksPassD;
-            vm.stocksE = vm.stocksPassed.stocksPassE;
               
             $scope.$apply();
 

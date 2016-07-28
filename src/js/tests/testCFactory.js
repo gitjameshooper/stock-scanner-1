@@ -15,19 +15,26 @@
         };
         // check if the stock passes all the C Tests
         function allTests(stock, stocksAlert) {
-            if (lodTestC(stock)  && priorHODTestC(stock) && (vwapTestC(stock) || currPriceTestC(stock))) {
+            if (lodTestC(stock) && priorLodTestC(stock)  &&  vwapTestC(stock) && priorDayMidTestC(stock) && priorHODTestC(stock)) {
                 return true;
             }
         }
-        // if below prior low
-        function lodTestC(stock){
+        // if curent day lo lower than prior lo
+        function priorLodTestC(stock){
             if(stock.plo > stock.lo){
                 return true;
             }
         }
-        // if higher than prior day close
-        function currPriceTestC(stock){
-            if(stock.last >= stock.pcls){
+        // if current price above prior low
+        function lodTestC(stock){
+            if(stock.plo < stock.last){
+                return true;
+            }
+        }
+        // if lower than prior day midpoint
+        function priorDayMidTestC(stock){
+            var midPoint = (stock.phi + stock.plo) / 2;
+            if(stock.last < midPoint){
                 return true;
             }
         }
@@ -37,11 +44,11 @@
                 return true;
             }
         }
-        // if 
+        // check potential range
         function priorHODTestC(stock){
             var priorDiff = stock.phi - stock.lo,
                 priorPct = priorDiff / stock.lo;
-                stock.stockDiffPriorPctLtoH = Number((priorPct).toFixed(2));
+                stock.stockDiffPriorPctCtoH = Number((priorPct).toFixed(2));
                  
                 return true;
         }

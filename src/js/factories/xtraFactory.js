@@ -9,6 +9,7 @@
     function xtraFactory($log) {
         return {
             settingsAnim: settingsAnim,
+            toggleTest: toggleTest,
             jQueryExtends: jQueryExtends
         };
 
