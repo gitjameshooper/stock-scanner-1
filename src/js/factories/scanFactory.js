@@ -35,7 +35,7 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // check if the stock passes all the C Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockPriorDayPctC)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                     // check if the stock passes all the D Tests

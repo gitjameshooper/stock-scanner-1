@@ -8,51 +8,52 @@
     testCFactory.$inject = ['$log', 'testOFactory'];
 
     function testCFactory($log, testOFactory) {
-         
+        var etfArr = ["SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY"];
         return {
             allTests: allTests
 
         };
         // check if the stock passes all the C Tests
-        function allTests(stock, stocksAlert) {
-            if (lodTestC(stock) && priorLodTestC(stock)  &&  vwapTestC(stock) && priorDayMidTestC(stock) && priorHODTestC(stock)) {
+        function allTests(stock, stocksAlert, stockPriorDayPctC) {
+            if (vwapTestC(stock) && pclsTestC(stock) && priorDayTestC(stock, stockPriorDayPctC) && pctDiffTestC(stock) && excludeTestC(stock)) {
+                return true;
+            }
+        }
+
+        function excludeTestC(stock) {
+            if (_.indexOf(etfArr, stock.symbol) < 0) {
+
                 return true;
             }
         }
         // if curent day lo lower than prior lo
-        function priorLodTestC(stock){
-            if(stock.plo > stock.lo){
+        function priorDayTestC(stock, stockPriorDayPctC) {
+            var pctPriorDay = stock.prchg / stock.pcls;
+            stock.pctPriorDay = Number(pctPriorDay.toFixed(2));
+
+            if (stock.pctPriorDay > (stockPriorDayPctC / 100)) {
                 return true;
             }
         }
-        // if current price above prior low
-        function lodTestC(stock){
-            if(stock.plo < stock.last){
+
+        function vwapTestC(stock) {
+            if (stock.vwap > stock.last) {
                 return true;
             }
         }
-        // if lower than prior day midpoint
-        function priorDayMidTestC(stock){
-            var midPoint = (stock.phi + stock.plo) / 2;
-            if(stock.last < midPoint){
+
+        function pclsTestC(stock) {
+            if (stock.pcls > stock.last) {
                 return true;
             }
         }
-        // stock above vwap
-        function vwapTestC(stock){
-            if(stock.last > stock.vwap){
-                return true;
-            }
+
+        function pctDiffTestC(stock) {
+            var pctDiff = stock.pcls - stock.last,
+                pctDiffC =  -(pctDiff / stock.last) * 100;
+                stock.pctDiffC = Number(pctDiffC.toFixed(2));
+
+             return true;   
         }
-        // check potential range
-        function priorHODTestC(stock){
-            var priorDiff = stock.phi - stock.lo,
-                priorPct = priorDiff / stock.lo;
-                stock.stockDiffPriorPctCtoH = Number((priorPct).toFixed(2));
-                 
-                return true;
-        }
-           
- 
     }
 })();

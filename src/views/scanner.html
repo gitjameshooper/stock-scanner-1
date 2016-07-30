@@ -50,6 +50,9 @@
                     </div>
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testC">
                         <h4>Red to Green Test</h4>
+                        <label class="text-light">% Prior Day Move
+                            <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockPriorDayPctC" />
+                        </label>
                     </div>
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testB">
                         <h4>VWAP Test</h4>
@@ -98,15 +101,17 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
+                            <th>Away<br /> PCLS</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-stockDiffPriorPctCtoH'">
+                        <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'pctDiffC'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                             <td>{{ stockC.last }}</td>
+                            <td>{{ stockC.pctDiffC }}</td>
                             <td>{{ stockC.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockC, stockApp.stocksC)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>

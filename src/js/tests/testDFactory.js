@@ -8,7 +8,7 @@
     testDFactory.$inject = ['$log', 'testOFactory'];
 
     function testDFactory($log, testOFactory) {
-        var etfArr = ["ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"];
+         var etfArr = ["SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"];
         return {
             allTests: allTests
 

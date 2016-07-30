@@ -18,7 +18,8 @@
                 stockMaxPrice: 100,
                 stockDiffPctA: 6,
                 stockVwapPctB: 8, // price percentage away from vwap
-                stockVwapHighPctB: 12, // high percentage away from vwap
+                stockVwapHighPctB: 60, // high percentage away from vwap
+                stockPriorDayPctC: 5, 
                 accountVal: 10000,
                 showTest: {
                     testA : true,
