@@ -15,7 +15,7 @@
         };
         // check if the stock passes all the C Tests
         function allTests(stock, stocksAlert, stockPriorDayPctC) {
-            if (vwapTestC(stock) && pclsTestC(stock) && priorDayTestC(stock, stockPriorDayPctC) && pctDiffTestC(stock) && excludeTestC(stock)) {
+            if (vwapTestC(stock) && pclsTestC(stock) && priorDayTestC(stock, stockPriorDayPctC) && priorHiLoTestC(stock) && pctDiffTestC(stock) && excludeTestC(stock)) {
                 return true;
             }
         }
@@ -48,12 +48,21 @@
             }
         }
 
+        function priorHiLoTestC(stock) {
+            var priceDiff = stock.phi - stock.plo,
+                priceDiffThird = priceDiff / 3;
+
+            if ((priceDiffThird + stock.plo) < stock.last) {
+                return true;
+            }
+        }
+
         function pctDiffTestC(stock) {
             var pctDiff = stock.pcls - stock.last,
-                pctDiffC =  -(pctDiff / stock.last) * 100;
-                stock.pctDiffC = Number(pctDiffC.toFixed(2));
+                pctDiffC = -(pctDiff / stock.last) * 100;
+            stock.pctDiffC = Number(pctDiffC.toFixed(2));
 
-             return true;   
+            return true;
         }
     }
 })();

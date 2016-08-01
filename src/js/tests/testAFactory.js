@@ -14,7 +14,7 @@
         };
         function allTests(stock, stocksAlert, stockDiffPctA){
             // check if the stock passes all the A Tests
-            if (priorDayTest(stock) && lodHodTest(stock, stockDiffPctA) && vwapTest(stock)) {
+            if (lodHodTest(stock, stockDiffPctA) && vwapTest(stock)) {
                 return true; 
             }
         }
@@ -33,13 +33,6 @@
                var stockVwapMidpoint = (stock.vwap + stock.hi) / 2;
               
             if ((stock.last <= stockVwapMidpoint) && (stock.last >= stock.vwap)) {
-                return true;
-            }
-        }
-        // if higher than midpoint between prior day HOD and LOD
-        function priorDayTest(stock) {
-            var stockMidPrior = (stock.plo + stock.phi) / 2;
-            if (stockMidPrior < stock.lo) {
                 return true;
             }
         }
