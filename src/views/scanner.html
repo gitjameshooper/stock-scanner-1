@@ -66,6 +66,14 @@
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
                         <h4>Float Test</h4>
                     </div>
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testE">
+                        <h4>Speed Test</h4>
+                        <label class="text-light">Alert High Speed
+                            <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockSpeedPctE" />
+                        </label>
+                    </div>
+
+                    
                 </div>
             </div>
         </div>
@@ -77,7 +85,8 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>DiffPct<br />L-H</th>
+                            <th>DiffPct
+                                <br />L-H</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
@@ -101,7 +110,8 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Away<br /> PCLS</th>
+                            <th>Away
+                                <br /> PCLS</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
@@ -149,7 +159,8 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Float<br />Rotated</th>
+                            <th>Float
+                                <br />Rotated</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
@@ -162,6 +173,30 @@
                             <td>{{ stockD.float }}</td>
                             <td>{{ stockD.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockD, stockApp.stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testE">
+                <table class="table table-bordered table-responsive text-center">
+                    <thead>
+                        <h3>Speed Test</h3>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Speed</th>
+                            <th>1/2
+                                <br />Shares</th>
+                            <th>Delist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-vl'">
+                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a></td>
+                            <td>{{ stockE.last }}</td>
+                            <td>{{ stockE.speed }}</td>
+                            <td>{{ stockE.shares }}</td>
+                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

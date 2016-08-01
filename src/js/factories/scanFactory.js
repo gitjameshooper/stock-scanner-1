@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory', 'testEFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory) {
         var delistArr = [];
 
         return {
@@ -43,6 +43,11 @@
                         stocksPassed.stocksPassD.push(stock);
 
                     }
+                    // check if the stock passes all the E Tests
+                    // if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockSpeedPctE)) {
+                    //     stocksPassed.stocksPassE.push(stock);
+
+                    // }
                 }
             });
             return stocksPassed;
@@ -64,12 +69,13 @@
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
         }
-        function duplicateStock(stock, stocksArr){
-             var stockIndex = _.findIndex(stocksArr, {symbol : stock.symbol});
-             if(stockIndex !== -1){ 
-                stocksArr.splice(stockIndex,1);  
+
+        function duplicateStock(stock, stocksArr) {
+            var stockIndex = _.findIndex(stocksArr, { symbol: stock.symbol });
+            if (stockIndex !== -1) {
+                stocksArr.splice(stockIndex, 1);
             }
-            return true;     
+            return true;
         }
         // remove stock from view - add to the delist array
         function delistStock(stock, stocksArr) {

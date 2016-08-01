@@ -19,7 +19,8 @@
                 stockDiffPctA: 5,
                 stockVwapPctB: 8, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
-                stockPriorDayPctC: 5, 
+                stockPriorDayPctC: 5,
+                stockSpeedPctE: 2, 
                 accountVal: 10000,
                 showTest: {
                     testA : true,
@@ -129,6 +130,7 @@
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
             vm.stocksD = vm.stocksPassed.stocksPassD;
+            vm.stocksE = vm.stocksPassed.stocksPassE;
               
             $scope.$apply();
 
