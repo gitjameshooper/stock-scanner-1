@@ -20,29 +20,20 @@
 
         function allTests(stock, stocksAlert, stockSpeedPctE) {
             // check if the stock passes all the E Tests
-            if (firstPassTest(stock) && speedTest(stock)) {
+            if (firstPassTest(stock)) {
                 return true;
             }
         }
 
         function firstPassTest(stock) {
-            stockIndex = _.indexOf(oldSymbolsArr, stock.symbol);
-            if (stockIndex < 0) {
-                
-                oldSymbolsArr.push(stock.symbol);
-            }else{
-                
-          
+                window.console.log(stock);
+            if ((stock.last - .50) < stock.wk52hi && (stock.last + .50) > stock.wk52hi ) {
+                 
                 return true;
-            }
+               }
         }
  
 
-        function speedTest(stock) {
-            window.console.log(stock.last + '---'+ oldSymbolsArr[stockIndex].last );
-            return true;
-            
-        }
 
     }
 })();

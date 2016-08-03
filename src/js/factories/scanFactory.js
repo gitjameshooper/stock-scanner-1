@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory', 'testEFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory', 'testEFactory', 'testFFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory, testFFactory) {
         var delistArr = [];
 
         return {
@@ -44,10 +44,16 @@
 
                     }
                     // check if the stock passes all the E Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockSpeedPctE)) {
-                    //     stocksPassed.stocksPassE.push(stock);
+                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockSpeedPctE)) {
+                        stocksPassed.stocksPassE.push(stock);
 
-                    // }
+                    }
+                    // check if the stock passes all the F Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockBounceF)) {
+                        stocksPassed.stocksPassF.push(stock);
+
+                    }
+
                 }
             });
             return stocksPassed;

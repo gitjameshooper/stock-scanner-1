@@ -20,6 +20,7 @@ module.exports = {
                 './src/js/tests/testCFactory.js',
                 './src/js/tests/testDFactory.js',
                 './src/js/tests/testEFactory.js',
+                './src/js/tests/testFFactory.js',
                 './src/js/controllers/stockController.js'
             ]
         }

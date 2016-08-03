@@ -38,6 +38,9 @@
                             <label class="text-light left">Test E
                                 <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testE" />
                             </label>
+                            <label class="text-light left">Bounce Test
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testF" />
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -72,8 +75,12 @@
                             <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockSpeedPctE" />
                         </label>
                     </div>
-
-                    
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testF">
+                        <h4>Bounce Test</h4>
+                        <label class="text-light">Bounce Dist.
+                            <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockBounceF" />
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,9 +201,32 @@
                         <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-vl'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a></td>
                             <td>{{ stockE.last }}</td>
-                            <td>{{ stockE.speed }}</td>
                             <td>{{ stockE.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testF">
+                <table class="table table-bordered table-responsive text-center">
+                    <thead>
+                        <h3>Bounce Test</h3>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Dist.</th>
+                            <th>1/2
+                                <br />Shares</th>
+                            <th>Delist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stockF in stockApp.stocksF | orderBy:'-vwapDistF'">
+                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockF.symbol }}&src=ctag">{{ stockF.symbol }}</a></td>
+                            <td>{{ stockF.last }}</td>
+                            <td>{{ stockF.vwapDistF }}</td>
+                            <td>{{ stockF.shares }}</td>
+                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockF, stockApp.stocksF)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

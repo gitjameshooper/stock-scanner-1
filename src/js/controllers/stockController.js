@@ -4,7 +4,7 @@
     angular
         .module('stockScannerApp')
         .controller('stockController', stockController);
-    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory','scanFactory', 'tierFactory'];
+    stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory', 'scanFactory', 'tierFactory'];
 
     function stockController($scope, $log, symbolsService, oAuthService, xtraFactory, scanFactory, tierFactory) {
         var vm = this;
@@ -20,43 +20,49 @@
                 stockVwapPctB: 8, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockPriorDayPctC: 5,
-                stockSpeedPctE: 2, 
+                stockSpeedPctE: 2,
+                stockBounceF: 5,
                 accountVal: 10000,
                 showTest: {
-                    testA : true,
-                    testB : true,
-                    testC : true,
-                    testD : true,
-                    testE : false
+                    testA: true,
+                    testB: true,
+                    testC: true,
+                    testD: false,
+                    testE: true,
+                    testF: false
                 },
                 stockVolumeObj: {
-                "hr8": 300000,
-                "hr9": 500000,
-                "hr10": 800000,
-                "hr11": 1000000,
-                "hr12": 1200000,
-                "hr13": 1400000,
-                "hr14": 1600000,
-                "hr15": 1600000
+                    "hr8": 300000,
+                    "hr9": 500000,
+                    "hr10": 800000,
+                    "hr11": 1000000,
+                    "hr12": 1200000,
+                    "hr13": 1400000,
+                    "hr14": 1600000,
+                    "hr15": 1600000
                 }
             }
-        // vars
+            // vars
         vm.tkUrl = '';
         vm.symbolsJSON = {};
         vm.oAuthJSON = {};
         vm.symbolTiers = [];
         vm.symbolStr = '';
-        vm.stocksPassed ={
-                stocksPassA :[],
-                stocksPassB : [],
-                stocksPassC : [],
-                stocksPassD : [],
-                stocksAlert :[]
-              }
+        vm.stocksPassed = {
+            stocksPassA: [],
+            stocksPassB: [],
+            stocksPassC: [],
+            stocksPassD: [],
+            stocksPassE: [],
+            stocksPassF: [],
+            stocksAlert: []
+        }
         vm.stocksA = [];
         vm.stocksB = [];
         vm.stocksC = [];
         vm.stocksD = [];
+        vm.stocksE = [];
+        vm.stocksF = [];
 
         // functions
         vm.startScan = startScan;
@@ -74,7 +80,7 @@
         vm.delistStock = scanFactory.delistStock;
         vm.init = init;
 
-        function init(){
+        function init() {
             xtraFactory.settingsAnim();
             xtraFactory.jQueryExtends();
         }
@@ -96,7 +102,7 @@
         }
 
         function getStocks(url, method, oAuthData) {
-             $.ajax({
+            $.ajax({
                 url: url,
                 type: method,
                 data: oAuthData,
@@ -110,28 +116,31 @@
 
             }).error(function(err) {
                 vm.cfg.status = "error";
+                $.playSound("/sounds/monkey");
                 $log.error('Bad TK Request - ' + err.statusText);
                 $scope.$apply();
                 // start scan if error
-                setTimeout(function(){
+                setTimeout(function() {
                     vm.startScan();
                 }, 10000);
-                
+
             }).done(function(data) {
                 //run tk data thru tests
                 vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.cfg);
                 vm.viewStocks();
-            });    
+            });
         }
-        function viewStocks(){
-            
+
+        function viewStocks() {
+
             // pass final arrays to view
             vm.stocksA = vm.stocksPassed.stocksPassA;
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
             vm.stocksD = vm.stocksPassed.stocksPassD;
             vm.stocksE = vm.stocksPassed.stocksPassE;
-              
+            vm.stocksF = vm.stocksPassed.stocksPassF;
+
             $scope.$apply();
 
             //  Create loop
@@ -145,18 +154,19 @@
                 vm.loopTiers();
             } else {
                 vm.cfg.status = "error";
+                $.playSound("/sounds/monkey");
             }
         }
 
         function loopTiers() {
             if (vm.cfg.run) {
-                    vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON,vm.symbolTiers, vm.oAuthJSON);
+                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON, vm.symbolTiers, vm.oAuthJSON);
                 setTimeout(function() {
                     vm.getStocks(vm.tkUrl, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 }, vm.cfg.apiMSecs);
             }
         }
-    
+
         function startScan() {
             vm.cfg.run = true;
             vm.cfg.status = "scanning";
