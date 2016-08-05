@@ -18,7 +18,7 @@
                 stockMaxPrice: 100,
                 stockDiffPctA: 5,
                 stockVwapPctB: 8, // price percentage away from vwap
-                stockVwapHighPctB: 12, // high percentage away from vwap
+                stockVwapHighPctB: 10, // high percentage away from vwap
                 stockPriorDayPctC: 5,
                 stockSpeedPctE: 2,
                 stockBounceF: 5,
@@ -27,8 +27,8 @@
                     testA: true,
                     testB: true,
                     testC: true,
-                    testD: false,
-                    testE: true,
+                    testD: true,
+                    testE: false,
                     testF: false
                 },
                 stockVolumeObj: {

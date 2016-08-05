@@ -24,11 +24,11 @@
 
         function lodTest(stock, stockBounceF) {
             var stockLoDiff = ((stock.lo - stock.vwap) / stock.last) * 100;
-            
+
             if (stock.last < stock.pcls && stock.last < stock.vwap && stockLoDiff < -stockBounceF) {
                 stock.vwapDistF = Number(stockLoDiff.toFixed(2));
                 return true;
-            }  
+            }
 
         }
 
@@ -40,5 +40,6 @@
                 return true;
             }
         }
+
     }
 })();

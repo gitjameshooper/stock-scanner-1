@@ -68,6 +68,7 @@
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
             stock.sho = Number(stock.sho);
+            stock.chg = Number(stock.chg)*100;
             stock.plo = Math.round(stock.plo * 100) / 100;
             stock.phi = Math.round(stock.phi * 100) / 100;
             stock.pcls = Math.round(stock.pcls * 100) / 100;

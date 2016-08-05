@@ -9,9 +9,7 @@
 
 
     function testEFactory($log, testOFactory) {
-        var oldSymbolsArr = [],
-            newSymbolsArr = [],
-            stockIndex = null;
+      
 
         return {
             allTests: allTests
@@ -20,18 +18,20 @@
 
         function allTests(stock, stocksAlert, stockSpeedPctE) {
             // check if the stock passes all the E Tests
-            if (firstPassTest(stock)) {
+             if(rTest(stock)){
+                return true;
+            }
+           
+        }
+        function rTest(stock){
+         var sty = stock.last - stock.pcls,
+             pct =  Number((sty / stock.last).toFixed(2) * 100);
+             stock.chg = pct;
+            if((stock.pcls < stock.last) && (pct > 3)){
                 return true;
             }
         }
-
-        function firstPassTest(stock) {
-                window.console.log(stock);
-            if ((stock.last - .50) < stock.wk52hi && (stock.last + .50) > stock.wk52hi ) {
-                 
-                return true;
-               }
-        }
+     
  
 
 

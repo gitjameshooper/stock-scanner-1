@@ -43,7 +43,7 @@
             if(stockAdd && stockIndex < 0){
                 stock.class = 'green';
                 stocksArr.push(stock.symbol);
-                $.playSound("http://www.noiseaddicts.com/samples_1w72b820/3739");
+                $.playSound("/sounds/evil-laugh");
             }else if(!stockAdd && stockIndex >= 0){
                  stocksArr.splice(stockIndex,1);
             }else if(stockAdd){

@@ -191,16 +191,17 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Speed</th>
+                            <th>Chg</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-vl'">
+                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-chg'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a></td>
                             <td>{{ stockE.last }}</td>
+                            <td>{{ stockE.chg }}</td>
                             <td>{{ stockE.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
