@@ -24,6 +24,7 @@ app.use(function(req, res, next){
   next();
 });
 
+app.use(express.static('public'));
 app.disable('x-powered-by');
 
 // Load the models
@@ -33,6 +34,7 @@ app.models = require('./models/index');
 app.routes = require('./routes/index');
 
 app.use('/stock', app.routes.stock);
+app.use('/tkcreds(.json)?/', app.routes.tkcreds);
 
 // Listen on Port 3000
 app.listen(3000);
