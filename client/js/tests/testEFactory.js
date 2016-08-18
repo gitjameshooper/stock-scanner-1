@@ -1,4 +1,4 @@
-// Test Notes:  Morning volume test
+// Test Notes:  Speed test
 (function() {
     'use strict';
 

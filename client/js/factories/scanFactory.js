@@ -44,12 +44,12 @@
 
                     }
                     // check if the stock passes all the E Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockSpeedPctE)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert)) {
                         stocksPassed.stocksPassE.push(stock);
 
                     }
                     // check if the stock passes all the F Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockBounceF)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
                         stocksPassed.stocksPassF.push(stock);
 
                     }
@@ -79,7 +79,6 @@
             stock.prchg = Number(stock.prchg);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
-            stock.yoyo = stock.vlChg_21 * stock.float;
         }
 
         function duplicateStock(stock, stocksArr) {

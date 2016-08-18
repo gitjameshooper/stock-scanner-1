@@ -1,4 +1,4 @@
-// Test Notes:  Used to find a morning push and pullback near vwap for entry to go long
+// Test Notes:  
 (function() {
     'use strict';
 
@@ -13,26 +13,18 @@
 
         };
 
-        function allTests(stock, stocksAlert, stockDiffPctA) {
-            // check if the stock passes all the A Tests
-            if (priceTest(stock) && volTest(stock)) {
+        function allTests(stock, stocksAlert) {
+            // check if the stock passes all the F Tests
+            if (priceTest(stock)) {
                 return true;
             }
         }
-        //  
+
         function priceTest(stock) {
 
-            if (stock.adp_50 < stock.adp_100) {
-            	stock.random = stock.adp_50 - stock.adp_100;
-                return true;
-            }
-        }
-        // 
-        function volTest(stock) {
+            return true;
 
-            if (stock.adv_30 > stock.adv_90) {
-                return true;
-            }
         }
+
     }
 })();

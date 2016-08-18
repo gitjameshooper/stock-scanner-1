@@ -20,13 +20,12 @@
                 stockVwapPctB: 8, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockPriorDayPctC: 5,
-                stockBounceF: 5,
-                accountVal: 10000,
+                accountVal: 8000,
                 showTest: {
                     testA: true,
-                    testB: true,
-                    testC: false,
-                    testD: false,
+                    testB: false,
+                    testC: true,
+                    testD: true,
                     testE: true,
                     testF: false
                 },
@@ -42,6 +41,7 @@
                 }
             }
             // vars
+        vm.loopCounter = 0;
         vm.tkUrl = '';
         vm.symbolsJSON = {};
         vm.oAuthJSON = {};
@@ -72,7 +72,6 @@
         vm.checkData = checkData;
         vm.createTiers = tierFactory.createTiers;
         vm.formatTierSymbols = tierFactory.formatTierSymbols;
-        vm.allTiersComplete = tierFactory.allTiersComplete;
         vm.loopTiers = loopTiers;
         vm.viewStocks = viewStocks;
         vm.scanStocks = scanFactory.scanStocks;

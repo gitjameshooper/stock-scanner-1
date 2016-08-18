@@ -62,5 +62,8 @@
                 return oAuthJSON.tkRequestData.url + symbolStr;
               
         }
+        function checkTier(loopCounter){
+            
+        }
     }
 })();
