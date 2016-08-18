@@ -35,7 +35,7 @@
             return symbolsTierArr;
         }
 
-        function formatTierSymbols(symbolsJSON, symbolTiers, oAuthJSON) {
+        function formatTierSymbols(symbolsJSON, symbolTiers, oAuthJSON, mainCfg) {
             
                 var symbolStr = '',
                     symbolsBegCount = 0;
@@ -52,18 +52,20 @@
                 });
 
                 cfg.symbolsCurTier++;
-
+                // window.console.log('Tier-'+cfg.symbolsCurTier);
+                // window.console.log('loop- '+mainCfg.loopCounter);
                 if (cfg.symbolsCurTier >= symbolTiers.length) {
                     cfg.symbolsCurTier = 0;
                     cfg.symbolsCurCount = 0;
+                    mainCfg.loopCounter++;
+                    if(mainCfg.loopCounter === 4){
+                        mainCfg.loopCounter = 0;
+                    }
                 }
                 symbolStr = symbolStr.slice(0, -1);
                 // return url with symbols
                 return oAuthJSON.tkRequestData.url + symbolStr;
               
-        }
-        function checkTier(loopCounter){
-            
         }
     }
 })();

@@ -21,7 +21,7 @@
 
                 // format stock values
                 formatStock(stock, cfg.accountVal);
-
+                
                 // run all stocks thru the delist, volume, price test
                 if (testOFactory.delistTest(stock, delistArr) && testOFactory.haltTest(stock) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
 
@@ -44,7 +44,8 @@
 
                     }
                     // check if the stock passes all the E Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.loopCounter)) {
+
                         stocksPassed.stocksPassE.push(stock);
 
                     }

@@ -14,6 +14,7 @@
                 run: true,
                 apiMSecs: 1000,
                 symbolsPerTier: 340,
+                loopCounter: 0,
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockDiffPctA: 5,
@@ -30,7 +31,7 @@
                     testF: false
                 },
                 stockVolumeObj: {
-                    "hr8": 300000,
+                    "hr8": 200000,
                     "hr9": 500000,
                     "hr10": 800000,
                     "hr11": 1000000,
@@ -41,7 +42,6 @@
                 }
             }
             // vars
-        vm.loopCounter = 0;
         vm.tkUrl = '';
         vm.symbolsJSON = {};
         vm.oAuthJSON = {};
@@ -141,13 +141,13 @@
 
             $scope.$apply();
 
-            //  Create loop
+            //  keep looping thru tiers
             vm.loopTiers();
         }
 
         function checkData() {
             if (vm.symbolsJSON && vm.oAuthJSON) {
-
+                // create tiers and start the loop
                 vm.symbolTiers = vm.createTiers(vm.symbolsJSON, vm.cfg.symbolsPerTier);
                 vm.loopTiers();
             } else {
@@ -158,7 +158,7 @@
 
         function loopTiers() {
             if (vm.cfg.run) {
-                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON, vm.symbolTiers, vm.oAuthJSON);
+                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON, vm.symbolTiers, vm.oAuthJSON, vm.cfg);
                 setTimeout(function() {
                     vm.getStocks(vm.tkUrl, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 }, vm.cfg.apiMSecs);
