@@ -28,8 +28,8 @@
         }
         // trading most shares outstanding
         function sharesTestD(stock) {
-             stock.float = Math.round((stock.vl / stock.sho) * 100) / 100;
-             if(stock.float !== Infinity && stock.float > .50){
+             
+             if(stock.float !== Infinity && stock.float > .30){
                 return true;
             }
         }

@@ -82,7 +82,7 @@ gulp.task('start-server', function() {
         })
 
 });
-gulp.task('server', function(callback) {
+gulp.task('serve', function(callback) {
     runSequence('clean', ['copy', 'less', 'bundleScripts', 'watch'],['start-mongo', 'start-server'],
         callback);
 });

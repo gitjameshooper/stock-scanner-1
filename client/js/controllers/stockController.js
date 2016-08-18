@@ -12,23 +12,22 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 600,
+                apiMSecs: 1000,
                 symbolsPerTier: 340,
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockDiffPctA: 5,
                 stockVwapPctB: 8, // price percentage away from vwap
-                stockVwapHighPctB: 10, // high percentage away from vwap
+                stockVwapHighPctB: 12, // high percentage away from vwap
                 stockPriorDayPctC: 5,
-                stockSpeedPctE: 2,
                 stockBounceF: 5,
                 accountVal: 10000,
                 showTest: {
                     testA: true,
                     testB: true,
-                    testC: true,
-                    testD: true,
-                    testE: false,
+                    testC: false,
+                    testD: false,
+                    testE: true,
                     testF: false
                 },
                 stockVolumeObj: {

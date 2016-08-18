@@ -10,6 +10,7 @@
         return {
             volTest: volTest,
             priceTest: priceTest,
+            haltTest: haltTest,
             delistTest: delistTest,
             stockAlert: stockAlert
 
@@ -23,30 +24,37 @@
                 return true;
             }
         }
+        function haltTest(stock) {
+              
+            if (stock.prchg > 0 && stock.bid > 0) {
+                return true;
+            }
+        }
         // filter out stock by minimum price
         function priceTest(stock, stockMinPrice, stockMaxPrice) {
-            
+
             if ((stock.last > stockMinPrice) && (stock.last < stockMaxPrice)) {
                 return true;
             }
         }
         // check if stock has been added to delist
-        function delistTest(stock, delistArr){
+        function delistTest(stock, delistArr) {
 
-           if(_.indexOf(delistArr, stock.symbol) < 0){
-            
-              return true;
-           }
+            if (_.indexOf(delistArr, stock.symbol) < 0) {
+
+                return true;
+            }
         }
-        function stockAlert(stock, stocksArr, stockAdd){
+
+        function stockAlert(stock, stocksArr, stockAdd) {
             var stockIndex = _.indexOf(stocksArr, stock.symbol);
-            if(stockAdd && stockIndex < 0){
+            if (stockAdd && stockIndex < 0) {
                 stock.class = 'green';
                 stocksArr.push(stock.symbol);
                 $.playSound("/sounds/evil-laugh");
-            }else if(!stockAdd && stockIndex >= 0){
-                 stocksArr.splice(stockIndex,1);
-            }else if(stockAdd){
+            } else if (!stockAdd && stockIndex >= 0) {
+                stocksArr.splice(stockIndex, 1);
+            } else if (stockAdd) {
                 stock.class = 'green';
             }
         }

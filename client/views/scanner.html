@@ -35,7 +35,7 @@
                             <label class="text-light left">Float Test
                                 <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testD" />
                             </label>
-                            <label class="text-light left">Test E
+                            <label class="text-light left">Vol. Chg Test
                                 <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testE" />
                             </label>
                             <label class="text-light left">Bounce Test
@@ -45,6 +45,12 @@
                     </div>
                 </div>
                 <div class="row toggle-settings text-grey">
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testE">
+                        <h4>Vol. Test</h4>
+                    </div>
+                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
+                        <h4>Float Test</h4>
+                    </div>
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testA">
                         <h4>PullBack Test</h4>
                         <label class="text-light">% LOD to HOD
@@ -66,15 +72,6 @@
                             <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockVwapHighPctB" />
                         </label>
                     </div>
-                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
-                        <h4>Float Test</h4>
-                    </div>
-                    <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testE">
-                        <h4>Speed Test</h4>
-                        <label class="text-light">Alert High Speed
-                            <input type="number" class="db text-black" step="0.10" ng-model="stockApp.cfg.stockSpeedPctE" />
-                        </label>
-                    </div>
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testF">
                         <h4>Bounce Test</h4>
                         <label class="text-light">Bounce Dist.
@@ -85,6 +82,61 @@
             </div>
         </div>
         <div class="row margin-top-20 f-15">
+            <div class="col-sm-6" ng-show="stockApp.cfg.showTest.testE">
+                <table class="table table-bordered table-responsive text-center">
+                    <thead>
+                        <h3>Volume Chg Test</h3>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Chg</th>
+                            <th>Volume Chg</th>
+                            <th>Float</th>
+                            <th>YOYO</th>
+                            <th>1/2
+                                <br />Shares</th>
+                            <th>Delist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-yoyo'">
+                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a></td>
+                            <td>{{ stockE.last }}</td>
+                            <td>{{ stockE.pchg }}</td>
+                            <td>{{ stockE.vlChg_21 }}</td>
+                            <td>{{ stockE.float }}</td>
+                            <td>{{ stockE.yoyo }}</td>
+                            <td>{{ stockE.shares }}</td>
+                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
+                <table class="table table-bordered table-responsive text-center">
+                    <thead>
+                        <h3>Float Test</h3>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Float
+                                <br />Rotated</th>
+                            <th>1/2
+                                <br />Shares</th>
+                            <th>Delist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stockD in stockApp.stocksD | orderBy:'-float'">
+                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
+                            <td>{{ stockD.last }}</td>
+                            <td>{{ stockD.float }}</td>
+                            <td>{{ stockD.shares }}</td>
+                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockD, stockApp.stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testA">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
@@ -92,18 +144,17 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>DiffPct
-                                <br />L-H</th>
+                            <th>Volume Chg</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-stockDiffPctLH'">
+                        <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-vlChg_21'">
                             <td class="{{ stockA.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                             <td>{{ stockA.last }}</td>
-                            <td>{{ stockA.stockDiffPctLH }}</td>
+                            <td>{{ stockA.vlChg_21 }}</td>
                             <td>{{ stockA.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockA, stockApp.stocksA)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
@@ -155,55 +206,6 @@
                             <td>{{ stockB.vwapDiff }}</td>
                             <td>{{ stockB.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockB, stockApp.stocksB)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
-                <table class="table table-bordered table-responsive text-center">
-                    <thead>
-                        <h3>Float Test</h3>
-                        <tr>
-                            <th>Symbol</th>
-                            <th>Price</th>
-                            <th>Float
-                                <br />Rotated</th>
-                            <th>1/2
-                                <br />Shares</th>
-                            <th>Delist</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="stockD in stockApp.stocksD | orderBy:'-float'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
-                            <td>{{ stockD.last }}</td>
-                            <td>{{ stockD.float }}</td>
-                            <td>{{ stockD.shares }}</td>
-                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockD, stockApp.stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testE">
-                <table class="table table-bordered table-responsive text-center">
-                    <thead>
-                        <h3>Speed Test</h3>
-                        <tr>
-                            <th>Symbol</th>
-                            <th>Price</th>
-                            <th>Chg</th>
-                            <th>1/2
-                                <br />Shares</th>
-                            <th>Delist</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-chg'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a></td>
-                            <td>{{ stockE.last }}</td>
-                            <td>{{ stockE.chg }}</td>
-                            <td>{{ stockE.shares }}</td>
-                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

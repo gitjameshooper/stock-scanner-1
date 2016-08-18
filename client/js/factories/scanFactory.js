@@ -23,7 +23,7 @@
                 formatStock(stock, cfg.accountVal);
 
                 // run all stocks thru the delist, volume, price test
-                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
+                if (testOFactory.delistTest(stock, delistArr) && testOFactory.haltTest(stock) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
 
                     // check if the stock passes all the A Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctA)) {
@@ -67,14 +67,19 @@
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.vl = Number(stock.vl);
+            stock.pvol = Number(stock.pvol);
+            stock.vlChg_21 = Number((stock.vl / stock.adv_21).toFixed(2));
             stock.sho = Number(stock.sho);
-            stock.chg = Number(stock.chg)*100;
+            stock.chg = Number(stock.chg);
+            stock.pchg = Number(stock.pchg);
+            stock.float = Math.round((stock.vl / stock.sho) * 100) / 100;
             stock.plo = Math.round(stock.plo * 100) / 100;
             stock.phi = Math.round(stock.phi * 100) / 100;
             stock.pcls = Math.round(stock.pcls * 100) / 100;
             stock.prchg = Number(stock.prchg);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.last = Math.round(stock.last * 100) / 100;
+            stock.yoyo = stock.vlChg_21 * stock.float;
         }
 
         function duplicateStock(stock, stocksArr) {
