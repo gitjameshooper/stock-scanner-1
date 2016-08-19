@@ -71,6 +71,9 @@
                     </div>
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testE">
                         <h4>Speed Test</h4>
+                        <label class="text-light">Max Spread
+                            <input type="number" class="db text-black" step="0.01" ng-model="stockApp.cfg.stockMaxSpreadE" />
+                        </label>
                     </div>
                     <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testF">
                         <h4>Sample Test</h4>
@@ -184,15 +187,17 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
+                            <th>Speed</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-vol'">
+                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-speed'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a></td>
                             <td>{{ stockE.last }}</td>
+                            <td>{{ stockE.speed }}</td>
                             <td>{{ stockE.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>

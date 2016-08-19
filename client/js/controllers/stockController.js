@@ -21,6 +21,9 @@
                 stockVwapPctB: 8, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockPriorDayPctC: 5,
+                stockSpeedPctE: 1,
+                stockSpeedHighPctE: 2,
+                stockMaxSpreadE: .20,
                 accountVal: 8000,
                 showTest: {
                     testA: true,

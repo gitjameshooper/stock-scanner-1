@@ -59,6 +59,7 @@
                     cfg.symbolsCurCount = 0;
                     mainCfg.loopCounter++;
                     if(mainCfg.loopCounter === 4){
+                        window.console.log('new-loop');
                         mainCfg.loopCounter = 0;
                     }
                 }
