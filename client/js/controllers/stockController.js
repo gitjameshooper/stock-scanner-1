@@ -12,7 +12,7 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 1000,
+                apiMSecs: 800,
                 symbolsPerTier: 340,
                 loopCounter: 0,
                 stockMinPrice: 2,

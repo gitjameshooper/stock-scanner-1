@@ -80,11 +80,11 @@
                     if (stock.speed >= stockSpeedHighPctE) {
                 
                         stockSpeed = true;
-                        testOFactory.stockAlert(stock, stocksAlert, true);
+                        // testOFactory.stockAlert(stock, stocksAlert, true);
                 
                     }else if(stock.speed >= stockSpeedPctE){
                         stockSpeed = true;
-                        testOFactory.stockAlert(stock, stocksAlert, false);
+                        // testOFactory.stockAlert(stock, stocksAlert, false);
                         
                     }
                 }
