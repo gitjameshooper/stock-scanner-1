@@ -30,8 +30,8 @@
                     testB: false,
                     testC: true,
                     testD: true,
-                    testE: true,
-                    testF: false
+                    testE: false,
+                    testF: true
                 },
                 stockVolumeObj: {
                     "hr8": 200000,

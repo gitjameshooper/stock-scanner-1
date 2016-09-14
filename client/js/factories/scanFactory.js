@@ -67,6 +67,8 @@
             stock.prbook = Math.round(stock.prbook * 100) / 100;
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
+            stock.last = Math.round(stock.last * 100) / 100;
+            stock.hidifflo = (stock.hi - stock.lo) / stock.last;
             stock.vl = Number(stock.vl);
             stock.pvol = Number(stock.pvol);
             stock.vlChg_21 = Number((stock.vl / stock.adv_21).toFixed(2));
@@ -80,7 +82,7 @@
             stock.prchg = Number(stock.prchg);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.spread = Number((stock.ask - stock.bid).toFixed(2));
-            stock.last = Math.round(stock.last * 100) / 100;
+            
         }
 
         function duplicateStock(stock, stocksArr) {

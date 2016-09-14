@@ -13,17 +13,21 @@
 
         };
 
-        function allTests(stock, stocksAlert) {
+        function allTests(stock, stocksAlert, stockAwayPctF) {
             // check if the stock passes all the F Tests
-            if (priceTest(stock)) {
+            if (betweenTestF(stock, stockAwayPctF)) {
                 return true;
             }
         }
 
-        function priceTest(stock) {
-
-            return true;
-
+        // stock near midpoint(between lo and hi)
+        function betweenTestF(stock, stockAwayPctF) {
+            var midPoint = (stock.hi + stock.lo) / 2,
+                stockAwayMidB = Math.abs((midPoint / stock.last) - 1) * 100;
+            stock.midAwayB = Math.round(stockAwayMidB * 100) / 100;
+            if (stockAwayMidB < 1) {
+                return true;
+            }
         }
 
     }
