@@ -64,7 +64,7 @@ gulp.task('watch', function() {
 //// Server Side ////
 
 // Running mongoDB for server
-gulp.task('start-mongo', runCommand('mongod --dbpath=./server/data'));
+gulp.task('start-mongo', runCommand('mongod --dbpath=/data/db'));
 gulp.task('stop-mongo', runCommand('killall mongod'));
 
 // Start Server and Watch for File changes

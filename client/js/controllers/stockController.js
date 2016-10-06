@@ -82,11 +82,13 @@
         vm.init = init;
 
         function init() {
+
             xtraFactory.settingsAnim();
             xtraFactory.jQueryExtends();
         }
 
         function getSymbols() {
+             
             return symbolsService.getSymbols()
                 .then(function(data) {
                     vm.symbolsJSON = data;
@@ -95,6 +97,7 @@
         }
 
         function getOAuth() {
+            window.console.log('oauth');
             return oAuthService.getOAuth()
                 .then(function(data) {
                     vm.oAuthJSON = data;
