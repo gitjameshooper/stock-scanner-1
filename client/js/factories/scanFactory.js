@@ -23,8 +23,8 @@
                 formatStock(stock, cfg.accountVal);
 
                 // run all stocks thru the delist, volume, price test
-                if (testOFactory.delistTest(stock, delistArr) && testOFactory.haltTest(stock) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
-
+                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
+    
                     // check if the stock passes all the A Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctA)) {
                         stocksPassed.stocksPassA.push(stock);
@@ -78,6 +78,7 @@
             stock.float = Math.round((stock.vl / stock.sho) * 100) / 100;
             stock.plo = Math.round(stock.plo * 100) / 100;
             stock.phi = Math.round(stock.phi * 100) / 100;
+            stock.popn = Math.round(stock.popn * 100) / 100;
             stock.pcls = Math.round(stock.pcls * 100) / 100;
             stock.prchg = Number(stock.prchg);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);

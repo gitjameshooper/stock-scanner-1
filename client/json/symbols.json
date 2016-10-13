@@ -10,6 +10,7 @@
     "ABB": "Abb Ltd",
     "ABBV": "Abbvie Inc Common Stock",
     "ABC": "Amerisourcebergen Corp",
+    "ACAD": "Acadia Pharmaceutica",
     "ABEV": "Ambev S.A.",
     "ABG": "Asbury Automotive Group Inc",
     "ABM": "ABM Industries Incorporated",
@@ -2742,7 +2743,6 @@
     "ABTX": "Allegiance Banc CS",
     "ABUS": "Arbutus Biopharma Cp",
     "ABY": "Atlantica Yield Plc",
-    "ACAD": "Acadia Pharmaceutica",
     "ACAS": "Amer Capital Ltd",
     "ACAT": "Arctic Cat Inc",
     "ACBI": "Atlantic Capital Cm",
@@ -7859,4 +7859,3 @@
     "ZSL": "Ultrashort Silver Proshares",
     "ZSML": "ETFS Zacks Earnings Small-Cap U"
   }
-

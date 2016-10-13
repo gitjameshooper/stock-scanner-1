@@ -217,11 +217,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockF in stockApp.stocksF | orderBy:'-hidifflo'">
+                        <tr ng-repeat="stockF in stockApp.stocksF | orderBy:'-last'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockF.symbol }}&src=ctag">{{ stockF.symbol }}</a></td>
                             <td>{{ stockF.last }}</td>
                             <td>{{ stockF.shares }}</td>
-                            <td>{{ stockF.hidifflo }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockF, stockApp.stocksF)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>

@@ -76,7 +76,6 @@
 
 
                     stock.speed = Number((Math.abs((stock.last - loopArr[key].last) / stock.last) * 100).toFixed(2));
-                    window.console.log(stock.symbol+"--"+stock.speed);
                     if (stock.speed >= stockSpeedHighPctE) {
                 
                         stockSpeed = true;

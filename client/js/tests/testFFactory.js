@@ -15,17 +15,27 @@
 
         function allTests(stock, stocksAlert, stockAwayPctF) {
             // check if the stock passes all the F Tests
-            if (betweenTestF(stock, stockAwayPctF)) {
+            if (priorRedF(stock, stockAwayPctF) && belowCloseF(stock, stockAwayPctF) && aboveOpenF(stock, stockAwayPctF)) {
                 return true;
             }
         }
+        // prior day red
+        function priorRedF(stock, stockAwayPctF) {
 
-        // stock near midpoint(between lo and hi)
-        function betweenTestF(stock, stockAwayPctF) {
-            var midPoint = (stock.hi + stock.lo) / 2,
-                stockAwayMidB = Math.abs((midPoint / stock.last) - 1) * 100;
-            stock.midAwayB = Math.round(stockAwayMidB * 100) / 100;
-            if (stockAwayMidB < 1) {
+            if (stock.prchg < 0) {
+                return true;
+            }
+        }
+        // stock opens lower than close
+        function belowCloseF(stock, stockAwayPctF) {  
+    
+            if (stock.pcls > stock.opn) {
+                return true;
+            }
+        }
+                // stock currently above prior day open
+        function aboveOpenF(stock, stockAwayPctF) {  
+            if (stock.popn < stock.last) {
                 return true;
             }
         }
