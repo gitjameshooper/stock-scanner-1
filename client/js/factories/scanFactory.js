@@ -30,30 +30,30 @@
                         stocksPassed.stocksPassA.push(stock);
                     }
 
-                    // check if the stock passes all the B Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
-                        stocksPassed.stocksPassB.push(stock);
-                    }
-                    // check if the stock passes all the C Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockPriorDayPctC)) {
-                        stocksPassed.stocksPassC.push(stock);
-                    }
-                    // check if the stock passes all the D Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
-                        stocksPassed.stocksPassD.push(stock);
+                    // // check if the stock passes all the B Tests
+                    // if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+                    //     stocksPassed.stocksPassB.push(stock);
+                    // }
+                    // // check if the stock passes all the C Tests
+                    // if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockPriorDayPctC)) {
+                    //     stocksPassed.stocksPassC.push(stock);
+                    // }
+                    // // check if the stock passes all the D Tests
+                    // if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                    //     stocksPassed.stocksPassD.push(stock);
 
-                    }
-                    // check if the stock passes all the E Tests
+                    // }
+                    // // check if the stock passes all the E Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
 
                         stocksPassed.stocksPassE.push(stock);
 
                     }
                     // check if the stock passes all the F Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
-                        stocksPassed.stocksPassF.push(stock);
+                    // if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                    //     stocksPassed.stocksPassF.push(stock);
 
-                    }
+                    // }
 
                 }
             });
@@ -68,9 +68,13 @@
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.last = Math.round(stock.last * 100) / 100;
-            stock.hidifflo = (stock.hi - stock.lo) / stock.last;
+            stock.mid = Math.round(((stock.hi + stock.lo) /2)* 100) / 100;
+            stock.oldhidifflo = (stock.hi - stock.lo) / stock.last;
+            stock.hidifflo = Math.round((stock.hi - stock.lo)*100)/100;
+            stock.closeMid = Math.round(Math.abs(stock.mid - stock.last)* 100) / 100;
             stock.vl = Number(stock.vl);
             stock.pvol = Number(stock.pvol);
+            stock.volday = Number(stock.vl - stock.pvol);
             stock.vlChg_21 = Number((stock.vl / stock.adv_21).toFixed(2));
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);

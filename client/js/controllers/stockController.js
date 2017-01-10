@@ -12,7 +12,7 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 800,
+                apiMSecs: 900,
                 symbolsPerTier: 340,
                 loopCounter: 0,
                 stockMinPrice: 2,
@@ -24,12 +24,12 @@
                 stockSpeedPctE: 1,
                 stockSpeedHighPctE: 2,
                 stockMaxSpreadE: .20,
-                accountVal: 8000,
+                accountVal: 14000,
                 showTest: {
                     testA: true,
                     testB: false,
-                    testC: true,
-                    testD: true,
+                    testC: false,
+                    testD: false,
                     testE: false,
                     testF: true
                 },
@@ -140,7 +140,10 @@
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
             vm.stocksD = vm.stocksPassed.stocksPassD;
-            vm.stocksE = vm.stocksPassed.stocksPassE;
+            $.each(vm.stocksPassed.stocksPassE, function(key, stock) {
+                    vm.stocksE.push(stock);    
+            });
+            
             vm.stocksF = vm.stocksPassed.stocksPassF;
 
             $scope.$apply();

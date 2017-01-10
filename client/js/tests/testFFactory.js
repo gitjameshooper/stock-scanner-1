@@ -15,30 +15,22 @@
 
         function allTests(stock, stocksAlert, stockAwayPctF) {
             // check if the stock passes all the F Tests
-            if (priorRedF(stock, stockAwayPctF) && belowCloseF(stock, stockAwayPctF) && aboveOpenF(stock, stockAwayPctF)) {
+           
+            if (stockVolumeF(stock, stockAwayPctF)) {
                 return true;
             }
         }
-        // prior day red
-        function priorRedF(stock, stockAwayPctF) {
+        // opening big diff
+        function stockVolumeF(stock, stockAwayPctF) {
+            
+               if(stock.vl > stock.pvol){
 
-            if (stock.prchg < 0) {
                 return true;
-            }
+                }
+             
         }
-        // stock opens lower than close
-        function belowCloseF(stock, stockAwayPctF) {  
-    
-            if (stock.pcls > stock.opn) {
-                return true;
-            }
-        }
-                // stock currently above prior day open
-        function aboveOpenF(stock, stockAwayPctF) {  
-            if (stock.popn < stock.last) {
-                return true;
-            }
-        }
+
+      
 
     }
 })();

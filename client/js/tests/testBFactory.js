@@ -21,20 +21,20 @@
         // stock is far away from vwap
         function vwapTestB(stock, stocksAlert, stockVwapPctB, stockVwapHighPctB) {
            
-             var stockDiffVwap = Number((stock.last - stock.vwap).toFixed(2)),
-                stockDiffPctVwapD = (stockDiffVwap / stock.last).toFixed(3) * 100,
-                stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
+            var stockDiffVwap = Number((stock.last - stock.vwap).toFixed(2)),
+                stockDiffPctVwapD = (stockDiffVwap / stock.last).toFixed(3) * 100;
+                // stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
                 stock.vwapDiff = Number(stockDiffPctVwapD.toFixed(2));
-                stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
+                // stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
 
-            if (stockDiffVwapDPos >= stockVwapPctB) {
+            if (stockDiffPctVwapD <= 0) {
                
                 // alert if high interest
-                if(stockDiffVwapDPos > stockVwapHighPctB){
-                    testOFactory.stockAlert(stock, stocksAlert, true);
-                }else{
-                    testOFactory.stockAlert(stock, stocksAlert, false);
-                }
+                // if(stockDiffVwapDPos > stockVwapHighPctB){
+                //     testOFactory.stockAlert(stock, stocksAlert, true);
+                // }else{
+                //     testOFactory.stockAlert(stock, stocksAlert, false);
+                // }
                 return true;
             }
         }

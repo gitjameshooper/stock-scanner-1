@@ -12,29 +12,44 @@
             allTests: allTests
         
         };
-        function allTests(stock, stocksAlert, stockDiffPctA){
+        function allTests(stock, stocksAlert){
+            var stockArr = [{
+                "name" : "TWLO",
+                "hi" : 32.00,
+                "lo" : 27.00
+            },{
+                "name" : "EXAS",
+                "hi" : 12.60,
+                "lo" : 12.00
+            },{
+                "name" : "ARRY",
+                "hi" : 9.62,
+                "lo" : 9.38
+            }];
             // check if the stock passes all the A Tests
-            if (lodHodTest(stock, stockDiffPctA) && vwapTest(stock)) {
+            if (stockZoneTest(stock, stockArr)) {
                 return true; 
             }
         }
-        // for difference between lod and hod
-        function lodHodTest(stock, stockDiffPctA) {
+        function stockZoneTest(stock, stockArr){
+                var stockH,
+                    stockL,
+                    stockSym;
 
-            var stockDiff = Number((stock.hi - stock.lo).toFixed(2)),
-                stockDiffPct = Number((stockDiff / stock.lo).toFixed(3) * 100);
-                stock.stockDiffPctLH = Number((stockDiffPct).toFixed(2));
-            if (stockDiffPct >= stockDiffPctA) {
-                return true;
+            for (var i = 0; i < stockArr.length; i++) { 
+                    stockH = stockArr[i]['hi'];
+                    stockL = stockArr[i]['lo'];
+                    stockSym = stockArr[i]['name'];
+                   
+                if(stock.symbol == stockSym){
+                      
+                    if(stockL < stock.last && stock.last < stockH){
+                      return true;
+                    }
+                }
             }
+           
         }
-        // if close to vwap
-        function vwapTest(stock) {
-               var stockVwapMidpoint = (stock.vwap + stock.hi) / 2;
-              
-            if ((stock.last <= stockVwapMidpoint) && (stock.last >= stock.vwap)) {
-                return true;
-            }
-        }
+        
     }
 })();
