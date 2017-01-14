@@ -17,6 +17,7 @@
         };
 
         function createTiers(symbolsJSON, symbolsPerTier) {
+
             var symbolCount = Object.keys(symbolsJSON).length / symbolsPerTier,
                 symbolCountR = Object.keys(symbolsJSON).length % symbolsPerTier,
                 tierStart = 0,
@@ -35,11 +36,13 @@
             return symbolsTierArr;
         }
 
-        function formatTierSymbols(symbolsJSON, symbolTiers, oAuthJSON, mainCfg) {
+        function formatTierSymbols(symbolsJSON, stocksPassedStr, symbolTiers, oAuthJSON, mainCfg) {
             
                 var symbolStr = '',
                     symbolsBegCount = 0;
-
+                    if(stocksPassedStr){
+                        symbolStr = stocksPassedStr;
+                    }
                 // cycle thru symbols in a tier
                 $.each(symbolsJSON, function(k, v) {
 
@@ -64,6 +67,7 @@
                     }
                 }
                 symbolStr = symbolStr.slice(0, -1);
+            
                 // return url with symbols
                 return oAuthJSON.tkRequestData.url + symbolStr;
               

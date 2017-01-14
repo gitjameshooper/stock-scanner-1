@@ -44,16 +44,16 @@
 
                     // }
                     // // check if the stock passes all the E Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
+                    // if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
 
-                        stocksPassed.stocksPassE.push(stock);
-
-                    }
-                    // check if the stock passes all the F Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
-                    //     stocksPassed.stocksPassF.push(stock);
+                    //     stocksPassed.stocksPassE.push(stock);
 
                     // }
+                    // check if the stock passes all the F Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                        stocksPassed.stocksPassF.push(stock);
+
+                    }
 
                 }
             });

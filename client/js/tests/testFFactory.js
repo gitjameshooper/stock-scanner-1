@@ -13,17 +13,33 @@
 
         };
 
-        function allTests(stock, stocksAlert, stockAwayPctF) {
+        function allTests(stock, stocksAlert) {
             // check if the stock passes all the F Tests
            
-            if (stockVolumeF(stock, stockAwayPctF)) {
+            if (stockLow(stock) && stockHi(stock) && stockClose(stock)) {
                 return true;
             }
         }
         // opening big diff
-        function stockVolumeF(stock, stockAwayPctF) {
+        function stockLow(stock) {
             
-               if(stock.vl > stock.pvol){
+               if(stock.lo < stock.plo){
+
+                return true;
+                }
+             
+        }
+        function stockClose(stock) {
+            
+               if(stock.last > stock.pcls){
+
+                return true;
+                }
+             
+        }
+        function stockHi(stock) {
+            
+               if(stock.last > stock.phi){
 
                 return true;
                 }

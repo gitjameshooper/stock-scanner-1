@@ -49,6 +49,7 @@
         vm.symbolsJSON = {};
         vm.oAuthJSON = {};
         vm.symbolTiers = [];
+        vm.stockCount = 0;
         vm.symbolStr = '';
         vm.stocksPassed = {
             stocksPassA: [],
@@ -71,6 +72,8 @@
         vm.stopScan = stopScan;
         vm.getSymbols = getSymbols;
         vm.getStocks = getStocks;
+        vm.countStocks = countStocks;
+        vm.strPassedStocks = strPassedStocks;
         vm.getOAuth = getOAuth;
         vm.checkData = checkData;
         vm.createTiers = tierFactory.createTiers;
@@ -151,9 +154,27 @@
             //  keep looping thru tiers
             vm.loopTiers();
         }
-
+        function countStocks(){
+    
+            vm.stockCount = vm.stocksA.length + vm.stocksB.length + vm.stocksC.length + vm.stocksD.length + vm.stocksE.length + vm.stocksF.length;
+        }
+        function strPassedStocks(){
+            
+            $.each(vm.stocksPassed,function(k,v){
+                
+                $.each(v,function(k,v){
+                        
+                        if(v.symbol){
+                           vm.stocksPassedStr += v.symbol + ',';
+                        }
+                });
+                
+            });
+             
+        }
         function checkData() {
             if (vm.symbolsJSON && vm.oAuthJSON) {
+
                 // create tiers and start the loop
                 vm.symbolTiers = vm.createTiers(vm.symbolsJSON, vm.cfg.symbolsPerTier);
                 vm.loopTiers();
@@ -162,10 +183,13 @@
                 $.playSound("/sounds/monkey");
             }
         }
-
         function loopTiers() {
             if (vm.cfg.run) {
-                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON, vm.symbolTiers, vm.oAuthJSON, vm.cfg);
+                vm.countStocks();
+                vm.strPassedStocks();
+                vm.symbolTiers = vm.createTiers(vm.symbolsJSON, vm.cfg.symbolsPerTier - vm.stockCount);
+                vm.tkUrl = vm.formatTierSymbols(vm.symbolsJSON, vm.stocksPassedStr, vm.symbolTiers, vm.oAuthJSON, vm.cfg);
+                vm.stocksPassedStr = '';
                 setTimeout(function() {
                     vm.getStocks(vm.tkUrl, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 }, vm.cfg.apiMSecs);

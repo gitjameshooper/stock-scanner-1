@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="row margin-top-20 f-15">
+        <div class="row f-15">
             <div class="col-sm-6" ng-show="stockApp.cfg.showTest.testA">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
@@ -89,6 +89,7 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
+                            <th>Type</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
@@ -98,6 +99,7 @@
                         <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-last'">
                             <td class="{{ stockA.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a> </td>
                             <td>{{ stockA.last }}</td>
+                            <td>{{ stockA.type }}</td>
                             <td>{{ stockA.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockA, stockApp.stocksA)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
@@ -216,9 +218,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockF in stockApp.stocksF | orderBy:'-volday'">
+                        <tr ng-repeat="stockF in stockApp.stocksF | orderBy:'-vl'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockF.symbol }}&src=ctag">{{ stockF.symbol }}</a></td>
-                             <td>{{ stockF.volday }}</td>
+                             <td>{{ stockF.vl }}</td>
                             <td>{{ stockF.shares }}</td>
                           
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockF, stockApp.stocksF)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
