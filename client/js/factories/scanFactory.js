@@ -15,9 +15,17 @@
             delistStock: delistStock
         };
 
-        function scanStocks(quotesData, stocksPassed, cfg) {
+        function scanStocks(quotesData, stocksPassed, symbolsJSON, cfg) {
 
             $.each(quotesData, function(key, stock) {
+                 
+                // merge stock float data from JSON
+                $.each(symbolsJSON, function(k, v) {
+                    if(stock.symbol == v.symbol){
+                        stock.float = v.float;
+                        stock.shortRatio = v.shortRatio;
+                    }
+                });
 
                 // format stock values
                 formatStock(stock, cfg.accountVal);
@@ -26,14 +34,14 @@
                 if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
     
                     // check if the stock passes all the A Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctA)) {
-                        stocksPassed.stocksPassA.push(stock);
-                    }
-
-                    // // check if the stock passes all the B Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
-                    //     stocksPassed.stocksPassB.push(stock);
+                    // if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctA)) {
+                    //     stocksPassed.stocksPassA.push(stock);
                     // }
+
+                    // check if the stock passes all the B Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+                        stocksPassed.stocksPassB.push(stock);
+                    }
                     // // check if the stock passes all the C Tests
                     // if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockPriorDayPctC)) {
                     //     stocksPassed.stocksPassC.push(stock);
@@ -43,12 +51,12 @@
                     //     stocksPassed.stocksPassD.push(stock);
 
                     // }
-                    // // check if the stock passes all the E Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
+                    // check if the stock passes all the E Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
 
-                    //     stocksPassed.stocksPassE.push(stock);
+                        stocksPassed.stocksPassE.push(stock);
 
-                    // }
+                    }
                     // check if the stock passes all the F Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
                         stocksPassed.stocksPassF.push(stock);
@@ -79,7 +87,9 @@
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);
             stock.pchg = Number(stock.pchg);
-            stock.float = Math.round((stock.vl / stock.sho) * 100) / 100;
+            stock.float = Math.round(stock.float * 100) / 100;
+            stock.floatRotated = Math.round((stock.vl / stock.float) * 100) / 100;
+            stock.shortRatio = Number(stock.shortRatio);
             stock.plo = Math.round(stock.plo * 100) / 100;
             stock.phi = Math.round(stock.phi * 100) / 100;
             stock.popn = Math.round(stock.popn * 100) / 100;

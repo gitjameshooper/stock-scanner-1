@@ -5,32 +5,32 @@
         .module('stockScannerApp')
         .controller('stockController', stockController);
     stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory', 'scanFactory', 'tierFactory'];
-
+     
     function stockController($scope, $log, symbolsService, oAuthService, xtraFactory, scanFactory, tierFactory) {
         var vm = this;
         // config
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 900,
+                apiMSecs: 1100,
                 symbolsPerTier: 340,
                 loopCounter: 0,
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockDiffPctA: 5,
-                stockVwapPctB: 8, // price percentage away from vwap
+                stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockPriorDayPctC: 5,
-                stockSpeedPctE: 1,
+                stockSpeedPctE: .50,
                 stockSpeedHighPctE: 2,
                 stockMaxSpreadE: .20,
                 accountVal: 14000,
                 showTest: {
-                    testA: true,
-                    testB: false,
+                    testA: false,
+                    testB: true,
                     testC: false,
                     testD: false,
-                    testE: false,
+                    testE: true,
                     testF: true
                 },
                 stockVolumeObj: {
@@ -84,6 +84,7 @@
         vm.delistStock = scanFactory.delistStock;
         vm.init = init;
 
+      
         function init() {
 
             xtraFactory.settingsAnim();
@@ -121,17 +122,17 @@
 
             }).error(function(err) {
                 vm.cfg.status = "error";
-                $.playSound("/sounds/monkey");
+                // $.playSound("/sounds/monkey");
                 $log.error('Bad TK Request - ' + err.statusText);
                 $scope.$apply();
                 // start scan if error
                 setTimeout(function() {
                     vm.startScan();
-                }, 10000);
+                }, 20000);
 
             }).done(function(data) {
                 //run tk data thru tests
-                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.cfg);
+                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
                 vm.viewStocks();
             });
         }
@@ -143,9 +144,10 @@
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
             vm.stocksD = vm.stocksPassed.stocksPassD;
-            $.each(vm.stocksPassed.stocksPassE, function(key, stock) {
-                    vm.stocksE.push(stock);    
-            });
+             vm.stocksE = vm.stocksPassed.stocksPassE;
+            // $.each(vm.stocksPassed.stocksPassE, function(key, stock) {
+            //         vm.stocksE.push(stock);    
+            // });
             
             vm.stocksF = vm.stocksPassed.stocksPassF;
 
@@ -158,6 +160,7 @@
     
             vm.stockCount = vm.stocksA.length + vm.stocksB.length + vm.stocksC.length + vm.stocksD.length + vm.stocksE.length + vm.stocksF.length;
         }
+        // prepend passed stock symbols for next api call
         function strPassedStocks(){
             
             $.each(vm.stocksPassed,function(k,v){

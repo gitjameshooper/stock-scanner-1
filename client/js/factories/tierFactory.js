@@ -45,9 +45,10 @@
                     }
                 // cycle thru symbols in a tier
                 $.each(symbolsJSON, function(k, v) {
-
+                       
                     if ((symbolsBegCount >= symbolTiers[cfg.symbolsCurTier][0]) && (symbolTiers[cfg.symbolsCurTier][0] <= cfg.symbolsCurCount) && (cfg.symbolsCurCount <= symbolTiers[cfg.symbolsCurTier][1])) {
-                        symbolStr += k + ',';
+                        symbolStr += v.symbol + ',';
+                        // old way symbolStr += k + ',';
                         cfg.symbolsCurCount++;
                     }
                     symbolsBegCount++;
