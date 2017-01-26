@@ -1,6 +1,6 @@
 <section class="scanner-page" ng-class="stockApp.cfg.status">
     <div class="container-fluid">
-        <div class="row f-18">
+        <div class="row f-18 fixed">
             <div class="col-xs-12 status-bar text-grey">
                 Status: <span class="status-text">{{ stockApp.cfg.status }} </span>
                 <button class="btn green margin-10" ng-click="stockApp.startScan()">Start Scan</button>
@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="row f-18">
-            <div class="col-xs-12 settings-bar black">
+            <div class="col-xs-12 settings-bar black hide">
                 <a href="" class="slide-toggle db text-grey no-hover padding-15-tb hvr-pop" data-toggle=".toggle-settings">Settings <i class="fa fa-arrow-circle-down text-grey" aria-hidden="true"></i><i class="fa fa-arrow-circle-up text-grey" aria-hidden="true"></i></a>
                 <div class="row toggle-settings text-grey">
                     <div class="col-sm-12">
@@ -90,7 +90,7 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>Type</th>
-                            <th>1/2
+                            <th>1/3
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
@@ -115,7 +115,7 @@
                             <th>Price</th>
                             <th>Away
                                 <br /> PCLS</th>
-                            <th>1/2
+                            <th>1/3
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
@@ -131,25 +131,24 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-3" ng-show="stockApp.cfg.showTest.testD">
+            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testD">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
-                        <h3>Float Test</h3>
+                        <h3>Gap Test</h3>
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Float
-                                <br />Rotated</th>
-                            <th>1/2
+                            <th>GapPCT</th>
+                            <th>1/3
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockD in stockApp.stocksD | orderBy:'-float'">
+                        <tr ng-repeat="stockD in stockApp.stocksD | orderBy:'-gapPCT'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                             <td>{{ stockD.last }}</td>
-                            <td>{{ stockD.float }}</td>
+                            <td>{{ stockD.gapPCT }}</td>
                             <td>{{ stockD.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockD, stockApp.stocksD)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
@@ -164,7 +163,7 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>Speed</th>
-                            <th>1/2
+                            <th>1/3
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
@@ -189,7 +188,7 @@
                             <th>Price</th>
                             <th>Float Rotated</th>
                             <th>Short Ratio</th>
-                            <th>1/2 
+                            <th>1/3 
                                 <br />Shares</th>
                        
                             <th>Delist</th>
@@ -216,7 +215,7 @@
                             <th>Symbol</th>
                             <th>Price</th>
                             <th>Pct Diff.</th>
-                            <th>1/2
+                            <th>1/3
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>

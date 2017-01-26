@@ -1,4 +1,4 @@
-// Test Notes:  
+// Test Notes:  Used to find stocks with float rotation
 (function() {
     'use strict';
 

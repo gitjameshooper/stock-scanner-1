@@ -22,12 +22,11 @@
         function vwapTestB(stock, stocksAlert, stockVwapPctB, stockVwapHighPctB) {
            
             var stockDiffVwap = Number((stock.last - stock.vwap).toFixed(2)),
-                stockDiffPctVwapD = (stockDiffVwap / stock.last).toFixed(3) * 100,
-                stockDiffVwapDPos = Math.abs(stockDiffPctVwapD);
-                stock.vwapDiff = Number(stockDiffVwapDPos.toFixed(2));
+                stockDiffPctVwapD = (stockDiffVwap / stock.last).toFixed(3) * 100;
+                 stock.vwapDiff = Number(stockDiffPctVwapD.toFixed(2));
                  
-
-            if (stock.vwapDiff >= stockVwapPctB) {
+                   
+            if (stock.vwapDiff >= stockVwapPctB || stock.vwapDiff <= -Math.abs(stockVwapPctB)) {
                
                 // alert if high interest
                 // if(stockDiffVwapDPos > stockVwapHighPctB){

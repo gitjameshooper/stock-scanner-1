@@ -21,15 +21,15 @@
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockPriorDayPctC: 5,
-                stockSpeedPctE: .50,
+                stockSpeedPctE: 1,
                 stockSpeedHighPctE: 2,
-                stockMaxSpreadE: .20,
-                accountVal: 14000,
+                stockMaxSpreadE: .75,
+                accountVal: 24000,
                 showTest: {
                     testA: false,
                     testB: true,
                     testC: false,
-                    testD: false,
+                    testD: true,
                     testE: true,
                     testF: true
                 },

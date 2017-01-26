@@ -13,6 +13,7 @@
             loop2 = [],
             loop3 = [],
             loop4 = [],
+            loop5 = [],
             clearArrs = true;
 
 
@@ -29,6 +30,7 @@
                     loop2 = [];
                     loop3 = [];
                     loop4 = [];
+                    loop5 = [];
                     clearArrs = false;
                 }
                 loop1.push(stock);
@@ -55,6 +57,7 @@
             }
             if (loopCounter === 3) {
 
+                loop4.push(stock);
                 if (speedTest(loop1, stock, stocksAlert, stockSpeedPctE, stockSpeedHighPctE) && spreadTest(stock, stockMaxSpreadE)) {
                     return true;
                 }
@@ -62,6 +65,23 @@
                     return true;
                 }
                 if (speedTest(loop3, stock, stocksAlert, stockSpeedPctE, stockSpeedHighPctE) && spreadTest(stock, stockMaxSpreadE)) {
+                    return true;
+                }
+
+            }
+            if (loopCounter === 4) {
+
+                loop5.push(stock);
+                if (speedTest(loop1, stock, stocksAlert, stockSpeedPctE, stockSpeedHighPctE) && spreadTest(stock, stockMaxSpreadE)) {
+                    return true;
+                }
+                if (speedTest(loop2, stock, stocksAlert, stockSpeedPctE, stockSpeedHighPctE) && spreadTest(stock, stockMaxSpreadE)) {
+                    return true;
+                }
+                if (speedTest(loop3, stock, stocksAlert, stockSpeedPctE, stockSpeedHighPctE) && spreadTest(stock, stockMaxSpreadE)) {
+                    return true;
+                }
+                if (speedTest(loop4, stock, stocksAlert, stockSpeedPctE, stockSpeedHighPctE) && spreadTest(stock, stockMaxSpreadE)) {
                     return true;
                 }
                 clearArrs = true;

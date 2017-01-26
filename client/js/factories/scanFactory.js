@@ -46,11 +46,11 @@
                     // if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockPriorDayPctC)) {
                     //     stocksPassed.stocksPassC.push(stock);
                     // }
-                    // // check if the stock passes all the D Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
-                    //     stocksPassed.stocksPassD.push(stock);
+                    // check if the stock passes all the D Tests
+                    if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                        stocksPassed.stocksPassD.push(stock);
 
-                    // }
+                    }
                     // check if the stock passes all the E Tests
                     if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
 
@@ -87,6 +87,7 @@
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);
             stock.pchg = Number(stock.pchg);
+            stock.opn = Math.round(stock.opn * 100) / 100;
             stock.float = Math.round(stock.float * 100) / 100;
             stock.floatRotated = Math.round((stock.vl / stock.float) * 100) / 100;
             stock.shortRatio = Number(stock.shortRatio);
@@ -95,9 +96,9 @@
             stock.popn = Math.round(stock.popn * 100) / 100;
             stock.pcls = Math.round(stock.pcls * 100) / 100;
             stock.prchg = Number(stock.prchg);
-            stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
+            stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 3);
             stock.spread = Number((stock.ask - stock.bid).toFixed(2));
-            
+                   
         }
 
         function duplicateStock(stock, stocksArr) {

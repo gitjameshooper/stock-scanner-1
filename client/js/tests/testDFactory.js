@@ -15,7 +15,7 @@
         };
         // check if the stock passes all the D Tests
         function allTests(stock, stocksAlert) {
-            if (sharesTestD(stock) && excludeTestD(stock)) {
+            if (gapTestD(stock) && excludeTestD(stock)) {
                 return true;
             }
         }
@@ -26,10 +26,11 @@
               return true;
            }
         }
-        // trading most shares outstanding
-        function sharesTestD(stock) {
-             
-             if(stock.float !== Infinity && stock.float > .30){
+        // 
+        function gapTestD(stock) {
+                stock.gapPCT = (((stock.opn - stock.pcls)/stock.opn)*100).toFixed(2);
+                stock.gapPCT = Number(stock.gapPCT);
+             if(stock.gapPCT > 5 || stock.gapPCT < -5){
                 return true;
             }
         }

@@ -43,6 +43,7 @@
                     if(stocksPassedStr){
                         symbolStr = stocksPassedStr;
                     }
+                    console.log(symbolTiers[cfg.symbolsCurTier][0]);
                 // cycle thru symbols in a tier
                 $.each(symbolsJSON, function(k, v) {
                        
@@ -56,7 +57,7 @@
                 });
 
                 cfg.symbolsCurTier++;
-                // window.console.log('Tier-'+cfg.symbolsCurTier);
+                window.console.log('Tier-'+cfg.symbolsCurTier);
                 // window.console.log('loop- '+mainCfg.loopCounter);
                 if (cfg.symbolsCurTier >= symbolTiers.length) {
                     cfg.symbolsCurTier = 0;
