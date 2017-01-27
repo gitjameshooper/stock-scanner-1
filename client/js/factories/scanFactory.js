@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory', 'testEFactory', 'testFFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory, testFFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory) {
         var delistArr = [];
 
         return {
@@ -29,40 +29,27 @@
 
                 // format stock values
                 formatStock(stock, cfg.accountVal);
-
+                    
                 // run all stocks thru the delist, volume, price test
                 if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
     
                     // check if the stock passes all the A Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockDiffPctA)) {
-                    //     stocksPassed.stocksPassA.push(stock);
-                    // }
+                    if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                        stocksPassed.stocksPassA.push(stock);
+                    }
 
                     // check if the stock passes all the B Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+                    if (cfg.showTest.testB && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassB.push(stock);
                     }
-                    // // check if the stock passes all the C Tests
-                    // if (duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockPriorDayPctC)) {
-                    //     stocksPassed.stocksPassC.push(stock);
-                    // }
+                    // check if the stock passes all the C Tests
+                    if (cfg.showTest.testC && duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                        stocksPassed.stocksPassC.push(stock);
+                    }
                     // check if the stock passes all the D Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert)) {
+                    if (cfg.showTest.testD && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassD.push(stock);
-
                     }
-                    // check if the stock passes all the E Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassE) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg.stockMaxSpreadE, cfg.stockSpeedPctE, cfg.stockSpeedHighPctE, cfg.loopCounter)) {
-
-                        stocksPassed.stocksPassE.push(stock);
-
-                    }
-                    // check if the stock passes all the F Tests
-                    if (duplicateStock(stock, stocksPassed.stocksPassF) && testFFactory.allTests(stock, stocksPassed.stocksAlert)) {
-                        stocksPassed.stocksPassF.push(stock);
-
-                    }
-
                 }
             });
             return stocksPassed;

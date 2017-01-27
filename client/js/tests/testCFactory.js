@@ -1,4 +1,4 @@
-// Test Notes:  Used to find stocks red to green 
+// Test Notes:  Speed test
 (function() {
     'use strict';
 
@@ -7,62 +7,107 @@
         .factory('testCFactory', testCFactory);
     testCFactory.$inject = ['$log', 'testOFactory'];
 
+
     function testCFactory($log, testOFactory) {
-        var etfArr = ["SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY"];
+        var loop1 = [],
+            loop2 = [],
+            loop3 = [],
+            loop4 = [],
+            loop5 = [],
+            clearArrs = true;
+
         return {
             allTests: allTests
 
         };
-        // check if the stock passes all the C Tests
-        function allTests(stock, stocksAlert, stockPriorDayPctC) {
-            if (vwapTestC(stock) && pclsTestC(stock) && priorDayTestC(stock, stockPriorDayPctC) && priorHiLoTestC(stock) && pctDiffTestC(stock) && excludeTestC(stock)) {
-                return true;
+
+        function allTests(stock, stocksAlert, cfg ) {
+            var loopCounter = cfg.loopCounter,
+                stockSpeedPctC = cfg.stockSpeedPctC,
+                stockMaxSpreadC = cfg.stockMaxSpreadC;
+            // check if the stock passes all the Tests
+            if (loopCounter === 0) {
+                if (clearArrs) {
+                    loop1 = [];
+                    loop2 = [];
+                    loop3 = [];
+                    loop4 = [];
+                    loop5 = [];
+                    clearArrs = false;
+                }
+                loop1.push(stock);
+            }
+            if (loopCounter === 1) {
+
+                loop2.push(stock);
+
+                if (speedTest(loop1, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+
+                    return true;
+                }
+            }
+            if (loopCounter === 2) {
+
+                loop3.push(stock);
+                if (speedTest(loop1, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                if (speedTest(loop2, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+
+            }
+            if (loopCounter === 3) {
+
+                loop4.push(stock);
+                if (speedTest(loop1, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                if (speedTest(loop2, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                if (speedTest(loop3, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+
+            }
+            if (loopCounter === 4) {
+
+                loop5.push(stock);
+                if (speedTest(loop1, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                if (speedTest(loop2, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                if (speedTest(loop3, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                if (speedTest(loop4, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
+                    return true;
+                }
+                clearArrs = true;
             }
         }
 
-        function excludeTestC(stock) {
-            if (_.indexOf(etfArr, stock.symbol) < 0) {
+        function speedTest(loopArr, stock, stocksAlert, stockSpeedPctC) {
+            var stockSpeed = false;
+            $.each(loopArr, function(key, value) {
 
-                return true;
-            }
-        }
-        // if curent day lo lower than prior lo
-        function priorDayTestC(stock, stockPriorDayPctC) {
-            var pctPriorDay = stock.prchg / stock.pcls;
-            stock.pctPriorDay = Number(pctPriorDay.toFixed(2));
-
-            if (stock.pctPriorDay > (stockPriorDayPctC / 100)) {
-                return true;
-            }
+                if (stock.symbol === loopArr[key].symbol) {
+                    stock.speed = Number((Math.abs((stock.last - loopArr[key].last) / stock.last) * 100).toFixed(2));
+                     if(stock.speed >= stockSpeedPctC){
+                        stockSpeed = true;
+                    }
+                }
+            });
+            return stockSpeed;
         }
 
-        function vwapTestC(stock) {
-            if (stock.vwap > stock.last) {
+        function spreadTest(stock, stockMaxSpreadC) {
+            if (stock.spread <= stockMaxSpreadC) {
                 return true;
             }
-        }
-
-        function pclsTestC(stock) {
-            if (stock.pcls > stock.last) {
-                return true;
-            }
-        }
-
-        function priorHiLoTestC(stock) {
-            var priceDiff = stock.phi - stock.plo,
-                priceDiffThird = priceDiff / 3;
-
-            if ((priceDiffThird + stock.plo) < stock.last) {
-                return true;
-            }
-        }
-
-        function pctDiffTestC(stock) {
-            var pctDiff = stock.pcls - stock.last,
-                pctDiffC = -(pctDiff / stock.last) * 100;
-            stock.pctDiffC = Number(pctDiffC.toFixed(2));
-
-            return true;
         }
     }
 })();

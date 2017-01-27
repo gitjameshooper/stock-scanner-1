@@ -22,7 +22,7 @@
                     controllerAs: 'stockApp'
                 })
                 .otherwise({
-                    redirectTo: "/"
+                    redirectTo: "/scanner"
                 });
         }]);
 

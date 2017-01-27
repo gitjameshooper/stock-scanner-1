@@ -89,3 +89,152 @@
         }
     }
 })();
+// Test Notes:  Used to find a morning push and pullback near vwap for entry to go long INVESTORS LIVE
+(function() {
+    'use strict';
+
+    angular
+        .module('stockScannerApp')
+        .factory('testAFactory', testAFactory);
+    testAFactory.$inject = ['$log', 'testOFactory'];
+
+    function testAFactory($log, testOFactory) {
+        return {
+            allTests: allTests
+        
+        };
+        function allTests(stock, stocksAlert){
+            var stockArr = [{
+                "name" : "TWLO",
+                "hi" : 32.00,
+                "lo" : 27.00,
+                "type" : "RG"
+            },{
+                "name" : "EXAS",
+                "hi" : 12.60,
+                "lo" : 12.00,
+                "type" : "Para"
+            },{
+                "name" : "ARRY",
+                "hi" : 9.62,
+                "lo" : 9.38,
+                "type" : "RG"
+            }];
+            // check if the stock passes all the A Tests
+            if (stockZoneTest(stock, stockArr)) {
+                return true; 
+            }
+        }
+        function stockZoneTest(stock, stockArr){
+                var stockH,
+                    stockL,
+                    stockSym,
+                    stockType;
+
+            for (var i = 0; i < stockArr.length; i++) { 
+                    stockH = stockArr[i]['hi'];
+                    stockL = stockArr[i]['lo'];
+                    stockSym = stockArr[i]['name'];
+                    stockType = stockArr[i]['type'];
+                   
+                if(stock.symbol == stockSym){
+                      
+                    if(stockL < stock.last && stock.last < stockH){
+                        stock.type = stockType;
+                      return true;
+                    }
+                }
+            }
+           
+        }
+        
+    }
+})();
+// Test Notes:  Bearish engulfing or bullish engulfing
+(function() {
+    'use strict';
+
+    angular
+        .module('stockScannerApp')
+        .factory('testFFactory', testFFactory);
+    testFFactory.$inject = ['$log', 'testOFactory'];
+
+    function testFFactory($log, testOFactory) {
+        return {
+            allTests: allTests
+
+        };
+
+        function allTests(stock, stocksAlert, stockAwayPctF) {
+            // check if the stock passes all the F Tests
+            if (priorRedF(stock, stockAwayPctF) && belowCloseF(stock, stockAwayPctF) && aboveOpenF(stock, stockAwayPctF)) {
+                return true;
+            }
+        }
+        // prior day red
+        function priorRedF(stock, stockAwayPctF) {
+            if (stock.prchg > 0) {
+                return true;
+            }
+        }
+        // stock opens lower than close
+        function belowCloseF(stock, stockAwayPctF) {  
+    
+            if (stock.pcls < stock.opn) {
+                return true;
+            }
+        }
+                // stock currently above prior day open
+        function aboveOpenF(stock, stockAwayPctF) {  
+            if (stock.popn > stock.last) {
+                return true;
+            }
+        }
+
+    }
+})();
+// Test Notes:  Bounce off VWAP test
+(function() {
+    'use strict';
+
+    angular
+        .module('stockScannerApp')
+        .factory('testFFactory', testFFactory);
+    testFFactory.$inject = ['$log', 'testOFactory'];
+
+
+    function testFFactory($log, testOFactory) {
+
+        return {
+            allTests: allTests
+
+        };
+
+        function allTests(stock, stocksAlert, stockBounceF) {
+            // check if the stock passes all the F Tests
+            if (lodTest(stock, stockBounceF) || hodTest(stock, stockBounceF)) {
+                return true;
+            }
+        }
+
+        function lodTest(stock, stockBounceF) {
+            var stockLoDiff = ((stock.lo - stock.vwap) / stock.last) * 100;
+
+            if (stock.last < stock.pcls && stock.last < stock.vwap && stockLoDiff < -stockBounceF) {
+                stock.vwapDistF = Number(stockLoDiff.toFixed(2));
+                return true;
+            }
+
+        }
+
+        function hodTest(stock, stockBounceF) {
+            var stockHiDiff = ((stock.hi - stock.vwap) / stock.last) * 100;
+
+            if (stock.last > stock.pcls && stock.last > stock.vwap && stockHiDiff > stockBounceF) {
+                stock.vwapDistF = Number(stockHiDiff.toFixed(2));
+                return true;
+            }
+        }
+
+    }
+})();

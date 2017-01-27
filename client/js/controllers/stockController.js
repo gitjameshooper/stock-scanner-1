@@ -12,26 +12,24 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 1100,
+                apiMSecs: 1000,
                 symbolsPerTier: 340,
+                etfArr: ["EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"],
                 loopCounter: 0,
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
-                stockDiffPctA: 5,
+                stockGapPctA: 5,
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
-                stockPriorDayPctC: 5,
-                stockSpeedPctE: 1,
-                stockSpeedHighPctE: 2,
-                stockMaxSpreadE: .75,
+                stockSpeedPctC: 1,
+                stockMaxSpreadC: .75,
+                stockMinFloatRotated: .80,
                 accountVal: 24000,
                 showTest: {
-                    testA: false,
+                    testA: true,
                     testB: true,
-                    testC: false,
-                    testD: true,
-                    testE: true,
-                    testF: true
+                    testC: true,
+                    testD: true
                 },
                 stockVolumeObj: {
                     "hr8": 200000,
@@ -56,16 +54,12 @@
             stocksPassB: [],
             stocksPassC: [],
             stocksPassD: [],
-            stocksPassE: [],
-            stocksPassF: [],
             stocksAlert: []
         }
         vm.stocksA = [];
         vm.stocksB = [];
         vm.stocksC = [];
         vm.stocksD = [];
-        vm.stocksE = [];
-        vm.stocksF = [];
 
         // functions
         vm.startScan = startScan;
@@ -144,13 +138,7 @@
             vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksPassed.stocksPassC;
             vm.stocksD = vm.stocksPassed.stocksPassD;
-             vm.stocksE = vm.stocksPassed.stocksPassE;
-            // $.each(vm.stocksPassed.stocksPassE, function(key, stock) {
-            //         vm.stocksE.push(stock);    
-            // });
             
-            vm.stocksF = vm.stocksPassed.stocksPassF;
-
             $scope.$apply();
 
             //  keep looping thru tiers
@@ -158,7 +146,7 @@
         }
         function countStocks(){
     
-            vm.stockCount = vm.stocksA.length + vm.stocksB.length + vm.stocksC.length + vm.stocksD.length + vm.stocksE.length + vm.stocksF.length;
+            vm.stockCount = vm.stocksA.length + vm.stocksB.length + vm.stocksC.length + vm.stocksD.length;
         }
         // prepend passed stock symbols for next api call
         function strPassedStocks(){

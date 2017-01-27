@@ -12,6 +12,7 @@
             priceTest: priceTest,
             haltTest: haltTest,
             delistTest: delistTest,
+            excludeETF: excludeETF,
             stockAlert: stockAlert
 
         };
@@ -45,7 +46,13 @@
                 return true;
             }
         }
-
+        // exclude etfs
+        function excludeETF(stock, etfArr){
+            if(_.indexOf(etfArr, stock.symbol) < 0){
+              return true;
+           }
+        }
+        // alert for stocks
         function stockAlert(stock, stocksArr, stockAdd) {
             var stockIndex = _.indexOf(stocksArr, stock.symbol);
             if (stockAdd && stockIndex < 0) {
