@@ -46,15 +46,17 @@
                     
                 // cycle thru symbols in a tier
                 $.each(symbolsJSON, function(k, v) {
-                       
+                       console.log(symbolTiers[cfg.symbolsCurTier][0]+'-----'+cfg.symbolsCurCount+'-----'+symbolTiers[cfg.symbolsCurTier][1]);
                     if ((symbolsBegCount >= symbolTiers[cfg.symbolsCurTier][0]) && (symbolTiers[cfg.symbolsCurTier][0] <= cfg.symbolsCurCount) && (cfg.symbolsCurCount <= symbolTiers[cfg.symbolsCurTier][1])) {
                         symbolStr += v.symbol + ',';
                         // old way symbolStr += k + ',';
                         cfg.symbolsCurCount++;
                     }
                     symbolsBegCount++;
+
                     
                 });
+                console.log(symbolStr);
 
                 cfg.symbolsCurTier++;
                

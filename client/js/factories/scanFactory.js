@@ -7,12 +7,13 @@
     scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory'];
 
     function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory) {
-        var delistArr = [];
+        var delistArr = JSON.parse(localStorage.getItem("delist")) || [];
 
         return {
             scanStocks: scanStocks,
             formatStock: formatStock,
-            delistStock: delistStock
+            delistStock: delistStock,
+            emptyDelist: emptyDelist
         };
 
         function scanStocks(quotesData, stocksPassed, symbolsJSON, cfg) {
@@ -31,7 +32,7 @@
                 formatStock(stock, cfg.accountVal);
                     
                 // run all stocks thru the delist, volume, price test
-                if (testOFactory.delistTest(stock, delistArr) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
+                if (testOFactory.delistTest(stock, JSON.parse(localStorage.getItem("delist"))) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
     
                     // check if the stock passes all the A Tests
                     if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
@@ -56,7 +57,7 @@
         }
 
         function formatStock(stock, accountVal) {
-            stock.bid = Math.round(stock.bid * 100) / 100;
+            stock.bid = Math.round(Number(stock.bid) * 100) / 100;
             stock.vwap = Math.round(stock.vwap * 100) / 100;
             stock.ask = Math.round(stock.ask * 100) / 100;
             stock.prbook = Math.round(stock.prbook * 100) / 100;
@@ -99,6 +100,11 @@
         function delistStock(stock, stocksArr) {
             stocksArr.splice(stocksArr.indexOf(stock), 1);
             delistArr.push(stock.symbol);
+            localStorage.setItem("delist", JSON.stringify(delistArr));
+        }
+        function emptyDelist(){
+            delistArr = [];
+            localStorage.removeItem('delist');
         }
     }
 })();

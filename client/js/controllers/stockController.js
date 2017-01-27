@@ -14,7 +14,7 @@
                 run: true,
                 apiMSecs: 1000,
                 symbolsPerTier: 340,
-                etfArr: ["EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY"],
+                etfArr: ["NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 loopCounter: 0,
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
@@ -33,7 +33,9 @@
                 },
                 stockVolumeObj: {
                     "hr8": 200000,
-                    "hr9": 500000,
+                    "hr840": 300000,
+                    "hr850": 500000,
+                    "hr9": 600000,
                     "hr10": 800000,
                     "hr11": 1000000,
                     "hr12": 1200000,
@@ -76,6 +78,7 @@
         vm.viewStocks = viewStocks;
         vm.scanStocks = scanFactory.scanStocks;
         vm.delistStock = scanFactory.delistStock;
+        vm.emptyDelist = scanFactory.emptyDelist;
         vm.init = init;
 
       

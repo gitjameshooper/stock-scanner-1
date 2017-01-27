@@ -1,13 +1,16 @@
 <section class="scanner-page" ng-class="stockApp.cfg.status">
     <div class="container-fluid">
         <div class="row f-18 fixed">
-            <div class="col-xs-11 status-bar text-grey">
+            <div class="col-xs-10 status-bar text-grey">
                 Status: <span class="status-text">{{ stockApp.cfg.status }} </span>
                 <button class="btn green margin-10" ng-click="stockApp.startScan()">Start Scan</button>
                 <button class="btn red margin-10" ng-click="stockApp.stopScan()">Stop Scan</button>
             </div>
             <div class="col-xs-1 status-bar text-grey">
                 <i class="fa fa-cog slide-toggle hvr-pop" data-toggle=".toggle-settings" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-1 status-bar text-grey">
+                <i class="fa fa-trash-o" aria-hidden="true" ng-click="stockApp.emptyDelist()"></i>
             </div>
         </div>
         <div class="row f-18">
