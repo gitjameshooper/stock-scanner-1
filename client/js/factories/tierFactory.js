@@ -36,7 +36,7 @@
             return symbolsTierArr;
         }
 
-        function formatTierSymbols(symbolsJSON, stocksPassedStr, symbolTiers, oAuthJSON, mainCfg) {
+        function formatTierSymbols(symbolsJSON, stocksPassedStr, symbolTiers, oAuthJSON, stockPassedCount, mainCfg) {
             
                 var symbolStr = '',
                     symbolsBegCount = 0;
@@ -45,18 +45,22 @@
                     }
                     
                 // cycle thru symbols in a tier
+                cfg.symbolsCurCount = symbolTiers[cfg.symbolsCurTier][0];
+// console.log(cfg.symbolsCurCount);
                 $.each(symbolsJSON, function(k, v) {
-                       console.log(symbolTiers[cfg.symbolsCurTier][0]+'-----'+cfg.symbolsCurCount+'-----'+symbolTiers[cfg.symbolsCurTier][1]);
-                    if ((symbolsBegCount >= symbolTiers[cfg.symbolsCurTier][0]) && (symbolTiers[cfg.symbolsCurTier][0] <= cfg.symbolsCurCount) && (cfg.symbolsCurCount <= symbolTiers[cfg.symbolsCurTier][1])) {
+                    if ((symbolsBegCount >= symbolTiers[cfg.symbolsCurTier][0]) && (symbolTiers[cfg.symbolsCurTier][0] <= (cfg.symbolsCurCount)) && ((cfg.symbolsCurCount) <= symbolTiers[cfg.symbolsCurTier][1])) {
                         symbolStr += v.symbol + ',';
-                        // old way symbolStr += k + ',';
+                    
+                        if(cfg.symbolsCurCount == symbolTiers[cfg.symbolsCurTier][1] ){
+                            return false;
+                        }
                         cfg.symbolsCurCount++;
                     }
                     symbolsBegCount++;
 
                     
                 });
-                console.log(symbolStr);
+                // console.log(symbolStr);
 
                 cfg.symbolsCurTier++;
                
