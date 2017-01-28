@@ -8,7 +8,8 @@
 
     function symbolsService($http, $log) {
         return {
-            getSymbols: getSymbols
+            getSymbols: getSymbols,
+            getSymbolsString: getSymbolsString
         };
 
         function getSymbols() {
@@ -16,7 +17,6 @@
                 .then(getSymbolsDone)
                 .catch(getSymbolsFail);
         }
-
         function getSymbolsDone(response) {
             return response.data;
         }
@@ -24,6 +24,16 @@
         function getSymbolsFail(error) {
             $log.error('Failed to get Symbols - ' + error.statusText);
             return false;
+        }
+        function getSymbolsString(symbolsJSON){
+            var symbolStr = '';
+             
+            $.each(symbolsJSON, function(k, v) {
+                if(v.symbol){
+                 symbolStr += v.symbol + ',';
+                }                    
+            });
+            return symbolStr;
         }
     }
 })();

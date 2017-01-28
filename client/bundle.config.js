@@ -13,7 +13,6 @@ module.exports = {
                 './client/js/services/oAuthService.js',
                 './client/js/factories/scanFactory.js',
                 './client/js/factories/xtraFactory.js',
-                './client/js/factories/tierFactory.js',
                 './client/js/tests/testOFactory.js',
                 './client/js/tests/testAFactory.js',
                 './client/js/tests/testBFactory.js',

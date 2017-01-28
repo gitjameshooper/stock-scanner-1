@@ -21,7 +21,6 @@
             var tkOAuth,
                 creds = response.data;
                  
-                
             tkOAuth = { 
                 consumer : OAuth({
                     consumer: {
@@ -35,10 +34,11 @@
                     secret: creds.access_secret
                 },
                 tkRequestData :{ 
-                    url: 'https://api.tradeking.com/v1/market/ext/quotes.json?symbols=',
-                    method: 'GET'
+                    url: 'https://api.tradeking.com/v1/market/ext/quotes.json',
+                    method: 'POST'
                 }  
             };
+           
             return tkOAuth;
         }
 

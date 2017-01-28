@@ -106,5 +106,6 @@
             delistArr = [];
             localStorage.removeItem('delist');
         }
+
     }
 })();
