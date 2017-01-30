@@ -12,7 +12,8 @@
         vm.cfg = {
                 status: 'ready',
                 run: true,
-                apiMSecs: 2000,
+                callOnce: true,
+                apiMSecs: 500,
                 etfArr: ["NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 loopCounter: 0,
                 stockMinPrice: 2,
@@ -74,6 +75,7 @@
         function init() {
             xtraFactory.settingsAnim();
             xtraFactory.jQueryExtends();
+
         }
         function getSymbols() {
             return symbolsService.getSymbols()
@@ -94,19 +96,12 @@
             // add symbols to data with oAuth
              
             oAuthData.symbols =  vm.symbolsStr;
+
             
             $.ajax({
                 url: url,
                 type: method,
-                data: oAuthData,
-                 beforeSend: function(xhr, settings) {
-                                if (vm.cfg.run) {
-                setTimeout(function() {
-                    vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
-                }, vm.cfg.apiMSecs);
-            }
-                   
-                }
+                data: oAuthData
             }).error(function(err) {
                 vm.cfg.status = "error";
                 vm.cfg.run = false;
@@ -120,11 +115,22 @@
 
             }).done(function(data) {
                 //run tk data thru tests
-                console.log('hey');
+
+                if(vm.cfg.callOnce){
+                    setInterval(function(){
+                        if (vm.cfg.run &&  $.active < 2) {          
+                            vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
+                        }
+                    }, vm.cfg.apiMSecs);
+                    vm.cfg.callOnce = false;
+                }
+                   
                 vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
                 vm.viewStocks();
+              
 
             });
+ 
 
         }
 
