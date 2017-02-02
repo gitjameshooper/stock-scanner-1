@@ -15,7 +15,6 @@
                 callOnce: true,
                 apiMSecs: 500,
                 etfArr: ["NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
-                loopCounter: 0,
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockGapPctA: 5,
@@ -23,14 +22,17 @@
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockSpeedPctC: 1,
                 stockMaxSpreadC: .75,
-                stockMinFloatRotated: .80,
+                loopCounter: 0,
+                loopArr1: [],
+                stockMinFloatRotated: .50,
                 accountVal: 24000,
                 showTest: {
                     testA: true,
-                    testB: true,
+                    testB: false,
                     testC: true,
-                    testD: true
+                    testD: false
                 },
+                stockMinVolume: 100000,
                 stockVolumeObj: {
                     "hr8": 200000,
                     "hr840": 300000,
@@ -94,14 +96,12 @@
         }
         function getStockData(url, method, oAuthData) {
             // add symbols to data with oAuth
-             
             oAuthData.symbols =  vm.symbolsStr;
-
             
             $.ajax({
                 url: url,
                 type: method,
-                data: oAuthData
+                data: oAuthData,
             }).error(function(err) {
                 vm.cfg.status = "error";
                 vm.cfg.run = false;
@@ -109,29 +109,45 @@
                 $log.error('Bad TK Request - ' + err.statusText);
                 $scope.$apply();
                 // start scan if error
-                // setTimeout(function() {
-                //     vm.startScan();
-                // }, 20000);
+                setTimeout(function() {
+                    vm.startScan();
+                }, 10000);
 
             }).done(function(data) {
-                //run tk data thru tests
-
+               
+                // call these functions once
                 if(vm.cfg.callOnce){
+                    // start the interval scanning based of active AJAX requests  
                     setInterval(function(){
                         if (vm.cfg.run &&  $.active < 2) {          
                             vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                         }
                     }, vm.cfg.apiMSecs);
+
+                    //  reset symbol string and filter all the stocks with no volume for api calls
+                    vm.symbolsStr = '';
+                    $.each(data.response.quotes.quote, function(k, v) {
+                        
+                        if(v.vl > vm.cfg.stockMinVolume){
+                            vm.symbolsStr += v.symbol + ',';
+                        }
+                                
+                    });
                     vm.cfg.callOnce = false;
                 }
-                   
+               // For speed test ONLY
+                vm.cfg.loopCounter++;
+
+                if(vm.cfg.loopCounter === 11){
+                    vm.cfg.loopCounter = 1;
+                    vm.cfg.loopArr1 = [];
+                }
+                 
+                //run tk stock data thru tests and push to view
                 vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
                 vm.viewStocks();
-              
 
             });
- 
-
         }
 
         function viewStocks() {

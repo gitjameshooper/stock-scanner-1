@@ -29,6 +29,7 @@
             var symbolStr = '';
              
             $.each(symbolsJSON, function(k, v) {
+                
                 if(v.symbol){
                  symbolStr += v.symbol + ',';
                 }                    

@@ -21,12 +21,17 @@
             $.each(quotesData, function(key, stock) {
                  
                 // merge stock float data from JSON
-                $.each(symbolsJSON, function(k, v) {
-                    if(stock.symbol == v.symbol){
-                        stock.float = v.float;
-                        stock.shortRatio = v.shortRatio;
-                    }
-                });
+                if(cfg.showTest.testD){
+                    $.each(symbolsJSON, function(k, v) {
+                        if(stock.symbol == v.symbol){
+                            stock.float = v.float;
+                            stock.shortRatio = v.shortRatio;
+                        }
+                    });
+                }else{
+                    stock.float = 0;
+                    stock.shortRatio = 0;
+                }
 
                 // format stock values
                 formatStock(stock, cfg.accountVal);
@@ -44,7 +49,7 @@
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // check if the stock passes all the C Tests
-                    if (cfg.showTest.testC && duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                    if (cfg.showTest.testC && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                     // check if the stock passes all the D Tests
@@ -84,7 +89,8 @@
             stock.popn = Math.round(stock.popn * 100) / 100;
             stock.pcls = Math.round(stock.pcls * 100) / 100;
             stock.prchg = Number(stock.prchg);
-            stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 3);
+            stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
+            stock.shares = Math.ceil(stock.shares/100)*100;
             stock.spread = Number((stock.ask - stock.bid).toFixed(2));
                    
         }

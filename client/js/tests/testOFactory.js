@@ -24,8 +24,8 @@
             if (dateHours > 15 || dateHours < 8) { dateHours = 15; }
             if (dateHours == 8 && dateMins >= 40){ dateMins = 40; }else{ dateMins = '';}
             if (dateHours == 8 && dateMins >= 50){ dateMins = 50; }else{ dateMins = '';}
+
             if (stock.vl >= stockVolumeObj['hr' + dateHours + dateMins]) {
-            
                 return true;
             }
         }
