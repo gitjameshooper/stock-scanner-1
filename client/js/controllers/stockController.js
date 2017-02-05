@@ -13,7 +13,7 @@
                 status: 'ready',
                 run: true,
                 callOnce: true,
-                apiMSecs: 500,
+                apiMSecs: 1000,
                 etfArr: ["NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
@@ -23,6 +23,7 @@
                 stockSpeedPctC: 1,
                 stockMaxSpreadC: .75,
                 loopCounter: 0,
+                loopCycles: 20,
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 24000,
@@ -138,10 +139,11 @@
                // For speed test ONLY
                 vm.cfg.loopCounter++;
 
-                if(vm.cfg.loopCounter === 11){
+                if(vm.cfg.loopCounter === (vm.cfg.loopCycles +1)){
                     vm.cfg.loopCounter = 1;
                     vm.cfg.loopArr1 = [];
                 }
+                
                  
                 //run tk stock data thru tests and push to view
                 vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
@@ -155,7 +157,11 @@
             // pass final arrays to view
             vm.stocksA = vm.stocksPassed.stocksPassA;
             vm.stocksB = vm.stocksPassed.stocksPassB;
-            vm.stocksC = vm.stocksPassed.stocksPassC;
+            //for speed test
+            if(vm.cfg.loopCounter == vm.cfg.loopCycles){
+                vm.stocksC = [];
+            }
+            vm.stocksC = vm.stocksC.concat(vm.stocksPassed.stocksPassC);
             vm.stocksD = vm.stocksPassed.stocksPassD;
             
             $scope.$apply();

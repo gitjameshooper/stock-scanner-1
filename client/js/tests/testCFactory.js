@@ -15,16 +15,24 @@
 
         function allTests(stock, stocksAlert, cfg ) {
             var loopCounter = cfg.loopCounter,
+                loopCycles = cfg.loopCycles,
                 loopArr1 = cfg.loopArr1,
                 stockSpeedPctC = cfg.stockSpeedPctC,
                 stockMaxSpreadC = cfg.stockMaxSpreadC;
-
+ 
             // check if the stock passes all the Tests
             if (loopCounter === 1) {
                 loopArr1.push(stock);
             }
-            if (loopCounter === 10) {
+            if (loopCounter === (loopCycles/2)) {
+               
+                if (speedTest(loopArr1, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
 
+                    return true;
+                }
+            }
+            if (loopCounter === loopCycles) {
+ 
                 if (speedTest(loopArr1, stock, stocksAlert, stockSpeedPctC) && spreadTest(stock, stockMaxSpreadC)) {
 
                     return true;
