@@ -18,6 +18,7 @@ module.exports = {
                 './client/js/tests/testBFactory.js',
                 './client/js/tests/testCFactory.js',
                 './client/js/tests/testDFactory.js',
+                './client/js/tests/testEFactory.js',
                 './client/js/controllers/stockController.js',
                 './client/js/controllers/mongoController.js'
             ]

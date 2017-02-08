@@ -40,6 +40,9 @@
                             <label class="text-light left">VWAP Test
                                 <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testB" />
                             </label>
+                            <label class="text-light left">Volume Test
+                                <input type="checkbox" class="db text-black" ng-model="stockApp.cfg.showTest.testE" />
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -174,6 +177,30 @@
                             <td>{{ stockB.vwapDiff }}</td>
                             <td>{{ stockB.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockB, stockApp.stocksB)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testE">
+                <table class="table table-bordered table-responsive text-center">
+                    <thead>
+                        <h3>Volume Test</h3>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Volume Rotated</th>
+                            <th>1/2
+                                <br />Shares</th>
+                            <th>Delist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stockE in stockApp.stocksE | orderBy:'-volRotated'">
+                            <td class="{{ stockE.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockE.symbol }}&src=ctag">{{ stockE.symbol }}</a> </td>
+                            <td>{{ stockE.last }}</td>
+                            <td>{{ stockE.volRotated }}</td>
+                            <td>{{ stockE.shares }}</td>
+                            <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockE, stockApp.stocksE)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

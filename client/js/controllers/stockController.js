@@ -14,29 +14,30 @@
                 run: true,
                 callOnce: true,
                 apiMSecs: 1000,
-                etfArr: ["NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
+                etfArr: ["FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockGapPctA: 5,
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
                 stockSpeedPctC: 1,
-                stockMaxSpreadC: .75,
+                stockMaxSpreadC: .50,
                 loopCounter: 0,
-                loopCycles: 20,
+                loopCycles: 30,
                 loopArr1: [],
                 stockMinFloatRotated: .50,
-                accountVal: 24000,
+                accountVal: 25000,
                 showTest: {
                     testA: true,
-                    testB: false,
+                    testB: true,
                     testC: true,
-                    testD: false
+                    testD: true,
+                    testE: true
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
                     "hr8": 200000,
-                    "hr840": 300000,
+                    "hr840": 400000,
                     "hr850": 500000,
                     "hr9": 600000,
                     "hr10": 800000,
@@ -56,12 +57,14 @@
             stocksPassB: [],
             stocksPassC: [],
             stocksPassD: [],
+            stocksPassE: [],
             stocksAlert: []
         }
         vm.stocksA = [];
         vm.stocksB = [];
         vm.stocksC = [];
         vm.stocksD = [];
+        vm.stocksE = [];
 
         // functions
         vm.startScan = startScan;
@@ -115,15 +118,15 @@
                 }, 10000);
 
             }).done(function(data) {
-               
+              
                 // call these functions once
                 if(vm.cfg.callOnce){
                     // start the interval scanning based of active AJAX requests  
-                    setInterval(function(){
-                        if (vm.cfg.run &&  $.active < 2) {          
-                            vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
-                        }
-                    }, vm.cfg.apiMSecs);
+                    // setInterval(function(){
+                    //     if (vm.cfg.run &&  $.active < 2) {          
+                    //         vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
+                    //     }
+                    // }, vm.cfg.apiMSecs);
 
                     //  reset symbol string and filter all the stocks with no volume for api calls
                     vm.symbolsStr = '';
@@ -143,11 +146,18 @@
                     vm.cfg.loopCounter = 1;
                     vm.cfg.loopArr1 = [];
                 }
-                
-                 
-                //run tk stock data thru tests and push to view
-                vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
-                vm.viewStocks();
+                if(vm.cfg.run){
+                    setTimeout(function(){
+                    vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
+
+                    //run tk stock data thru tests and push to view
+                   
+                    vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
+                    vm.viewStocks();
+
+                    },vm.cfg.apiMSecs);
+
+                }
 
             });
         }
@@ -157,14 +167,25 @@
             // pass final arrays to view
             vm.stocksA = vm.stocksPassed.stocksPassA;
             vm.stocksB = vm.stocksPassed.stocksPassB;
+            // console.log(vm.stocksPassed.stocksPassB);
             //for speed test
             if(vm.cfg.loopCounter == vm.cfg.loopCycles){
                 vm.stocksC = [];
             }
+
             vm.stocksC = vm.stocksC.concat(vm.stocksPassed.stocksPassC);
             vm.stocksD = vm.stocksPassed.stocksPassD;
+            vm.stocksE = vm.stocksPassed.stocksPassE;
             
             $scope.$apply();
+            vm.stocksPassed = {
+                stocksPassA: [],
+                stocksPassB: [],
+                stocksPassC: [],
+                stocksPassD: [],
+                stocksPassE: [],
+                stocksAlert: []
+            }
         }
         function startScan() {
             vm.cfg.run = true;

@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory','testEFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory) {
         var delistArr = JSON.parse(localStorage.getItem("delist")) || [];
 
         return {
@@ -40,21 +40,25 @@
                 if (testOFactory.delistTest(stock, JSON.parse(localStorage.getItem("delist"))) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
     
                     // check if the stock passes all the A Tests
-                    if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassA) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                    if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.etfArr) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassA.push(stock);
                     }
 
                     // check if the stock passes all the B Tests
-                    if (cfg.showTest.testB && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassB) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                    if (cfg.showTest.testB && testOFactory.excludeETF(stock, cfg.etfArr) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassB.push(stock);
                     }
                     // check if the stock passes all the C Tests
-                    if (cfg.showTest.testC && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassC) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                    if (cfg.showTest.testC && testOFactory.excludeETF(stock, cfg.etfArr) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassC.push(stock);
                     }
                     // check if the stock passes all the D Tests
-                    if (cfg.showTest.testD && testOFactory.excludeETF(stock, cfg.etfArr) && duplicateStock(stock, stocksPassed.stocksPassD) && testDFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                    if (cfg.showTest.testD && testOFactory.excludeETF(stock, cfg.etfArr) && testDFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassD.push(stock);
+                    }
+                    // check if the stock passes all the E Tests
+                    if (cfg.showTest.testE && testOFactory.excludeETF(stock, cfg.etfArr) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                        stocksPassed.stocksPassE.push(stock);
                     }
                 }
             });
@@ -75,8 +79,7 @@
             stock.closeMid = Math.round(Math.abs(stock.mid - stock.last)* 100) / 100;
             stock.vl = Number(stock.vl);
             stock.pvol = Number(stock.pvol);
-            stock.volday = Number(stock.vl - stock.pvol);
-            stock.vlChg_21 = Number((stock.vl / stock.adv_21).toFixed(2));
+            stock.volRotated =  Math.round((stock.vl / stock.pvol) * 100) / 100;
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);
             stock.pchg = Number(stock.pchg);
@@ -94,14 +97,7 @@
             stock.spread = Number((stock.ask - stock.bid).toFixed(2));
                    
         }
-
-        function duplicateStock(stock, stocksArr) {
-            var stockIndex = _.findIndex(stocksArr, { symbol: stock.symbol });
-            if (stockIndex !== -1) {
-                stocksArr.splice(stockIndex, 1);
-            }
-            return true;
-        }
+          
         // remove stock from view - add to the delist array
         function delistStock(stock, stocksArr) {
             stocksArr.splice(stocksArr.indexOf(stock), 1);

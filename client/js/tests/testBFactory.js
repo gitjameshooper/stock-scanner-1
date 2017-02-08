@@ -14,20 +14,21 @@
         };
         // check if the stock passes all the Tests
         function allTests(stock, stocksAlert, cfg) {
+
             if (vwapTestB(stock, stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
                 return true;
             }
         }
         // stock is far away from vwap
         function vwapTestB(stock, stocksAlert, stockVwapPctB, stockVwapHighPctB) {
-           
+          
             var stockDiffVwap = Number((stock.last - stock.vwap).toFixed(2)),
                 stockDiffPctVwap = (stockDiffVwap / stock.last).toFixed(3) * 100;
                  stock.vwapDiff = Number(stockDiffPctVwap.toFixed(2));
-                 
-                // for positive and negative vwap
-            if (stock.vwapDiff >= stockVwapPctB || stock.vwapDiff <= -Math.abs(stockVwapPctB)) {
                
+                // for positive and negative vwap
+            if (stock.vwapDiff >= stockVwapPctB || stock.vwapDiff <= (stockVwapPctB* -1)) {
+              
                 // alert if high interest  need to test this
                 // if(stockDiffVwapDPos > stockVwapHighPctB){
                 //     testOFactory.stockAlert(stock, stocksAlert, true);
