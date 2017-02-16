@@ -30,8 +30,8 @@
             }
         }
         function haltTest(stock) {
-              
-            if (stock.prchg > 0 && stock.bid > 0) {
+             
+            if (stock.bid_time == "00:00") {
                 return true;
             }
         }

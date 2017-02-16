@@ -28,11 +28,11 @@
                 stockMinFloatRotated: .50,
                 accountVal: 25000,
                 showTest: {
-                    testA: true,
-                    testB: true,
-                    testC: true,
-                    testD: true,
-                    testE: true
+                    testA: true,  // Flag test
+                    testB: false,  // Vwap Test
+                    testC: true,  // Speed Test
+                    testD: false,  // Float Test
+                    testE: false   // Volume Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {

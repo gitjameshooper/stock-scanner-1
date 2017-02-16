@@ -37,7 +37,7 @@
                 formatStock(stock, cfg.accountVal);
                     
                 // run all stocks thru the delist, volume, price test
-                if (testOFactory.delistTest(stock, JSON.parse(localStorage.getItem("delist"))) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
+                if (testOFactory.delistTest(stock, JSON.parse(localStorage.getItem("delist"))) && testOFactory.haltTest(stock) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
     
                     // check if the stock passes all the A Tests
                     if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.etfArr) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
@@ -79,6 +79,7 @@
             stock.closeMid = Math.round(Math.abs(stock.mid - stock.last)* 100) / 100;
             stock.vl = Number(stock.vl);
             stock.pvol = Number(stock.pvol);
+            stock.hivwap =  Number(stock.hi / stock.vwap);
             stock.volRotated =  Math.round((stock.vl / stock.pvol) * 100) / 100;
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);
