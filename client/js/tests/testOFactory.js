@@ -31,7 +31,7 @@
         }
         function haltTest(stock) {
              
-            if (stock.bid_time == "00:00") {
+            if (stock.bid_time != "00:00") {
                 return true;
             }
         }
