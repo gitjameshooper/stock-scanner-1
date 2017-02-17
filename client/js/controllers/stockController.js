@@ -14,7 +14,7 @@
                 run: true,
                 callOnce: true,
                 apiMSecs: 1000,
-                etfArr: ["FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
+                etfArr: ["TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockGapPctA: 5,
@@ -29,10 +29,10 @@
                 accountVal: 25000,
                 showTest: {
                     testA: true,  // Flag test
-                    testB: false,  // Vwap Test
+                    testB: true,  // Vwap Test
                     testC: true,  // Speed Test
                     testD: false,  // Float Test
-                    testE: false   // Volume Test
+                    testE: true   // Volume Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
