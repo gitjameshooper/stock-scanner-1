@@ -16,7 +16,7 @@
                 apiMSecs: 1000,
                 etfArr: ["TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
-                stockMaxPrice: 100,
+                stockMaxPrice: 70,
                 stockGapPctA: 5,
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 12, // high percentage away from vwap
@@ -26,13 +26,13 @@
                 loopCycles: 30,
                 loopArr1: [],
                 stockMinFloatRotated: .50,
-                accountVal: 25000,
+                accountVal: 28000,
                 showTest: {
                     testA: true,  // Flag test
-                    testB: true,  // Vwap Test
-                    testC: true,  // Speed Test
+                    testB: false,  // Vwap Test
+                    testC: false,  // Speed Test
                     testD: false,  // Float Test
-                    testE: true   // Volume Test
+                    testE: false   // Volume Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {

@@ -12,7 +12,7 @@
 					  method: 'GET',
 					  url: '/stock/ABC'
 					}).then(function successCallback(response) {
-							window.console.log(response);
+							 
 							vm.stock = response.data[0];
 					    // this callback will be called asynchronously
 					    // when the response is available

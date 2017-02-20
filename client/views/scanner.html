@@ -88,17 +88,17 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Pct Chg</th>
+                            <th>Flag</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-hivwap'">
+                        <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-flag'">
                             <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                             <td>{{ stockA.last }}</td>
-                            <td>{{ stockA.pchg }}</td>
+                            <td>{{ stockA.flag }}</td>
                             <td>{{ stockA.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockA, stockApp.stocksA)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>

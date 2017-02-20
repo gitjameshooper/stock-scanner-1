@@ -14,15 +14,20 @@
         };
         // check if the stock passes all the Tests
         function allTests(stock, stocksAlert, cfg) {
-            if (aboveVWAP(stock) && abovePchg(stock)) {
+            if (aboveVWAP(stock) && poleHeight(stock) && vwapHeight(stock)) {
                 return true;
             }
         }
+        function vwapHeight(stock){  
+            if(stock.hivwap > .30){
 
-        
-        function abovePchg(stock) {
-                 
-             if(stock.pchg > 2){
+                return true;
+            }
+        }
+        function poleHeight(stock){
+            
+            if(stock.pole > .60){
+
                 return true;
             }
         }
@@ -32,7 +37,6 @@
                  
                 return true;
             }
-
         }
     }
 })();
