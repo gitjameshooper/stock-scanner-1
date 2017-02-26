@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory','testEFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory','testEFactory', 'testGFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory, testGFactory) {
         var delistArr = JSON.parse(localStorage.getItem("delist")) || [];
 
         return {
@@ -60,6 +60,9 @@
                     if (cfg.showTest.testE && testOFactory.excludeETF(stock, cfg.etfArr) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                         stocksPassed.stocksPassE.push(stock);
                     }
+                      if (cfg.showTest.testG && testOFactory.excludeETF(stock, cfg.etfArr) && testGFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                        stocksPassed.stocksPassG.push(stock);
+                    }
                 }
             });
             return stocksPassed;
@@ -72,6 +75,7 @@
             stock.prbook = Math.round(stock.prbook * 100) / 100;
             stock.lo = Math.round(stock.lo * 100) / 100;
             stock.hi = Math.round(stock.hi * 100) / 100;
+            stock.cl = Math.round(stock.cl * 100) / 100;
             stock.last = Math.round(stock.last * 100) / 100;
             stock.mid = Math.round(((stock.hi + stock.lo) /2)* 100) / 100;
             stock.oldhidifflo = (stock.hi - stock.lo) / stock.last;

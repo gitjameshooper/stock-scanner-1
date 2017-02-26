@@ -14,7 +14,7 @@
                 run: true,
                 callOnce: true,
                 apiMSecs: 1000,
-                etfArr: ["TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
+                etfArr: ["DFJ","TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 70,
                 stockGapPctA: 5,
@@ -26,13 +26,14 @@
                 loopCycles: 30,
                 loopArr1: [],
                 stockMinFloatRotated: .50,
-                accountVal: 28000,
+                accountVal: 27000,
                 showTest: {
                     testA: true,  // Flag test
                     testB: false,  // Vwap Test
                     testC: false,  // Speed Test
                     testD: false,  // Float Test
-                    testE: false   // Volume Test
+                    testE: true,   // Investors Live Test
+                    testG: true   // Swing Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
@@ -58,6 +59,7 @@
             stocksPassC: [],
             stocksPassD: [],
             stocksPassE: [],
+            stocksPassG: [],
             stocksAlert: []
         }
         vm.stocksA = [];
@@ -65,6 +67,7 @@
         vm.stocksC = [];
         vm.stocksD = [];
         vm.stocksE = [];
+        vm.stocksG = [];
 
         // functions
         vm.startScan = startScan;
@@ -176,6 +179,7 @@
             vm.stocksC = vm.stocksC.concat(vm.stocksPassed.stocksPassC);
             vm.stocksD = vm.stocksPassed.stocksPassD;
             vm.stocksE = vm.stocksPassed.stocksPassE;
+            vm.stocksG = vm.stocksPassed.stocksPassG;
             
             $scope.$apply();
             vm.stocksPassed = {
@@ -184,6 +188,7 @@
                 stocksPassC: [],
                 stocksPassD: [],
                 stocksPassE: [],
+                stocksPassG: [],
                 stocksAlert: []
             }
         }

@@ -1,4 +1,4 @@
-// Test Notes:  Used to find a Gap stocks
+// Test Notes:  Used to find Flag stocks
 (function() {
     'use strict';
 
