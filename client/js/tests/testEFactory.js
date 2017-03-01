@@ -14,20 +14,20 @@
         };
         function allTests(stock, stocksAlert){
             var stockArr = [{
-                "name" : "TWLO",
-                "hi" : 32.00,
-                "lo" : 27.00,
-                "type" : "RG"
+                "name" : "LJPC",
+                "hi" : 37.50,
+                "lo" : 36.50,
+                "type" : "BUY"
             },{
-                "name" : "EXAS",
-                "hi" : 12.60,
-                "lo" : 12.00,
-                "type" : "Para"
+                "name" : "ACIA",
+                "hi" : 55.00,
+                "lo" : 54.50,
+                "type" : "Short"
             },{
-                "name" : "ARRY",
-                "hi" : 9.62,
-                "lo" : 9.38,
-                "type" : "RG"
+                "name" : "HPE",
+                "hi" : 22.80,
+                "lo" : 22.30,
+                "type" : "Short"
             }];
             // check if the stock passes all the E Tests
             if (stockZoneTest(stock, stockArr)) {

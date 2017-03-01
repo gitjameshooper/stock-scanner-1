@@ -27,14 +27,14 @@
                  stock.vwapDiff = Number(stockDiffPctVwap.toFixed(2));
                
                 // for positive and negative vwap
-            if (stock.vwapDiff >= stockVwapPctB || stock.vwapDiff <= (stockVwapPctB* -1)) {
+            if (stock.vwapDiff >= stockVwapPctB || stock.vwapDiff <= (stockVwapPctB * -1)) {
               
                 // alert if high interest  need to test this
-                // if(stockDiffVwapDPos > stockVwapHighPctB){
-                //     testOFactory.stockAlert(stock, stocksAlert, true);
-                // }else{
-                //     testOFactory.stockAlert(stock, stocksAlert, false);
-                // }
+                if(stockDiffPctVwap > stockVwapHighPctB || stockDiffPctVwap < (stockVwapHighPctB * -1)){
+                    testOFactory.stockAlert(stock, stocksAlert, true);
+                }else{
+                    testOFactory.stockAlert(stock, stocksAlert, false);
+                }
                 return true;
             }
         }

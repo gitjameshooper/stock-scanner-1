@@ -88,10 +88,10 @@
             stock.chg = Number(stock.chg);
             stock.pchg = Number(stock.pchg);
             stock.opn = Math.round(stock.opn * 100) / 100;
-            stock.pole = Number(stock.hi - stock.opn);
             stock.hivwap =  Number(stock.hi - stock.vwap);
             stock.float = Math.round(stock.float * 100) / 100;
-            stock.flag = Math.round(((stock.pole * .50) + (stock.hivwap * .50))* 100) / 100; 
+            stock.pole = Number(stock.hi - stock.opn);
+            stock.flag = Math.round((((stock.pole * .50) + (stock.hivwap * .50)) /stock.last) * 100) / 100; 
             stock.floatRotated = Math.round((stock.vl / stock.float) * 100) / 100;
             stock.shortRatio = Number(stock.shortRatio);
             stock.plo = Math.round(stock.plo * 100) / 100;

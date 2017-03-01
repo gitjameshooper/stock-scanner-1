@@ -16,11 +16,12 @@
                 apiMSecs: 1000,
                 etfArr: ["DFJ","TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
-                stockMaxPrice: 70,
+                stockMaxPrice: 90,
                 stockGapPctA: 5,
                 stockVwapPctB: 5, // price percentage away from vwap
-                stockVwapHighPctB: 12, // high percentage away from vwap
+                stockVwapHighPctB: 10, // high percentage away from vwap
                 stockSpeedPctC: 1,
+                stockSpeedHighPctC: 3,
                 stockMaxSpreadC: .50,
                 loopCounter: 0,
                 loopCycles: 30,
@@ -33,7 +34,7 @@
                     testC: false,  // Speed Test
                     testD: false,  // Float Test
                     testE: true,   // Investors Live Test
-                    testG: true   // Swing Test
+                    testG: false   // Swing Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
@@ -112,7 +113,7 @@
             }).error(function(err) {
                 vm.cfg.status = "error";
                 vm.cfg.run = false;
-                // $.playSound("/sounds/monkey");
+                $.playSound("/sounds/monkey");
                 $log.error('Bad TK Request - ' + err.statusText);
                 $scope.$apply();
                 // start scan if error

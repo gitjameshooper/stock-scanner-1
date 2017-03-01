@@ -14,7 +14,7 @@
         };
         // check if the stock passes all the Tests
         function allTests(stock, stocksAlert, cfg) {
-            if (aboveVWAP(stock) && poleHeight(stock) && vwapHeight(stock)) {
+            if (aboveVWAP(stock) && poleHeight(stock) && vwapHeight(stock) && flagTest(stock)) {
                 return true;
             }
         }
@@ -27,6 +27,12 @@
         function poleHeight(stock){
             
             if(stock.pole > .60){
+
+                return true;
+            }
+        }
+        function flagTest(stock){  
+            if(stock.flag > .03 && stock.flag < .15){
 
                 return true;
             }

@@ -18,6 +18,7 @@
                 loopCycles = cfg.loopCycles,
                 loopArr1 = cfg.loopArr1,
                 stockSpeedPctC = cfg.stockSpeedPctC,
+                stockSpeedHighPctC = cfg.stockSpeedHighPctC,
                 stockMaxSpreadC = cfg.stockMaxSpreadC;
  
             // check if the stock passes all the Tests
@@ -42,7 +43,7 @@
             }
         }
 
-        function speedTest(loopArr, stock, stocksAlert, stockSpeedPctC) {
+        function speedTest(loopArr, stock, stocksAlert, stockSpeedPctC, stockSpeedHighPctC) {
              
             var stockSpeed = false;
             $.each(loopArr, function(key, value) {
@@ -51,8 +52,13 @@
                     
                     stock.speed = Number((Math.abs((stock.last - loopArr[key].last) / stock.last) * 100).toFixed(2));
                  
-                     if(stock.speed >= stockSpeedPctC){
+                    if(stock.speed >= stockSpeedPctC){
                         stockSpeed = true;
+                    }
+                    if(stock.speed >= stockSpeedHighPctC){
+                        testOFactory.stockAlert(stock, stocksAlert, true);
+                    }else{
+                        testOFactory.stockAlert(stock, stocksAlert, false);
                     }
                 }
             });
