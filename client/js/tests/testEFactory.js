@@ -14,22 +14,31 @@
         };
         function allTests(stock, stocksAlert){
             var stockArr = [{
-                "name" : "LJPC",
-                "hi" : 37.50,
-                "lo" : 36.50,
-                "type" : "BUY"
-            },{
-                "name" : "ACIA",
-                "hi" : 55.00,
-                "lo" : 54.50,
+                "name" : "SNAP",
+                "hi" : 25.50,
+                "lo" : 24.00,
                 "type" : "Short"
             },{
-                "name" : "HPE",
-                "hi" : 22.80,
-                "lo" : 22.30,
+                "name" : "AAOI",
+                "hi" : 55.00,
+                "lo" : 50.00,
+                "type" : "Short"
+            },{
+                "name" : "DKS",
+                "hi" : 51.50,
+                "lo" : 50.00,
+                "type" : "Short"
+            },{
+                "name" : "SIG",
+                "hi" : 72.50,
+                "lo" : 64.00,
                 "type" : "Short"
             }];
             // check if the stock passes all the E Tests
+             
+            if(stock.symbol === 'AAOI'){
+                console.log(stock);
+            }
             if (stockZoneTest(stock, stockArr)) {
                 return true; 
             }

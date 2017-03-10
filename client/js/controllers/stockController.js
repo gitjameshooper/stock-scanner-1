@@ -13,7 +13,7 @@
                 status: 'ready',
                 run: true,
                 callOnce: true,
-                apiMSecs: 1000,
+                apiMSecs: 1500,
                 etfArr: ["DFJ","TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 90,
@@ -30,8 +30,8 @@
                 accountVal: 27000,
                 showTest: {
                     testA: true,  // Flag test
-                    testB: false,  // Vwap Test
-                    testC: false,  // Speed Test
+                    testB: true,  // Vwap Test
+                    testC: true,  // Speed Test
                     testD: false,  // Float Test
                     testE: true,   // Investors Live Test
                     testG: false   // Swing Test
