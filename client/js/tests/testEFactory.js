@@ -14,31 +14,32 @@
         };
         function allTests(stock, stocksAlert){
             var stockArr = [{
-                "name" : "SNAP",
-                "hi" : 25.50,
-                "lo" : 24.00,
+                "name" : "LJPC",
+                "hi" : 34.00,
+                "lo" : 33.00,
+                "type" : "Buy"
+            },{
+                "name" : "MOMO",
+                "hi" : 35.50,
+                "lo" : 31.50,
                 "type" : "Short"
             },{
-                "name" : "AAOI",
-                "hi" : 55.00,
-                "lo" : 50.00,
-                "type" : "Short"
-            },{
-                "name" : "DKS",
-                "hi" : 51.50,
-                "lo" : 50.00,
+                "name" : "ESPR",
+                "hi" : 34.00,
+                "lo" : 32.00,
                 "type" : "Short"
             },{
                 "name" : "SIG",
-                "hi" : 72.50,
-                "lo" : 64.00,
-                "type" : "Short"
+                "hi" : 69.00,
+                "lo" : 67.00,
+                "type" : "Buy"
+            },{
+                "name" : "CRCM",
+                "hi" : 10.80,
+                "lo" : 10.50,
+                "type" : "Buy"
             }];
             // check if the stock passes all the E Tests
-             
-            if(stock.symbol === 'AAOI'){
-                console.log(stock);
-            }
             if (stockZoneTest(stock, stockArr)) {
                 return true; 
             }

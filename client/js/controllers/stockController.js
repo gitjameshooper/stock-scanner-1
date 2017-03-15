@@ -5,7 +5,7 @@
         .module('stockScannerApp')
         .controller('stockController', stockController);
     stockController.$inject = ['$scope', '$log', 'symbolsService', 'oAuthService', 'xtraFactory', 'scanFactory'];
-     
+
     function stockController($scope, $log, symbolsService, oAuthService, xtraFactory, scanFactory) {
         var vm = this;
         // config
@@ -14,7 +14,7 @@
                 run: true,
                 callOnce: true,
                 apiMSecs: 1500,
-                etfArr: ["DFJ","TVIX","FEZ","XRT","RSX","DXD","INDA","USMV","TBT","LABU","LABD","HEDJ","EPI","BKLN","VTV","ITB","XLU","HEZU","YINN","VMBS","EFV","NUGT","JNUG","EDZ","DPK","SJNK","OIH","SQQQ","XOP","ERY","USLV","FAZ","UVXY","VIXY","PDBC","CATH","VXX","UWTI","DWTI","DGAZ","DUST","XIV","TZA","DBEF","DBJP","UGAZ","SPXS","XIV","XOP","GDX","SVXY","JDST"],
+                etfArr: ["DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 90,
                 stockGapPctA: 5,
@@ -27,14 +27,15 @@
                 loopCycles: 30,
                 loopArr1: [],
                 stockMinFloatRotated: .50,
-                accountVal: 27000,
+                accountVal: 30000,
+                testing: true, // used for testing after hours
                 showTest: {
-                    testA: true,  // Flag test
-                    testB: true,  // Vwap Test
-                    testC: true,  // Speed Test
-                    testD: false,  // Float Test
-                    testE: true,   // Investors Live Test
-                    testG: false   // Swing Test
+                    testA: true, // Flag test
+                    testB: true, // Vwap Test
+                    testC: true, // Speed Test
+                    testD: false, // Float Test
+                    testE: true, // Investors Live Test
+                    testG: false // Swing Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
@@ -50,7 +51,7 @@
                     "hr15": 1600000
                 }
             }
-        // vars
+            // vars
         vm.oAuthJSON = {};
         vm.symbolsStr = '';
         vm.symbolsJSON = {};
@@ -87,6 +88,7 @@
             xtraFactory.jQueryExtends();
 
         }
+
         function getSymbols() {
             return symbolsService.getSymbols()
                 .then(function(data) {
@@ -95,6 +97,7 @@
                     vm.getOAuth();
                 });
         }
+
         function getOAuth() {
             return oAuthService.getOAuth()
                 .then(function(data) {
@@ -102,10 +105,11 @@
                     vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
                 });
         }
+
         function getStockData(url, method, oAuthData) {
             // add symbols to data with oAuth
-            oAuthData.symbols =  vm.symbolsStr;
-            
+            oAuthData.symbols = vm.symbolsStr;
+
             $.ajax({
                 url: url,
                 type: method,
@@ -122,67 +126,60 @@
                 }, 10000);
 
             }).done(function(data) {
-              
-                // call these functions once
-                if(vm.cfg.callOnce){
-                    // start the interval scanning based of active AJAX requests  
-                    // setInterval(function(){
-                    //     if (vm.cfg.run &&  $.active < 2) {          
-                    //         vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
-                    //     }
-                    // }, vm.cfg.apiMSecs);
 
-                    //  reset symbol string and filter all the stocks with no volume for api calls
+                // call these functions once after first data from api
+                if (vm.cfg.callOnce) {
+
+                    //  Overwrite symbol string and filter all the stocks with no volume for smaller api calls
                     vm.symbolsStr = '';
-                    $.each(data.response.quotes.quote, function(k, v) {
-                        
-                        if(v.vl > vm.cfg.stockMinVolume){
-                            vm.symbolsStr += v.symbol + ',';
+                    $.each(data.response.quotes.quote, function(k, stock) {
+
+                        if (stock.vl > vm.cfg.stockMinVolume) {
+                            vm.symbolsStr += stock.symbol + ',';
                         }
-                                
+
                     });
                     vm.cfg.callOnce = false;
                 }
-               // For speed test ONLY
+                // Start - speed test ONLY
                 vm.cfg.loopCounter++;
 
-                if(vm.cfg.loopCounter === (vm.cfg.loopCycles +1)){
+                if (vm.cfg.loopCounter === (vm.cfg.loopCycles + 1)) {
                     vm.cfg.loopCounter = 1;
                     vm.cfg.loopArr1 = [];
                 }
-                if(vm.cfg.run){
-                    setTimeout(function(){
-                    vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
+                // End - speed test ONLY
+                if (vm.cfg.run) {
+                    setTimeout(function() {
+                        vm.getStockData(vm.oAuthJSON.tkRequestData.url, vm.oAuthJSON.tkRequestData.method, vm.oAuthJSON.consumer.authorize(vm.oAuthJSON.tkRequestData, vm.oAuthJSON.token));
 
-                    //run tk stock data thru tests and push to view
-                   
-                    vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
-                    vm.viewStocks();
+                        //run tk stock data thru tests and push to view
+                        vm.stocksPassed = vm.scanStocks(data.response.quotes.quote, vm.stocksPassed, vm.symbolsJSON, vm.cfg);
+                        vm.viewStocks();
 
-                    },vm.cfg.apiMSecs);
-
+                    }, vm.cfg.apiMSecs);
                 }
-
             });
         }
 
         function viewStocks() {
 
-            // pass final arrays to view
-            vm.stocksA = vm.stocksPassed.stocksPassA;
-            vm.stocksB = vm.stocksPassed.stocksPassB;
-            // console.log(vm.stocksPassed.stocksPassB);
-            //for speed test
-            if(vm.cfg.loopCounter == vm.cfg.loopCycles){
+            // Start - speed test ONLY
+            if (vm.cfg.loopCounter == vm.cfg.loopCycles) {
                 vm.stocksC = [];
             }
+            // End - speed test ONLY
 
+            // pass stocks that passed the tests to final arrays for the view
+            vm.stocksA = vm.stocksPassed.stocksPassA;
+            vm.stocksB = vm.stocksPassed.stocksPassB;
             vm.stocksC = vm.stocksC.concat(vm.stocksPassed.stocksPassC);
             vm.stocksD = vm.stocksPassed.stocksPassD;
             vm.stocksE = vm.stocksPassed.stocksPassE;
             vm.stocksG = vm.stocksPassed.stocksPassG;
-            
             $scope.$apply();
+
+            //reset stocks passed arrays
             vm.stocksPassed = {
                 stocksPassA: [],
                 stocksPassB: [],
@@ -193,8 +190,10 @@
                 stocksAlert: []
             }
         }
+
         function startScan() {
             vm.cfg.run = true;
+            vm.cfg.callOnce = true;
             vm.cfg.status = "scanning";
             vm.getSymbols();
         }
