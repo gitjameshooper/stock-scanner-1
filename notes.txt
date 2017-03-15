@@ -1,0 +1,30 @@
+NOTES:
+How to add new stocks:
+Use to add the new stocks to symbol-string.txt https://www.iposcoop.com/last-100-ipos/
+
+Then run command to create csv files in terminal.
+Then convert them to JSON here. http://www.convertcsv.com/csv-to-json.htm
+
+EXAMPLE:
+Add this to top 
+"symbol","float","shortRatio"
+to generate this below
+
+[
+ {
+   "symbol": "SGB",
+   "float": "1871000",
+   "shortRatio": "2.82"
+ },
+ {
+   "symbol": "SGDJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SGB",
+   "float": "1871000",
+   "shortRatio": "2.82"
+ }
+]
+

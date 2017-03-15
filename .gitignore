@@ -1,5 +1,5 @@
-/src/json/tk-creds.json
-node_modules
+/node_modules
 .DS_Store
-/app
-/server
+/public/
+/server/data/
+/server/json/tk-creds.json

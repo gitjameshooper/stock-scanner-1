@@ -1,0 +1,2442 @@
+[
+ {
+   "symbol": "KORU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KRE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KROO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KRS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KRU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KSA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KWT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "KXI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LABD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LABS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LABU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LAQ",
+   "float": "N/A",
+   "shortRatio": "0.03"
+ },
+ {
+   "symbol": "LARE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LBDC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LBJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LBND",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LBY",
+   "float": "21258000",
+   "shortRatio": "1.540"
+ },
+ {
+   "symbol": "LD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LDUR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LEAD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LEDD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LEI",
+   "float": "N/A",
+   "shortRatio": "0.51"
+ },
+ {
+   "symbol": "LEMB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LEU",
+   "float": "5332000",
+   "shortRatio": "0.71"
+ },
+ {
+   "symbol": "LGL",
+   "float": "1923000",
+   "shortRatio": "2.59"
+ },
+ {
+   "symbol": "LGLV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LIQT",
+   "float": "28798000",
+   "shortRatio": "0.570"
+ },
+ {
+   "symbol": "LIT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LLEM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LLSC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LLSP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LMLP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LNG",
+   "float": "156817000",
+   "shortRatio": "6.76"
+ },
+ {
+   "symbol": "LODE",
+   "float": "128791000",
+   "shortRatio": "3.3600"
+ },
+ {
+   "symbol": "LOV",
+   "float": "9736000",
+   "shortRatio": "4.35"
+ },
+ {
+   "symbol": "LOWC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LQD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LQDH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LRET",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LRGF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LSC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LSTK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LTL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LTPZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LTS",
+   "float": "99548000",
+   "shortRatio": "8.25"
+ },
+ {
+   "symbol": "LVL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "LWC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MAB",
+   "float": "N/A",
+   "shortRatio": "0.02"
+ },
+ {
+   "symbol": "MAG",
+   "float": "69918000",
+   "shortRatio": "9.08"
+ },
+ {
+   "symbol": "MATF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MATH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MBB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MBG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MCF",
+   "float": "23069000",
+   "shortRatio": "3.19"
+ },
+ {
+   "symbol": "MCRO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MCZ",
+   "float": "70979000",
+   "shortRatio": "0.3200"
+ },
+ {
+   "symbol": "MDD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MDGN",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "MDY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MDYG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MDYV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MEAR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MES",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MGC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MGH",
+   "float": "41008000",
+   "shortRatio": "0.4800"
+ },
+ {
+   "symbol": "MGK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MGN",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "MGT",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "MGV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MHE",
+   "float": "N/A",
+   "shortRatio": "0.0000"
+ },
+ {
+   "symbol": "MHH",
+   "float": "1612000",
+   "shortRatio": "0.6400"
+ },
+ {
+   "symbol": "MIDU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MIDZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MINC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MINT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MIW",
+   "float": "N/A",
+   "shortRatio": "0.25"
+ },
+ {
+   "symbol": "MJCO",
+   "float": "5496000",
+   "shortRatio": "4.04"
+ },
+ {
+   "symbol": "MLN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPQ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLPZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MLSS",
+   "float": "16487000",
+   "shortRatio": "0.67"
+ },
+ {
+   "symbol": "MLTI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MMTM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MMV",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "MNA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MOAT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MOC",
+   "float": "5366000",
+   "shortRatio": "6.50"
+ },
+ {
+   "symbol": "MOM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MOO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MORL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MORT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MOTI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MRGR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MRRL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MSN",
+   "float": "9164000",
+   "shortRatio": "0.34"
+ },
+ {
+   "symbol": "MSTX",
+   "float": "215367000",
+   "shortRatio": "0.6900"
+ },
+ {
+   "symbol": "MTK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MTUM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MUB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MUNI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MVF",
+   "float": "N/A",
+   "shortRatio": "0.57"
+ },
+ {
+   "symbol": "MVG",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "MVV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MXC",
+   "float": "860000",
+   "shortRatio": "0.71"
+ },
+ {
+   "symbol": "MXI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MYY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "MZA",
+   "float": "N/A",
+   "shortRatio": "0.02"
+ },
+ {
+   "symbol": "MZZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NAIL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NAK",
+   "float": "209178000",
+   "shortRatio": "0.870"
+ },
+ {
+   "symbol": "NANR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NASH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NAVB",
+   "float": "138973000",
+   "shortRatio": "15.910"
+ },
+ {
+   "symbol": "NBH",
+   "float": "N/A",
+   "shortRatio": "1.34"
+ },
+ {
+   "symbol": "NBO",
+   "float": "N/A",
+   "shortRatio": "0.0300"
+ },
+ {
+   "symbol": "NBW",
+   "float": "N/A",
+   "shortRatio": "0.73"
+ },
+ {
+   "symbol": "NBY",
+   "float": "10078000",
+   "shortRatio": "9.02"
+ },
+ {
+   "symbol": "NCB",
+   "float": "N/A",
+   "shortRatio": "1.03"
+ },
+ {
+   "symbol": "NCQ",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "NEAR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NEN",
+   "float": "2302000",
+   "shortRatio": "1.0100"
+ },
+ {
+   "symbol": "NFLT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NFO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NFRA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NG",
+   "float": "205398000",
+   "shortRatio": "5.5900"
+ },
+ {
+   "symbol": "NGD",
+   "float": "498143000",
+   "shortRatio": "1.410"
+ },
+ {
+   "symbol": "NGE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NHC",
+   "float": "9796000",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "NHS",
+   "float": "N/A",
+   "shortRatio": "0.16"
+ },
+ {
+   "symbol": "NIB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NINI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NJV",
+   "float": "N/A",
+   "shortRatio": "2.330"
+ },
+ {
+   "symbol": "NLR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NML",
+   "float": "N/A",
+   "shortRatio": "0.39"
+ },
+ {
+   "symbol": "NMZ",
+   "float": "N/A",
+   "shortRatio": "0.99"
+ },
+ {
+   "symbol": "NNVC",
+   "float": "42222000",
+   "shortRatio": "11.3400"
+ },
+ {
+   "symbol": "NOBL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NOG",
+   "float": "40372000",
+   "shortRatio": "10.48"
+ },
+ {
+   "symbol": "NOM",
+   "float": "N/A",
+   "shortRatio": "0.0000"
+ },
+ {
+   "symbol": "NORW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NPN",
+   "float": "N/A",
+   "shortRatio": "1.12"
+ },
+ {
+   "symbol": "NRO",
+   "float": "N/A",
+   "shortRatio": "0.72"
+ },
+ {
+   "symbol": "NSAT",
+   "float": "4520000",
+   "shortRatio": "0.25"
+ },
+ {
+   "symbol": "NSPR",
+   "float": "1207000",
+   "shortRatio": "2.11"
+ },
+ {
+   "symbol": "NSU",
+   "float": "295949000",
+   "shortRatio": "1.24"
+ },
+ {
+   "symbol": "NTIP",
+   "float": "12681000",
+   "shortRatio": "0.18"
+ },
+ {
+   "symbol": "NTN",
+   "float": "1151000",
+   "shortRatio": "2.09"
+ },
+ {
+   "symbol": "NUGT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NVX",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "NYF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "NYH",
+   "float": "N/A",
+   "shortRatio": "0.6200"
+ },
+ {
+   "symbol": "NYV",
+   "float": "N/A",
+   "shortRatio": "0.4800"
+ },
+ {
+   "symbol": "NZH",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "OAPH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OASI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OCX",
+   "float": "3301000",
+   "shortRatio": "3.58"
+ },
+ {
+   "symbol": "OEF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OEUH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OEUR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OEW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OGCP",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "OGEN",
+   "float": "N/A",
+   "shortRatio": "0.92"
+ },
+ {
+   "symbol": "OIH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OIIL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OIL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OILX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OLEM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OLO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ONEK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ONEO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ONEV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ONEY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ONG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ONP",
+   "float": "16166000",
+   "shortRatio": "1.46"
+ },
+ {
+   "symbol": "ONVO",
+   "float": "N/A",
+   "shortRatio": "0.00"
+ },
+ {
+   "symbol": "OPD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ORM",
+   "float": "9087000",
+   "shortRatio": "2.17"
+ },
+ {
+   "symbol": "OSMS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OUNZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OUSA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "OVLC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PAEU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PAF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PAK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PALL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PARR",
+   "float": "26108000",
+   "shortRatio": "7.65"
+ },
+ {
+   "symbol": "PBD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PBE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PBJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PBP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PBS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PBW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PCEF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PCY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PDN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PDP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PED",
+   "float": "32792000",
+   "shortRatio": "0.420"
+ },
+ {
+   "symbol": "PEJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PEK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PERM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PEX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PEY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PEZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PFF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PFI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PFIG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PFM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PFNX",
+   "float": "18184000",
+   "shortRatio": "2.06"
+ },
+ {
+   "symbol": "PFXF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGAL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGHD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGHY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PGX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PHB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PHDG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PHF",
+   "float": "N/A",
+   "shortRatio": "0.23"
+ },
+ {
+   "symbol": "PHO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PHYS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PICB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PICK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PID",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PIE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PILL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PILS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PIN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PIO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PIP",
+   "float": "48631000",
+   "shortRatio": "0.670"
+ },
+ {
+   "symbol": "PIZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PJP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PKB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PKW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PLG",
+   "float": "112282000",
+   "shortRatio": "1.46"
+ },
+ {
+   "symbol": "PLM",
+   "float": "217972000",
+   "shortRatio": "11.8300"
+ },
+ {
+   "symbol": "PLND",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PLW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PLX",
+   "float": "71947000",
+   "shortRatio": "0.1100"
+ },
+ {
+   "symbol": "PMR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PPA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PPLT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PRB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PRF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PRK",
+   "float": "13152000",
+   "shortRatio": "10.340"
+ },
+ {
+   "symbol": "PRME",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PRN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSLV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSQ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PSR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PST",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTEU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTLC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTMC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PTN",
+   "float": "102949000",
+   "shortRatio": "1.460"
+ },
+ {
+   "symbol": "PTNQ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PUI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PUTW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PUTX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PUW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PVCT",
+   "float": "235112000",
+   "shortRatio": "0.4700"
+ },
+ {
+   "symbol": "PVI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PW",
+   "float": "1051000",
+   "shortRatio": "0.3500"
+ },
+ {
+   "symbol": "PWB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PWC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PWV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PWZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXLG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXLV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXMG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXMV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXQ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXSG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PXSV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PYZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PZA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PZD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PZG",
+   "float": "11984000",
+   "shortRatio": "1.76"
+ },
+ {
+   "symbol": "PZI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "PZT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QAI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QAUS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QCAN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QDEF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QDEU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QDF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QDYN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QED",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QEFA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QEH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QEMM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QESP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QGBR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QGTA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QID",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QJPN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QKOR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QLD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QLS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QLTA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QLTB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QLTC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QMEX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QMN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QMOM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QQQE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QTWN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QUAL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QUS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QVAL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QVM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "QWLD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RALS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RAVI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RBL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RCD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RCG",
+   "float": "N/A",
+   "shortRatio": "0.14"
+ },
+ {
+   "symbol": "RDIV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REED",
+   "float": "8305000",
+   "shortRatio": "13.1100"
+ },
+ {
+   "symbol": "REET",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REGL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REI",
+   "float": "33598000",
+   "shortRatio": "6.66"
+ },
+ {
+   "symbol": "REK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REMX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RETL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "REZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RFCI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RFDA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RFFC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RFG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RFUN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RFV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RGI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RGRO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RHS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RIC",
+   "float": "54091000",
+   "shortRatio": "0.960"
+ },
+ {
+   "symbol": "RIF",
+   "float": "N/A",
+   "shortRatio": "0.81"
+ },
+ {
+   "symbol": "RIGS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RINF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RING",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RISE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RJA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RJI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RJN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RJZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RLGT",
+   "float": "33645000",
+   "shortRatio": "4.63"
+ },
+ {
+   "symbol": "RLY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RNN",
+   "float": "199244000",
+   "shortRatio": "1.7300"
+ },
+ {
+   "symbol": "ROAM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RODI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RODM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ROGS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ROM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ROOF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RORO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ROUS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "ROX",
+   "float": "85913000",
+   "shortRatio": "5.84"
+ },
+ {
+   "symbol": "RPG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RPV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RRF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RSCO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RSP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RSX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RSXJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RTH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RTLA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RTM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RTR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RUSL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RUSS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RVNU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RVP",
+   "float": "6435000",
+   "shortRatio": "0.0900"
+ },
+ {
+   "symbol": "RWC",
+   "float": "8469000",
+   "shortRatio": "2.130"
+ },
+ {
+   "symbol": "RWJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWK",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RWXL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RXD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RXI",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RXL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RYE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RYF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RYH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RYJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RYT",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RYU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RZG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "RZV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SAA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SAGG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SAND",
+   "float": "149946000",
+   "shortRatio": "1.6700"
+ },
+ {
+   "symbol": "SBB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SBEU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SBI",
+   "float": "N/A",
+   "shortRatio": "0.09"
+ },
+ {
+   "symbol": "SBIO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SBM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SBND",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SBUS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SBV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHC",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCHZ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCID",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCIF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCIJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCIN",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCIU",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCIX",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCPB",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SCTO",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDD",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDEM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDIV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDOG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDOW",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDP",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDPI",
+   "float": "7094000",
+   "shortRatio": "3.5300"
+ },
+ {
+   "symbol": "SDS",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SDYL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SEA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SEB",
+   "float": "262000",
+   "shortRatio": "4.73"
+ },
+ {
+   "symbol": "SEF",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SENS",
+   "float": "25759000",
+   "shortRatio": "13.80"
+ },
+ {
+   "symbol": "SFHY",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SFIG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SFLA",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SGA",
+   "float": "3687000",
+   "shortRatio": "8.52"
+ },
+ {
+   "symbol": "SGAR",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SGB",
+   "float": "1871000",
+   "shortRatio": "2.82"
+ },
+ {
+   "symbol": "SGDJ",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SGDM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SGG",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SGOL",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SH",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SHE",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SHM",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ },
+ {
+   "symbol": "SHV",
+   "float": "N/A",
+   "shortRatio": "N/A"
+ }
+]
