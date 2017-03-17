@@ -15,7 +15,7 @@
         // check if the stock passes all the Tests
         function allTests(stock, stocksAlert, cfg) {
 
-            if (vwapTestB(stock, stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+            if (checkVwapErrorB(stock) && vwapTestB(stock, stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
                 return true;
             }
         }
@@ -35,6 +35,13 @@
                 }else{
                     testOFactory.stockAlert(stock, stocksAlert, false);
                 }
+                return true;
+            }
+        }
+        function checkVwapErrorB(stock) {
+          
+                // check for good data
+            if (stock.vwap < stock.hi && stock.vwap > stock.lo) {    
                 return true;
             }
         }
