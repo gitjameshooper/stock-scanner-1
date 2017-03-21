@@ -11,6 +11,9 @@
                 .when('/how-it-works', {
                     templateUrl: "/views/how-it-works.html"
                 })
+                .when('/playbook', {
+                    templateUrl: "/views/playbook.html"
+                })
                 .when('/scanner', {
                     templateUrl: "/views/scanner.html",
                     controller: 'stockController',

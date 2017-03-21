@@ -1,7 +1,7 @@
 <h1>Stock Scanner using the Trade King API.</h1>
 <p>(You must have a tradeking account to use this)</p>
 
-<p>Currently set up to scan 7500 stocks from the NYSE, AMEX, and NASDAQ</p>
+<p>Currently set up to scan 8000<sup>+</sup> stocks from the NYSE, AMEX, and NASDAQ</p>
 
 <h3>Steps for Use:</h3>
 <ol>
@@ -25,7 +25,7 @@
 
 <p>Now you can view the app in localhost:3000 in your browser and start scanning</p>
 
-<p>Note: Currently developing tests to filter stocks through</p>
+<p>Note: Tests are always evolving to filter stocks for the best setups</p>
 
 
  

@@ -5,23 +5,19 @@
                 <h1 class="text-center margin-50-tb">How it Works</h1>
                 <h2>Main Steps</h2>
                 <ul>
-                    <li>Authentication/Symbol Prep. - Authorize use of <a href="https://developers.tradeking.com/" target="_blank">TradeKing.com API</a></li>
-                    <li>Tier Process - Tier system to run through all stock symbols</li>
+                    <li>Authentication/Symbol Prep/Get Stock Data - Authorize use of <a href="https://developers.tradeking.com/" target="_blank">TradeKing.com API</a></li>
                     <li>Stock Tests - Runs all stocks through tests</li>
-                    <li>Buckets - Put stocks in buckets for best trades</li>
+                    <li>Buckets - Put stocks in buckets for best trade setups</li>
                 </ul>
-                <h3>Authentication/Symbol Prep.</h3>
+                <h3>Authentication/Symbol Prep/Get Stock Data</h3>
                 <ul>
                     <li>Uses oAuth to authorize</li>
                     <li>Makes JSON call to get public and secret keys/tokens</li>
                     <li>Makes JSON call to get all stock symbols</li>
-                    <li>Formats symbols into a string and start the tier process</li>
+                    <li>Formats symbols into a string and starts scanning</li>
+                    <li>Makes a call to TradeKing's REST API every second(api limit 1 call/sec.) to get data then puts them through the tests.</li>
                 </ul>
-                <h3>Tier Process</h3>
-                <ul>
-                    <li>Makes a call to TradeKing's REST API every second(api limit 1 call/sec.) to get data for 350 stocks.</li>
-                    <li>Afer each call it puts the 350 stocks through different tests.</li>
-                </ul>
+               
                 <h3>Stock Tests</h3>
                 <ul>
                     <li>Using these <a href="https://developers.tradeking.com/documentation/market-ext-quotes-get-post" target="_blank">data points</a>(under the data fields section) tests are run to determine if the stock fits a certain criteria</li>
@@ -34,20 +30,18 @@
                     <li>VWAP Test
                         <p>Checks to see how far</p>
                     </li>
-                    <li>If the stock passes all the tests then it gets added to a bucket.</li>
-                    <li>Then it makes another API call for 350 more stocks.</li>
+                    <li>If the stock passes a test then it gets added to that bucket.</li>
                 </ul>
                 <h3>Buckets</h3>
                 <ul>
-                    <li>Once it makes through all the stocks it then applies the buckets of data to the view.(avg. 10 secs.)</li>
+                    <li>Once it makes through all the stocks it then applies the buckets of data to the view.(avg. 4 secs.)</li>
                     <li>Three Main Buckets
                         <ul>
                             <li>ABCD</li>
                             <li>VWAP</li>
-                            <li>Fast Moving</li>
+                            <li>Speed</li>
                         </ul>
                     </li>
-                    <li>Then the Tier Process starts over again and runs through all the stock symbols</li>
                 </ul>
                 <h3>Using the App</h3>
                 <ul>
