@@ -14,12 +14,12 @@
         };
         function allTests(stock, stocksAlert){
             var stockArr = [{
-                "name" : "LJPC",
-                "hi" : 34.00,
-                "lo" : 33.00,
+                "name" : "AVXS",
+                "hi" : 83.50,
+                "lo" : 82.50,
                 "type" : "Buy"
             },{
-                "name" : "MOMO",
+                "name" : "MDCO",
                 "hi" : 35.50,
                 "lo" : 31.50,
                 "type" : "Short"
@@ -29,14 +29,9 @@
                 "lo" : 32.00,
                 "type" : "Short"
             },{
-                "name" : "SIG",
-                "hi" : 69.00,
-                "lo" : 67.00,
-                "type" : "Buy"
-            },{
-                "name" : "CRCM",
-                "hi" : 10.80,
-                "lo" : 10.50,
+                "name" : "CERU",
+                "hi" : 3.40,
+                "lo" : 3.00,
                 "type" : "Buy"
             }];
             // check if the stock passes all the E Tests

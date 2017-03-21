@@ -19,18 +19,19 @@
         // check liquidity of stock throughout the day
         function volTest(stock, stockVolumeObj) {
             var dateHours = new Date().getHours(),
-                dateMins  = new Date().getMinutes();
+                dateMins = new Date().getMinutes();
             // if outside trading time use after 3pm/EOD volume
             if (dateHours > 15 || dateHours < 8) { dateHours = 15; }
-            if (dateHours == 8 && dateMins >= 40){ dateMins = 40; }else{ dateMins = '';}
-            if (dateHours == 8 && dateMins >= 50){ dateMins = 50; }else{ dateMins = '';}
+            if (dateHours == 8 && dateMins >= 40) { dateMins = 40; } else { dateMins = ''; }
+            if (dateHours == 8 && dateMins >= 50) { dateMins = 50; } else { dateMins = ''; }
 
             if (stock.vl >= stockVolumeObj['hr' + dateHours + dateMins]) {
                 return true;
             }
         }
+
         function haltTest(stock) {
-             
+
             if (stock.bid_time != "00:00") {
                 return true;
             }
@@ -51,11 +52,13 @@
             }
         }
         // exclude etfs
-        function excludeETF(stock, etfArr){
-            if(_.indexOf(etfArr, stock.symbol) < 0){
-              return true;
-           }
-        }  
+        function excludeETF(stock, include, etfArr) {
+            
+                if (include || _.indexOf(etfArr, stock.symbol) < 0) {
+                    return true;
+                } 
+            
+        }
         // alert for stocks
         function stockAlert(stock, stocksArr, stockAdd) {
             var stockIndex = _.indexOf(stocksArr, stock.symbol);

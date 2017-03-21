@@ -14,6 +14,7 @@
                 run: true,
                 callOnce: true,
                 apiMSecs: 1500,
+                includeETF: true,
                 etfArr: ["DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 90,
@@ -81,6 +82,7 @@
         vm.scanStocks = scanFactory.scanStocks;
         vm.delistStock = scanFactory.delistStock;
         vm.emptyDelist = scanFactory.emptyDelist;
+        vm.emptyLocalStorage = scanFactory.emptyLocalStorage;
         vm.init = init;
 
         function init() {
