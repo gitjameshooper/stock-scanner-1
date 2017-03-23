@@ -14,24 +14,19 @@
         };
         function allTests(stock, stocksAlert){
             var stockArr = [{
-                "name" : "AVXS",
-                "hi" : 83.50,
-                "lo" : 82.50,
+                "name" : "ACIA",
+                "hi" : 57.50,
+                "lo" : 56.00,
                 "type" : "Buy"
             },{
-                "name" : "MDCO",
-                "hi" : 35.50,
-                "lo" : 31.50,
-                "type" : "Short"
+                "name" : "CNCE",
+                "hi" : 18.20,
+                "lo" : 17.50,
+                "type" : "Buy"
             },{
-                "name" : "ESPR",
-                "hi" : 34.00,
-                "lo" : 32.00,
-                "type" : "Short"
-            },{
-                "name" : "CERU",
-                "hi" : 3.40,
-                "lo" : 3.00,
+                "name" : "AAOI",
+                "hi" : 52.00,
+                "lo" : 50.00,
                 "type" : "Buy"
             }];
             // check if the stock passes all the E Tests

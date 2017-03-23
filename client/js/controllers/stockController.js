@@ -21,8 +21,8 @@
                 stockGapPctA: 5,
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 10, // high percentage away from vwap
-                stockSpeedPctC: 1,
-                stockSpeedHighPctC: 3,
+                stockSpeedPctC: 2,
+                stockSpeedHighPctC: 4,
                 stockMaxSpreadC: .50,
                 loopCounter: 0,
                 loopCycles: 30,
@@ -34,9 +34,9 @@
                     testA: true, // Flag test
                     testB: true, // Vwap Test
                     testC: true, // Speed Test
-                    testD: false, // Float Test
+                    testD: true, // Float Test
                     testE: true, // Investors Live Test
-                    testG: false // Swing Test
+                    testG: true // Swing Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
