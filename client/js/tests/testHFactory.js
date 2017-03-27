@@ -23,7 +23,7 @@
 
         function stockOpenTest(stock) {
 
-            if ((stock.chg > 0) && (stock.hidifflo > 5)) {
+            if ((stock.chg > 0) && (stock.hidifflo > 3)) {
                 return true;
             }
 

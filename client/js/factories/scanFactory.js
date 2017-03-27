@@ -114,7 +114,7 @@
             stock.chg = Number(stock.chg);
             stock.pchg = Number(stock.pchg);
             stock.opn = Math.round(stock.opn * 100) / 100;
-            stock.hivwap = Number(stock.hi - stock.vwap);
+            stock.hivwap = Math.round((stock.hi - stock.vwap)*100) / 100;
             stock.float = Math.round(stock.float * 100) / 100;
             stock.pole = Number(stock.hi - stock.opn);
             stock.flag = Math.round((((stock.pole * .50) + (stock.hivwap * .50)) / stock.last) * 100) / 100;

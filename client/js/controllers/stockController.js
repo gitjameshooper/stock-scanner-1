@@ -29,7 +29,7 @@
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 30000,
-                testing: true, // used for testing after hours
+                testing: false, // used for testing after hours
                 showTest: {
                     testA: true, // Flag test
                     testB: true, // Vwap Test
