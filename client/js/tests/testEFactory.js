@@ -14,19 +14,19 @@
         };
         function allTests(stock, stocksAlert){
             var stockArr = [{
-                "name" : "ACIA",
-                "hi" : 57.50,
-                "lo" : 56.00,
+                "name" : "PENN",
+                "hi" : 17.00,
+                "lo" : 16.50,
                 "type" : "Buy"
             },{
                 "name" : "CNCE",
-                "hi" : 18.20,
-                "lo" : 17.50,
+                "hi" : 108.20,
+                "lo" : 107.50,
                 "type" : "Buy"
             },{
                 "name" : "AAOI",
-                "hi" : 52.00,
-                "lo" : 50.00,
+                "hi" : 502.00,
+                "lo" : 500.00,
                 "type" : "Buy"
             }];
             // check if the stock passes all the E Tests

@@ -29,14 +29,15 @@
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 30000,
-                testing: false, // used for testing after hours
+                testing: true, // used for testing after hours
                 showTest: {
                     testA: true, // Flag test
                     testB: true, // Vwap Test
                     testC: true, // Speed Test
                     testD: true, // Float Test
                     testE: true, // Investors Live Test
-                    testG: true // Swing Test
+                    testG: true, // Swing Test
+                    testH: true // ABCD Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
@@ -63,6 +64,7 @@
             stocksPassD: [],
             stocksPassE: [],
             stocksPassG: [],
+            stocksPassH: [],
             stocksAlert: []
         }
         vm.stocksA = [];
@@ -71,6 +73,7 @@
         vm.stocksD = [];
         vm.stocksE = [];
         vm.stocksG = [];
+        vm.stocksH = [];
 
         // functions
         vm.startScan = startScan;
@@ -179,6 +182,7 @@
             vm.stocksD = vm.stocksPassed.stocksPassD;
             vm.stocksE = vm.stocksPassed.stocksPassE;
             vm.stocksG = vm.stocksPassed.stocksPassG;
+            vm.stocksH = vm.stocksPassed.stocksPassH;
             $scope.$apply();
 
             //reset stocks passed arrays
@@ -189,6 +193,7 @@
                 stocksPassD: [],
                 stocksPassE: [],
                 stocksPassG: [],
+                stocksPassH: [],
                 stocksAlert: []
             }
         }

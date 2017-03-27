@@ -4,9 +4,9 @@
     angular
         .module('stockScannerApp')
         .factory('scanFactory', scanFactory);
-    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory', 'testEFactory', 'testGFactory'];
+    scanFactory.$inject = ['$log', 'testOFactory', 'testAFactory', 'testBFactory', 'testCFactory', 'testDFactory', 'testEFactory', 'testGFactory', 'testHFactory'];
 
-    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory, testGFactory) {
+    function scanFactory($log, testOFactory, testAFactory, testBFactory, testCFactory, testDFactory, testEFactory, testGFactory, testHFactory) {
         var delistArr = JSON.parse(localStorage.getItem("delist")) || [];
 
         return {
@@ -87,6 +87,10 @@
             if (cfg.showTest.testG && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testGFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
                 stocksPassed.stocksPassG.push(stock);
                 addLocalStorage('testG', stock);
+            }
+            if (cfg.showTest.testH && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testHFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+                stocksPassed.stocksPassH.push(stock);
+                addLocalStorage('testH', stock);
             }
         }
 

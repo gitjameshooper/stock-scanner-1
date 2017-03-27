@@ -20,6 +20,7 @@ module.exports = {
                 './client/js/tests/testDFactory.js',
                 './client/js/tests/testEFactory.js',
                 './client/js/tests/testGFactory.js',
+                './client/js/tests/testHFactory.js',
                 './client/js/controllers/stockController.js',
                 './client/js/controllers/mongoController.js'
             ]

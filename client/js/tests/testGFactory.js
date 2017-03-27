@@ -14,7 +14,7 @@
         };
         // check if the stock passes all the Tests
         function allTests(stock, stocksAlert, cfg) {
-            console.log(stock);
+           
             if (priorDayCandle(stock)) {
                 return true;
             }
