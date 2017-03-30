@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="row f-15">
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testE">
+            <div class="col-xs-12 testE" ng-show="stockApp.cfg.showTest.testE">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>I-Live Test</h3>
@@ -115,7 +115,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testA">
+            <div class="col-xs-12 testA" ng-show="stockApp.cfg.showTest.testA">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>Flag Test</h3>
@@ -130,7 +130,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="stockA in stockApp.stocksA | orderBy:'-flag'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
+                            <td class="{{ stockA.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockA.symbol }}&src=ctag">{{ stockA.symbol }}</a></td>
                             <td>{{ stockA.last }}</td>
                             <td>{{ stockA.flag }}</td>
                             <td>{{ stockA.shares }}</td>
@@ -139,7 +139,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testB">
+            <div class="col-xs-12 testB" ng-show="stockApp.cfg.showTest.testB">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>VWAP Test</h3>
@@ -163,7 +163,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testC">
+            <div class="col-xs-12 testC" ng-show="stockApp.cfg.showTest.testC">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>Speed Test</h3>
@@ -178,7 +178,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="stockC in stockApp.stocksC | orderBy:'-speed'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
+                            <td class="{{ stockC.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockC.symbol }}&src=ctag">{{ stockC.symbol }}</a></td>
                             <td>{{ stockC.last }}</td>
                             <td>{{ stockC.speed }}</td>
                             <td>{{ stockC.shares }}</td>
@@ -187,7 +187,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testD">
+            <div class="col-xs-12 testD" ng-show="stockApp.cfg.showTest.testD">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>Low Float Test</h3>
@@ -203,7 +203,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="stockD in stockApp.stocksD | orderBy:'-floatRotated'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
+                            <td class="{{ stockD.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockD.symbol }}&src=ctag">{{ stockD.symbol }}</a></td>
                             <td>{{ stockD.last }}</td>
                             <td>{{ stockD.floatRotated }}</td>
                             <td>{{ stockD.shortRatio }}</td>
@@ -213,7 +213,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testH">
+            <div class="col-xs-12 testH" ng-show="stockApp.cfg.showTest.testH">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>ABCD Test</h3>
@@ -229,7 +229,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="stockH in stockApp.stocksH | orderBy:'-hivwap'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockH.symbol }}&src=ctag">{{ stockH.symbol }}</a></td>
+                            <td class="{{ stockH.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockH.symbol }}&src=ctag">{{ stockH.symbol }}</a></td>
                             <td>{{ stockH.last }}</td>
                              <td>{{ stockH.chg }}</td>
                             <td>{{ stockH.hivwap }}</td>
@@ -239,7 +239,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-12" ng-show="stockApp.cfg.showTest.testG">
+            <div class="col-xs-12 testG" ng-show="stockApp.cfg.showTest.testG">
                 <table class="table table-bordered table-responsive text-center">
                     <thead>
                         <h3>Swing Test</h3>
@@ -257,7 +257,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="stockG in stockApp.stocksG | orderBy:'-candleHeight'">
-                            <td><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockG.symbol }}&src=ctag">{{ stockG.symbol }}</a></td>
+                            <td class="{{ stockG.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockG.symbol }}&src=ctag">{{ stockG.symbol }}</a></td>
                             <td>{{ stockG.last }}</td>
                             <td>{{ stockG.popn }}</td>
                             <td>{{ stockG.pcls }}</td>

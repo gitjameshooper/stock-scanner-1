@@ -60,17 +60,17 @@
             
         }
         // alert for stocks 
-        function stockAlert(stock, stocksArr, stockAdd) {
+        function stockAlert(stock, stocksArr, testName, stockAdd) {
             var stockIndex = _.indexOf(stocksArr, stock.symbol);
+            if(stockAdd){
+                stock.class = 'green-'+testName;
+            }
             if (stockAdd && stockIndex < 0) {
-                stock.class = 'green';
                 stocksArr.push(stock.symbol);
                 $.playSound("/sounds/alert");
             } else if (!stockAdd && stockIndex >= 0) {
                 stocksArr.splice(stockIndex, 1);
-            } else if (stockAdd) {
-                stock.class = 'green';
-            }
+            } 
         }
     }
 })();

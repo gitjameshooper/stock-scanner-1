@@ -31,9 +31,9 @@
               
                 // alert if high interest  need to test this
                 if(stockDiffPctVwap > stockVwapHighPctB || stockDiffPctVwap < (stockVwapHighPctB * -1)){
-                    testOFactory.stockAlert(stock, stocksAlert, true);
+                    testOFactory.stockAlert(stock, stocksAlert, 'testB', true);
                 }else{
-                    testOFactory.stockAlert(stock, stocksAlert, false);
+                    testOFactory.stockAlert(stock, stocksAlert, 'testB', false);
                 }
                 return true;
             }

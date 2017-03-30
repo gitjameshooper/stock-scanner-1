@@ -13,7 +13,7 @@
 
         };
 
-        function allTests(stock, xcfg) {  
+        function allTests(stock, cfg) {  
             // check if the stock passes all the Tests
             if (nanStock(stock) && stockFloat(stock, cfg.stockMinFloatRotated)) {
                 return true;

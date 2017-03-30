@@ -14,19 +14,19 @@
         };
         function allTests(stock, cfg){
             var stockArr = [{
-                "name" : "APOP",
-                "hi" : 9.40,
-                "lo" : 7.00,
+                "name" : "VRX",
+                "hi" : 11.15,
+                "lo" : 10.90,
                 "type" : "Buy"
             },{
-                "name" : "CNCE",
-                "hi" : 18.20,
-                "lo" : 17.00,
+                "name" : "NTNX",
+                "hi" : 18.70,
+                "lo" : 18.50,
                 "type" : "Buy"
             },{
-                "name" : "AAOI",
-                "hi" : 502.00,
-                "lo" : 500.00,
+                "name" : "CRCM",
+                "hi" : 12.30,
+                "lo" : 12.00,
                 "type" : "Buy"
             }];
             // check if the stock passes all the E Tests

@@ -22,7 +22,7 @@
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 10, // high percentage away from vwap
                 stockSpeedPctC: 2,
-                stockSpeedHighPctC: 4,
+                stockSpeedHighPctC: 3,
                 stockMaxSpreadC: .50,
                 loopCounter: 0,
                 loopCycles: 30,
@@ -34,8 +34,8 @@
                 showTest: {
                     testA: false, // Flag test
                     testB: true, // Vwap Test
-                    testC: false, // Speed Test
-                    testD: false, // Float Test
+                    testC: true, // Speed Test
+                    testD: true, // Float Test
                     testE: true, // Investors Live Test
                     testG: false, // Swing Test
                     testH: false // ABCD Test
