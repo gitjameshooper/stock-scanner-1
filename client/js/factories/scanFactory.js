@@ -60,35 +60,35 @@
             // format stock values
             formatStock(stock, cfg.accountVal);
             // check if the stock passes all the A Tests
-            if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testAFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testAFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassA.push(stock);
                 addLocalStorage('testA', stock);
             }
             // check if the stock passes all the B Tests
-            if (cfg.showTest.testB && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testBFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testB && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testBFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassB.push(stock);
                 addLocalStorage('testB', stock);
             }
             // check if the stock passes all the C Tests
-            if (cfg.showTest.testC && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testCFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testC && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testCFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassC.push(stock);
                 addLocalStorage('testC', stock);
             }
             // check if the stock passes all the D Tests
-            if (cfg.showTest.testD && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testDFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testD && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testDFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassD.push(stock);
                 addLocalStorage('testD', stock);
             }
             // check if the stock passes all the E Tests
-            if (cfg.showTest.testE && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testEFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testE && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testEFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassE.push(stock);
                 addLocalStorage('testE', stock);
             }
-            if (cfg.showTest.testG && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testGFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testG && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testGFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassG.push(stock);
                 addLocalStorage('testG', stock);
             }
-            if (cfg.showTest.testH && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testHFactory.allTests(stock, stocksPassed.stocksAlert, cfg)) {
+            if (cfg.showTest.testH && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testHFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassH.push(stock);
                 addLocalStorage('testH', stock);
             }

@@ -15,7 +15,7 @@
                 callOnce: true,
                 apiMSecs: 1500,
                 includeETF: false,
-                etfArr: ["DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
+                etfArr: ["EEM","DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 90,
                 stockGapPctA: 5,
@@ -26,18 +26,19 @@
                 stockMaxSpreadC: .50,
                 loopCounter: 0,
                 loopCycles: 30,
+                stocksAlert: [],
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 30000,
                 testing: false, // used for testing after hours
                 showTest: {
-                    testA: true, // Flag test
+                    testA: false, // Flag test
                     testB: true, // Vwap Test
-                    testC: true, // Speed Test
-                    testD: true, // Float Test
+                    testC: false, // Speed Test
+                    testD: false, // Float Test
                     testE: true, // Investors Live Test
-                    testG: true, // Swing Test
-                    testH: true // ABCD Test
+                    testG: false, // Swing Test
+                    testH: false // ABCD Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
@@ -64,8 +65,7 @@
             stocksPassD: [],
             stocksPassE: [],
             stocksPassG: [],
-            stocksPassH: [],
-            stocksAlert: []
+            stocksPassH: []
         }
         vm.stocksA = [];
         vm.stocksB = [];
@@ -193,8 +193,7 @@
                 stocksPassD: [],
                 stocksPassE: [],
                 stocksPassG: [],
-                stocksPassH: [],
-                stocksAlert: []
+                stocksPassH: []
             }
         }
 

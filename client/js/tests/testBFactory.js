@@ -13,9 +13,9 @@
 
         };
         // check if the stock passes all the Tests
-        function allTests(stock, stocksAlert, cfg) {
+        function allTests(stock, cfg) {
 
-            if (checkVwapErrorB(stock) && vwapTestB(stock, stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
+            if (checkVwapErrorB(stock) && vwapTestB(stock, cfg.stocksAlert, cfg.stockVwapPctB, cfg.stockVwapHighPctB)) {
                 return true;
             }
         }

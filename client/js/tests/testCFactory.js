@@ -13,10 +13,11 @@
             allTests: allTests
         };
 
-        function allTests(stock, stocksAlert, cfg ) {
+        function allTests(stock, cfg ) {
             var loopCounter = cfg.loopCounter,
                 loopCycles = cfg.loopCycles,
                 loopArr1 = cfg.loopArr1,
+                stocksAlert = cfg.stocksAlert,
                 stockSpeedPctC = cfg.stockSpeedPctC,
                 stockSpeedHighPctC = cfg.stockSpeedHighPctC,
                 stockMaxSpreadC = cfg.stockMaxSpreadC;

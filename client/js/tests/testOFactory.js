@@ -59,7 +59,7 @@
                 } 
             
         }
-        // alert for stocks
+        // alert for stocks 
         function stockAlert(stock, stocksArr, stockAdd) {
             var stockIndex = _.indexOf(stocksArr, stock.symbol);
             if (stockAdd && stockIndex < 0) {

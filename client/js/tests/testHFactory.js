@@ -13,7 +13,7 @@
 
         };
 
-        function allTests(stock, stocksAlert) {
+        function allTests(stock, cfg) {
 
             // check if the stock passes all the E Tests
             if (stockOpenTest(stock) && stockAboveMidTest(stock)) {

@@ -12,16 +12,16 @@
             allTests: allTests
         
         };
-        function allTests(stock, stocksAlert){
+        function allTests(stock, cfg){
             var stockArr = [{
-                "name" : "PENN",
-                "hi" : 17.00,
-                "lo" : 16.50,
+                "name" : "APOP",
+                "hi" : 9.40,
+                "lo" : 7.00,
                 "type" : "Buy"
             },{
                 "name" : "CNCE",
-                "hi" : 108.20,
-                "lo" : 107.50,
+                "hi" : 18.20,
+                "lo" : 17.00,
                 "type" : "Buy"
             },{
                 "name" : "AAOI",
@@ -54,8 +54,6 @@
                     }
                 }
             }
-           
         }
-        
     }
 })();
