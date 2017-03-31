@@ -8,39 +8,42 @@
     testAFactory.$inject = ['$log', 'testOFactory'];
 
     function testAFactory($log, testOFactory) {
-         return {
+        return {
             allTests: allTests
 
         };
         // check if the stock passes all the Tests
         function allTests(stock, cfg) {
-            if (aboveVWAP(stock) && poleHeight(stock) && vwapHeight(stock) && flagTest(stock)) {
+            if (volTest(stock) && midTest(stock) && rangeTest(stock)) {
                 return true;
             }
         }
-        function vwapHeight(stock){  
-            if(stock.hivwap > .30){
+
+        function volTest(stock) {
+
+            if (stock.volDay > .10) {
 
                 return true;
             }
         }
-        function poleHeight(stock){
+
+        function midTest(stock) {
+            var priceDiff = .25;
+            if (stock.last < 10) {
+                priceDiff = .15;
+            } else if (stock.last < .20) {
+                priceDiff = .20;
+
+            }
+
+            if ((stock.mid + priceDiff) > stock.last && (stock.mid - priceDiff) < stock.last) {
+                return true;
+            }
+        }
+
+        function rangeTest(stock) {
             
-            if(stock.pole > .60){
-
-                return true;
-            }
-        }
-        function flagTest(stock){  
-            if(stock.flag > .03 && stock.flag < .15){
-
-                return true;
-            }
-        }
-        function aboveVWAP(stock){
-            
-            if(stock.last > stock.vwap){
-                 
+            if (stock.hidifflo > .30) {
                 return true;
             }
         }

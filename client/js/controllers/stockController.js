@@ -32,7 +32,7 @@
                 accountVal: 30000,
                 testing: false, // used for testing after hours
                 showTest: {
-                    testA: false, // Flag test
+                    testA: true, // Boom test
                     testB: true, // Vwap Test
                     testC: true, // Speed Test
                     testD: true, // Float Test

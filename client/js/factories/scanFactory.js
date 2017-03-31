@@ -95,6 +95,7 @@
         }
 
         function formatStock(stock, accountVal) {
+            // main stock data
             stock.bid = Math.round(Number(stock.bid) * 100) / 100;
             stock.vwap = Math.round(stock.vwap * 100) / 100;
             stock.ask = Math.round(stock.ask * 100) / 100;
@@ -103,28 +104,33 @@
             stock.hi = Math.round(stock.hi * 100) / 100;
             stock.cl = Math.round(stock.cl * 100) / 100;
             stock.last = Math.round(stock.last * 100) / 100;
-            stock.mid = Math.round(((stock.hi + stock.lo) / 2) * 100) / 100;
-            stock.oldhidifflo = (stock.hi - stock.lo) / stock.last;
-            stock.hidifflo = Math.round((stock.hi - stock.lo) * 100) / 100;
-            stock.closeMid = Math.round(Math.abs(stock.mid - stock.last) * 100) / 100;
             stock.vl = Number(stock.vl);
             stock.pvol = Number(stock.pvol);
-            stock.volRotated = Math.round((stock.vl / stock.pvol) * 100) / 100;
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);
             stock.pchg = Number(stock.pchg);
             stock.opn = Math.round(stock.opn * 100) / 100;
+            stock.plo = Math.round(stock.plo * 100) / 100;
+            stock.phi = Math.round(stock.phi * 100) / 100;
+            stock.popn = Math.round(stock.popn * 100) / 100;
+            stock.pcls = Math.round(stock.pcls * 100) / 100;
+            stock.prchg = Number(stock.prchg);
+
+            // calculated for tests
+            stock.mid = Math.round(((stock.hi + stock.lo) / 2) * 100) / 100;
+            stock.hidifflo = Math.round((stock.hi - stock.lo) * 100) / 100;
+            stock.closeMid = Math.round(Math.abs(stock.mid - stock.last) * 100) / 100;
+
+            stock.volDay = Math.round((stock.vl / stock.pvol)*100)/100;
+            stock.volRotated = Math.round((stock.vl / stock.pvol) * 100) / 100;
+            stock.volDRange = stock.volDay * stock.hidifflo;
+
             stock.hivwap = Math.round((stock.hi - stock.vwap)*100) / 100;
             stock.float = Math.round(stock.float * 100) / 100;
             stock.pole = Number(stock.hi - stock.opn);
             stock.flag = Math.round((((stock.pole * .50) + (stock.hivwap * .50)) / stock.last) * 100) / 100;
             stock.floatRotated = Math.round((stock.vl / stock.float) * 100) / 100;
             stock.shortRatio = Number(stock.shortRatio);
-            stock.plo = Math.round(stock.plo * 100) / 100;
-            stock.phi = Math.round(stock.phi * 100) / 100;
-            stock.popn = Math.round(stock.popn * 100) / 100;
-            stock.pcls = Math.round(stock.pcls * 100) / 100;
-            stock.prchg = Number(stock.prchg);
             stock.shares = Math.round((accountVal / stock.last).toFixed(0) / 2);
             stock.shares = Math.ceil(stock.shares / 100) * 100;
             stock.spread = Number((stock.ask - stock.bid).toFixed(2));
