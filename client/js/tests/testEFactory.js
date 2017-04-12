@@ -14,14 +14,14 @@
         };
         function allTests(stock, cfg){
             var stockArr = [{
-                "name" : "VRX",
-                "hi" : 11.15,
-                "lo" : 10.90,
-                "type" : "Buy"
+                "name" : "TSLA",
+                "hi" : 115.00,
+                "lo" : 105.00,
+                "type" : "Short"
             },{
-                "name" : "NTNX",
-                "hi" : 18.70,
-                "lo" : 18.50,
+                "name" : "VRTX",
+                "hi" : 111.50,
+                "lo" : 109.00,
                 "type" : "Buy"
             },{
                 "name" : "CRCM",

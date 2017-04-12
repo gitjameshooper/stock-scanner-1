@@ -118,7 +118,9 @@
 
             // calculated for tests
             stock.mid = Math.round(((stock.hi + stock.lo) / 2) * 100) / 100;
-            stock.hidifflo = Math.round((stock.hi - stock.lo) * 100) / 100;
+            stock.hidiffloWhole = Math.round((stock.hi - stock.lo) * 100) / 100;
+            stock.hidiffloPct = Math.round(((stock.hi - stock.lo) / stock.last) * 100);
+            stock.vwapAway = Number(Math.abs(stock.last - stock.vwap).toFixed(2));
             stock.closeMid = Math.round(Math.abs(stock.mid - stock.last) * 100) / 100;
 
             stock.volDay = Math.round((stock.vl / stock.pvol)*100)/100;

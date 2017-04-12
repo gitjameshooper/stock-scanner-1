@@ -16,21 +16,22 @@
         function allTests(stock, cfg) {
 
             // check if the stock passes all the E Tests
-            if (stockOpenTest(stock) && stockAboveMidTest(stock)) {
+            if (stockOpenTest(stock) && stockAboveOpenTest(stock)) {
                 return true;
             }
         }
 
         function stockOpenTest(stock) {
-
-            if ((stock.chg > 0) && (stock.hidifflo > 3)) {
+             
+            if(stock.hidiffloPct > 5 || stock.hidiffloWhole > 1){
                 return true;
             }
+            
 
         }
-        function stockAboveMidTest(stock) {
+        function stockAboveOpenTest(stock) {
 
-            if (stock.last > stock.mid) {
+            if (stock.last > stock.opn) {
                 return true;
             }
 

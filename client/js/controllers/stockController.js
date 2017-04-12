@@ -32,13 +32,13 @@
                 accountVal: 30000,
                 testing: false, // used for testing after hours
                 showTest: {
-                    testA: true, // Boom test
-                    testB: true, // Vwap Test
-                    testC: true, // Speed Test
-                    testD: true, // Float Test
-                    testE: true, // Investors Live Test
+                    testA: false, // Boom test
+                    testB: false, // Vwap Test
+                    testC: false, // Speed Test
+                    testD: false, // Float Test
+                    testE: false, // Investors Live Test
                     testG: false, // Swing Test
-                    testH: false // ABCD Test
+                    testH: true // ABCD Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {

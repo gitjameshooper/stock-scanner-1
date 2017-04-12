@@ -220,19 +220,21 @@
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>
-                            <th>Chg</th>
-                            <th>High VWAP</th>
+                            <th>PCT</th>
+                            <th>Whole</th>
+                            <th>VWAP Away</th>
                             <th>1/2
                                 <br />Shares</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="stockH in stockApp.stocksH | orderBy:'-hivwap'">
+                        <tr ng-repeat="stockH in stockApp.stocksH | orderBy:'vwapAway'">
                             <td class="{{ stockH.class }}"><a class="f-18" target="_blank" href="https://twitter.com/search?q=%24{{ stockH.symbol }}&src=ctag">{{ stockH.symbol }}</a></td>
                             <td>{{ stockH.last }}</td>
-                             <td>{{ stockH.chg }}</td>
-                            <td>{{ stockH.hivwap }}</td>
+                             <td>{{ stockH.hidiffloPct }}</td>
+                            <td>{{ stockH.hidiffloWhole }}</td>
+                            <td>{{ stockH.vwapAway }}</td>
                             <td>{{ stockH.shares }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockH, stockApp.stocksH)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
