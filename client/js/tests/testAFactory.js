@@ -1,4 +1,4 @@
-// Test Notes:  Used to find Flag stocks
+// Test Notes:  Used for volume stocks
 (function() {
     'use strict';
 
@@ -14,38 +14,28 @@
         };
         // check if the stock passes all the Tests
         function allTests(stock, cfg) {
-            if (volTest(stock) && midTest(stock) && rangeTest(stock)) {
+            if (volDayTest(stock) && volAvgTest(stock)) {
+                return true;
+            }
+        }
+            // add adv_90 volume to calcualtion
+        function volDayTest(stock) {
+
+            if (stock.volDay > 2) {
+
                 return true;
             }
         }
 
-        function volTest(stock) {
+        function volAvgTest(stock) {
 
-            if (stock.volDay > .10) {
+            if (stock.volAvgDay > 2) {
 
                 return true;
             }
         }
+ 
 
-        function midTest(stock) {
-            var priceDiff = .25;
-            if (stock.last < 10) {
-                priceDiff = .15;
-            } else if (stock.last < .20) {
-                priceDiff = .20;
-
-            }
-
-            if ((stock.mid + priceDiff) > stock.last && (stock.mid - priceDiff) < stock.last) {
-                return true;
-            }
-        }
-
-        function rangeTest(stock) {
-            
-            if (stock.hidifflo > .30) {
-                return true;
-            }
-        }
+        
     }
 })();

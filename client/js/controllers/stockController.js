@@ -17,7 +17,7 @@
                 includeETF: false,
                 etfArr: ["EEM","DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
                 stockMinPrice: 2,
-                stockMaxPrice: 90,
+                stockMaxPrice: 100,
                 stockGapPctA: 5,
                 stockVwapPctB: 5, // price percentage away from vwap
                 stockVwapHighPctB: 10, // high percentage away from vwap
@@ -30,15 +30,15 @@
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 30000,
-                testing: false, // used for testing after hours
+                testing: true, // used for testing after hours
                 showTest: {
-                    testA: false, // Boom test
+                    testA: true, // volume test
                     testB: false, // Vwap Test
                     testC: false, // Speed Test
                     testD: false, // Float Test
                     testE: false, // Investors Live Test
                     testG: false, // Swing Test
-                    testH: true // ABCD Test
+                    testH: false // ABCD Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {

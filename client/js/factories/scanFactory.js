@@ -26,7 +26,9 @@
 
                 // if testing don't run stocks through global tests
                 if (cfg.testing) {
-                    testStocks(quotesData, stocksPassed, symbolsJSON, cfg, key, stock);
+                    if(stock.vl > 800000){
+                        testStocks(quotesData, stocksPassed, symbolsJSON, cfg, key, stock);
+                    }
                 } else {
                     // run all stocks thru global tests: delist, halt, volume, price   
                     if (testOFactory.delistTest(stock, JSON.parse(localStorage.getItem("delist"))) && testOFactory.haltTest(stock) && testOFactory.volTest(stock, cfg.stockVolumeObj) && testOFactory.priceTest(stock, cfg.stockMinPrice, cfg.stockMaxPrice)) {
@@ -124,6 +126,7 @@
             stock.closeMid = Math.round(Math.abs(stock.mid - stock.last) * 100) / 100;
 
             stock.volDay = Math.round((stock.vl / stock.pvol)*100)/100;
+            stock.volAvgDay = Math.round((stock.vl / stock.adv_90)*100)/100;
             stock.volRotated = Math.round((stock.vl / stock.pvol) * 100) / 100;
             stock.volDRange = stock.volDay * stock.hidifflo;
 
