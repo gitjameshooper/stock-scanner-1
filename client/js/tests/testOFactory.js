@@ -67,7 +67,7 @@
             }
             if (stockAdd && stockIndex < 0) {
                 stocksArr.push(stock.symbol);
-                $.playSound("/sounds/alert");
+                // $.playSound("/sounds/alert");
             } else if (!stockAdd && stockIndex >= 0) {
                 stocksArr.splice(stockIndex, 1);
             } 

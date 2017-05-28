@@ -14,67 +14,34 @@
         };
         function allTests(stock, cfg){
             var stockArr = [{
-                "name" : "ash",
-                "hi" : 63.00,
-                "lo" : 62.00,
-                "type" : "Buy"
+                "name" : "zoes"
             },{
-                "name" : "sorl",
-                "hi" : 5.75,
-                "lo" : 5.40,
-                "type" : "Buy"
+                "name" : "deck"
             },{
-                "name" : "wday",
-                "hi" : 95.30,
-                "lo" : 94.00,
-                "type" : "buy"
+                "name" : "ntnx"
             },{
-                "name" : "alny",
-                "hi" : 65.50,
-                "lo" : 64.50,
-                "type" : "Buy"
+                "name" : "splk"
             },{
-                "name" : "trvg",
-                "hi" : 20.00,
-                "lo" : 19.50,
-                "type" : "Buy"
+                "name" : "trgp"
             },{
-                "name" : "exas",
-                "hi" : 32.50,
-                "lo" : 32.00,
-                "type" : "Buy"
+                "name" : "veev"
             },{
-                "name" : "qrvo",
-                "hi" : 71.40,
-                "lo" : 70.00,
-                "type" : "Buy"
+                "name" : "gme"
             },{
-                "name" : "snap",
-                "hi" : 20.50,
-                "lo" : 20.00,
-                "type" : "Buy"
+                "name" : "bby"
             },{
-                "name" : "htz",
-                "hi" : 10.70,
-                "lo" : 10.40,
-                "type" : "Buy"
+                "name" : "sig"
             },{
-                "name" : "w",
-                "hi" : 61.40,
-                "lo" : 60.50,
-                "type" : "Buy"
+                "name" : "alxn"
             },{
-                "name" : "jwn",
-                "hi" : 42.00,
-                "lo" : 41.50,
-                "type" : "short"
+                "name" : "afsi"
             }];
             // check if the stock passes all the E Tests
-            if (stockZoneTest(stock, stockArr)) {
+            if (stockMidTest(stock, stockArr)) {
                 return true; 
             }
         }
-        function stockZoneTest(stock, stockArr){
+        function stockMidTest(stock, stockArr){
                 var stockH,
                     stockL,
                     stockSym,
@@ -88,10 +55,9 @@
                    
                 if(stock.symbol.toLowerCase() == stockSym.toLowerCase()){
                       
-                    if(stockL < stock.last && stock.last < stockH){
-                        stock.type = stockType;
-                      return true;
-                    }
+        
+                    return true;
+                    
                 }
             }
         }

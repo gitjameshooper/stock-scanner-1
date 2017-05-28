@@ -30,15 +30,15 @@
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 55000,
-                testing: false, // used for testing after hours
+                testing: true, // used for testing after hours
                 showTest: {
                     testA: false, // volume test
-                    testB: true, // Vwap Test
-                    testC: true, // Speed Test
-                    testD: true, // Float Test
-                    testE: false, // Investors Live Test
+                    testB: true, // secondary volume Test
+                    testC: false, // Speed Test
+                    testD: false, // Float Test
+                    testE: true, // Mid Volume Test
                     testG: false, // Swing Test
-                    testH: true // ABCD Test
+                    testH: false // ABCD Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {
