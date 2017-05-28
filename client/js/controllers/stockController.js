@@ -15,7 +15,7 @@
                 callOnce: true,
                 apiMSecs: 1500,
                 includeETF: false,
-                etfArr: ["EEM","DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
+                etfArr: ["EUFN","NEAR","RING","OIL","PFF","PHB","PGX","QID","EWG","JNK","EEM","DFJ", "TVIX", "FEZ", "XRT", "RSX", "DXD", "INDA", "USMV", "TBT", "LABU", "LABD", "HEDJ", "EPI", "BKLN", "VTV", "ITB", "XLU", "HEZU", "YINN", "VMBS", "EFV", "NUGT", "JNUG", "EDZ", "DPK", "SJNK", "OIH", "SQQQ", "XOP", "ERY", "USLV", "FAZ", "UVXY", "VIXY", "PDBC", "CATH", "VXX", "UWTI", "DWTI", "DGAZ", "DUST", "XIV", "TZA", "DBEF", "DBJP", "UGAZ", "SPXS", "XIV", "XOP", "GDX", "SVXY", "JDST"],
                 stockMinPrice: 2,
                 stockMaxPrice: 100,
                 stockGapPctA: 5,
@@ -29,16 +29,16 @@
                 stocksAlert: [],
                 loopArr1: [],
                 stockMinFloatRotated: .50,
-                accountVal: 30000,
-                testing: true, // used for testing after hours
+                accountVal: 55000,
+                testing: false, // used for testing after hours
                 showTest: {
-                    testA: true, // volume test
-                    testB: false, // Vwap Test
-                    testC: false, // Speed Test
-                    testD: false, // Float Test
+                    testA: false, // volume test
+                    testB: true, // Vwap Test
+                    testC: true, // Speed Test
+                    testD: true, // Float Test
                     testE: false, // Investors Live Test
                     testG: false, // Swing Test
-                    testH: false // ABCD Test
+                    testH: true // ABCD Test
                 },
                 stockMinVolume: 100000,
                 stockVolumeObj: {

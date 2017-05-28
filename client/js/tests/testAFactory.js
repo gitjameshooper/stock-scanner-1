@@ -14,14 +14,16 @@
         };
         // check if the stock passes all the Tests
         function allTests(stock, cfg) {
-            if (volDayTest(stock) && volAvgTest(stock)) {
+            
+            if (volDayTest(stock) && volAvgTest(stock) && tradesTest(stock) && rangeTest(stock)) {
+
                 return true;
             }
         }
             // add adv_90 volume to calcualtion
         function volDayTest(stock) {
 
-            if (stock.volDay > 2) {
+            if (stock.volDay > 1.5) {
 
                 return true;
             }
@@ -34,6 +36,21 @@
                 return true;
             }
         }
+          function tradesTest(stock) {
+
+            if (stock.tr_num > 30000) {
+
+                return true;
+            }
+        }
+        function rangeTest(stock) {
+
+            if (stock.hidiffloWhole > 1) {
+
+                return true;
+            }
+        }
+ 
  
 
         

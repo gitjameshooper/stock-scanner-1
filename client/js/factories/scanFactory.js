@@ -62,7 +62,7 @@
             // format stock values
             formatStock(stock, cfg.accountVal);
             // check if the stock passes all the A Tests
-            if (cfg.showTest.testA && testOFactory.excludeETF(stock, cfg.includeETF, cfg.etfArr) && testAFactory.allTests(stock, cfg)) {
+            if (cfg.showTest.testA && testAFactory.allTests(stock, cfg)) {
                 stocksPassed.stocksPassA.push(stock);
                 addLocalStorage('testA', stock);
             }
@@ -107,6 +107,7 @@
             stock.cl = Math.round(stock.cl * 100) / 100;
             stock.last = Math.round(stock.last * 100) / 100;
             stock.vl = Number(stock.vl);
+            stock.tr_num = Number(stock.tr_num);
             stock.pvol = Number(stock.pvol);
             stock.sho = Number(stock.sho);
             stock.chg = Number(stock.chg);

@@ -124,8 +124,7 @@
                             <th>Price</th>
                             <th>Vol Day</th>
                             <th>Avg Daily Vol</th>
-                            <th>1/2
-                                <br />Shares</th>
+                            <th># of Trades</th>
                             <th>Delist</th>
                         </tr>
                     </thead>
@@ -135,7 +134,7 @@
                             <td>{{ stockA.last }}</td>
                             <td>{{ stockA.volDay }}</td>
                             <td>{{ stockA.volAvgDay }}</td>
-                            <td>{{ stockA.shares }}</td>
+                            <td>{{ stockA.tr_num }}</td>
                             <td><a class="btn red padding-adjust margin-0" ng-click="stockApp.delistStock(stockA, stockApp.stocksA)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                         </tr>
                     </tbody>

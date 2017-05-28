@@ -14,20 +14,60 @@
         };
         function allTests(stock, cfg){
             var stockArr = [{
-                "name" : "MOMO",
-                "hi" : 37.80,
-                "lo" : 37.20,
-                "type" : "Short"
-            },{
-                "name" : "INCY",
-                "hi" : 125.10,
-                "lo" : 124.00,
-                "type" : "short"
-            },{
-                "name" : "CRCM",
-                "hi" : 12.30,
-                "lo" : 12.00,
+                "name" : "ash",
+                "hi" : 63.00,
+                "lo" : 62.00,
                 "type" : "Buy"
+            },{
+                "name" : "sorl",
+                "hi" : 5.75,
+                "lo" : 5.40,
+                "type" : "Buy"
+            },{
+                "name" : "wday",
+                "hi" : 95.30,
+                "lo" : 94.00,
+                "type" : "buy"
+            },{
+                "name" : "alny",
+                "hi" : 65.50,
+                "lo" : 64.50,
+                "type" : "Buy"
+            },{
+                "name" : "trvg",
+                "hi" : 20.00,
+                "lo" : 19.50,
+                "type" : "Buy"
+            },{
+                "name" : "exas",
+                "hi" : 32.50,
+                "lo" : 32.00,
+                "type" : "Buy"
+            },{
+                "name" : "qrvo",
+                "hi" : 71.40,
+                "lo" : 70.00,
+                "type" : "Buy"
+            },{
+                "name" : "snap",
+                "hi" : 20.50,
+                "lo" : 20.00,
+                "type" : "Buy"
+            },{
+                "name" : "htz",
+                "hi" : 10.70,
+                "lo" : 10.40,
+                "type" : "Buy"
+            },{
+                "name" : "w",
+                "hi" : 61.40,
+                "lo" : 60.50,
+                "type" : "Buy"
+            },{
+                "name" : "jwn",
+                "hi" : 42.00,
+                "lo" : 41.50,
+                "type" : "short"
             }];
             // check if the stock passes all the E Tests
             if (stockZoneTest(stock, stockArr)) {
@@ -46,7 +86,7 @@
                     stockSym = stockArr[i]['name'];
                     stockType = stockArr[i]['type'];
                    
-                if(stock.symbol == stockSym){
+                if(stock.symbol.toLowerCase() == stockSym.toLowerCase()){
                       
                     if(stockL < stock.last && stock.last < stockH){
                         stock.type = stockType;
