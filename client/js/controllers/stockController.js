@@ -30,9 +30,9 @@
                 loopArr1: [],
                 stockMinFloatRotated: .50,
                 accountVal: 55000,
-                testing: true, // used for testing after hours
+                testing: false, // used for testing after hours
                 showTest: {
-                    testA: false, // volume test
+                    testA: true, // volume test
                     testB: true, // secondary volume Test
                     testC: false, // Speed Test
                     testD: false, // Float Test
