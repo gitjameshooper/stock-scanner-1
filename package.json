@@ -22,7 +22,6 @@
     "jquery": "2.2.3",
     "lodash": "4.13.1",
     "method-override": "2.3.6",
-    "mongodb": "2.2.2",
     "mongoose": "4.5.4",
     "oauth-1.0a": "1.0.1",
     "request": "2.72.0",

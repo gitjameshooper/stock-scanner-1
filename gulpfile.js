@@ -62,11 +62,6 @@ gulp.task('watch', function() {
 
 
 //// Server Side ////
-
-// Running mongoDB for server
-gulp.task('start-mongo', runCommand('mongod --dbpath=/data/db'));
-gulp.task('stop-mongo', runCommand('killall mongod'));
-
 // Start Server and Watch for File changes
 gulp.task('start-server', function() {
     // listen for changes
@@ -83,6 +78,6 @@ gulp.task('start-server', function() {
 
 });
 gulp.task('serve', function(callback) {
-    runSequence('clean', ['copy', 'less', 'bundleScripts', 'watch'],['start-mongo', 'start-server'],
+    runSequence('clean', ['copy', 'less', 'bundleScripts', 'watch'],'start-server',
         callback);
 });

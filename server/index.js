@@ -5,11 +5,6 @@ var mongoose = require('mongoose');
 
 // Create App
 var app = express();
-
-// Connect to Mongodb
-mongoose.connect("mongodb://localhost/stocksDB");
-mongoose.connection.on('error', console.error.bind(console, 'mongodb connection error:'));
-mongoose.connection.once('open', function(){ });
  
 // Middleware for REST API 
 app.use(bodyParser.json());

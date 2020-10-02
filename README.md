@@ -1,5 +1,6 @@
 # Stock Scanner
 Stock Scanner using the Trade King API. Currently set up to scan 7500 stocks from the NYSE, AMEX, and NASDAQ.
+![Alt Img](preview.png)
 
 ## Installation
 
