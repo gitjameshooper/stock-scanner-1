@@ -22,7 +22,7 @@
     "jquery": "2.2.3",
     "lodash": "4.13.1",
     "method-override": "2.3.6",
-    "mongoose": "4.5.4",
+    "mongoose": "4.13.21",
     "oauth-1.0a": "1.0.1",
     "request": "2.72.0",
     "run-sequence": "1.2.2",
